@@ -23,8 +23,8 @@ const Home: NextPage = () => {
       description: "dgfgfdsdgf",
       operation: "Dfgdfg",
       price: 8500,
-      locationLat: 33,
-      locationLng: 22,
+      locationLat: -31.52471936821179,
+      locationLng: -68.5823669732075,
       propertyInfo: {
         id: "sdf",
         propertyId: "sfd",
@@ -47,8 +47,8 @@ const Home: NextPage = () => {
       description: "dgfgfdsdgf",
       operation: "Dfgdfg",
       price: 11000,
-      locationLat: 33,
-      locationLng: 22,
+      locationLat: -31.521715506516014,
+      locationLng: -68.58110400550659,
       propertyInfo: {
         id: "ert",
         propertyId: "sfd",
@@ -71,8 +71,8 @@ const Home: NextPage = () => {
       description: "dgfgfdsdgf",
       operation: "Dfgdfg",
       price: 54000,
-      locationLat: 33,
-      locationLng: 22,
+      locationLat: -31.529170907268195,
+      locationLng: -68.5197871440546,
       propertyInfo: {
         id: "cvbn",
         propertyId: "sfd",
@@ -95,8 +95,8 @@ const Home: NextPage = () => {
       description: "dgfgfdsdgf",
       operation: "Dfgdfg",
       price: 25000,
-      locationLat: 33,
-      locationLng: 22,
+      locationLat: -31.527268731827387,
+      locationLng: -68.53377754533042,
       propertyInfo: {
         id: "cvbn",
         propertyId: "sfd",
@@ -123,14 +123,15 @@ const Home: NextPage = () => {
 
       <NavBar />
 
-      <main className="min-h-screen bg-neutral-100">
+      <main className="min-h-screen bg-neutral-100 pt-[70px]">
         <section className="relative ">
-          {/* <MapContainer
-            properties={properties}
-            setActiveProperty={setActiveProperty}
-            activeProperty={activeProperty}
-            /> */}
-          <div className="fixed z-10 h-[calc(100vh_-_70px)] w-2/5 bg-neutral-600"></div>
+          <div className="fixed z-10 h-[calc(100vh_-_70px)] w-2/5 ">
+            <MapContainer
+              properties={properties}
+              setActiveProperty={setActiveProperty}
+              activeProperty={activeProperty}
+            />
+          </div>
           <section className="ml-auto grid w-3/5 grid-cols-auto-fit justify-items-center gap-4 p-4">
             {properties.map((property) => (
               <PropertyCard key={property.id} property={property} />

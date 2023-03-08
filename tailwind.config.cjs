@@ -9,6 +9,10 @@ const config = {
         inconsolata: ["Inconsolata", "monospace"],
         archivo: ["Archivo Narrow", "sans-serif"],
       },
+      colors: {
+        marino: "#1f233f",
+        oliva: "#90c228",
+      },
       height: {
         nav: "70px",
       },

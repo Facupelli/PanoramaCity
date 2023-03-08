@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Carousel from "nuka-carousel/lib/carousel";
+import ChevronLeft from "~/icons/ChevronLeft";
+import ChevronRight from "~/icons/ChevronRight";
 import { type Property } from "~/types/model";
 import { formatPrice } from "../utils/price";
 import { formatSurface } from "../utils/surface";
@@ -34,8 +36,8 @@ export default function PropertyCard({ property }: Props) {
             backgroundColor: "transparent",
             filter: "drop-shadow(1px 1px 1px rgba(0,0,0,0.5))",
           },
-          //   nextButtonText: <ChevronRight />,
-          //   prevButtonText: <ChevronLeft />,
+          nextButtonText: <ChevronRight />,
+          prevButtonText: <ChevronLeft />,
           pagingDotsStyle: {
             padding: "0 2px",
           },
@@ -74,17 +76,22 @@ export default function PropertyCard({ property }: Props) {
           />
         </div>
       </Carousel>
-      <section className=" p-2 font-barlow">
-        <p className="pb-2 text-sm text-neutral-600">{property.type?.name}</p>
-        <div className="grid pb-1">
+      <section className="grid gap-y-1 p-2 font-barlow">
+        <p className=" text-sm text-neutral-600">{property.type?.name}</p>
+        <div className="grid ">
           <p className="font-semibold">{property.propertyInfo?.address}</p>
           <p className=" text-sm text-neutral-600">{`${property.propertyInfo?.zone}, ${property.propertyInfo?.city}`}</p>
         </div>
-        <div className="flex gap-x-4 pb-1">
-          <p>{formatSurface(property.propertyInfo?.surface ?? 0)}m²</p>
-          <p>{property.propertyInfo?.ambiences}amb.</p>
+        <div className="flex gap-x-4 ">
+          <p>{formatSurface(property.propertyInfo?.surface ?? 0)} m²</p>
+          <p>{property.propertyInfo?.ambiences} amb.</p>
         </div>
-        <p className="text-lg font-bold">{formatPrice(property.price)}</p>
+        <div className="flex justify-between">
+          <p className="text-lg font-bold">{formatPrice(property.price)}</p>
+          <div>
+            <button className="text-sm font-semibold text-oliva">FAV</button>
+          </div>
+        </div>
       </section>
     </article>
   );

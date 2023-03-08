@@ -15,7 +15,7 @@ export default function MapContainer({
   activeProperty,
 }: Props) {
   return (
-    <section className="">
+    <section className="h-full w-full ">
       <Map
         properties={properties}
         setActiveProperty={setActiveProperty}
