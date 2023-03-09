@@ -43,9 +43,21 @@ const UserDetail: NextPage = ({ user }: Props) => {
 
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
         <div className="mx-auto max-w-6xl px-10 py-10 font-barlow">
-          <h1 className="text-xl font-semibold">Publicar un inmueble</h1>
+          <div className="flex items-baseline justify-between gap-24 ">
+            <h1 className="text-xl font-semibold">Publicar un inmueble</h1>
+            <p>
+              Paso {step} de {steps}
+            </p>
+            <div className="h-[3px] grow rounded-lg bg-white">
+              <div
+                className={`h-[3px] rounded-lg bg-marino transition-all delay-100 duration-200 ease-out ${
+                  step === 1 && "w-[33%]"
+                } ${step === 2 && "w-[66%]"} ${step === 3 && "w-[99%]"}`}
+              ></div>
+            </div>
+          </div>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="pt-4">
             {step === 1 && <MainInfo register={register} watch={watch} />}
             {step === 2 && <Address register={register} watch={watch} />}
             {step === 3 && (
@@ -59,7 +71,14 @@ const UserDetail: NextPage = ({ user }: Props) => {
                   handleClick={() => setStep((prev) => (prev -= 1))}
                 />
               )}
-              {step !== 3 && (
+              {step === 3 ? (
+                <button
+                  type="submit"
+                  className="rounded bg-white p-2 text-sm font-semibold"
+                >
+                  FINALIZAR
+                </button>
+              ) : (
                 <PageBtn
                   type="next"
                   handleClick={() => setStep((prev) => (prev += 1))}

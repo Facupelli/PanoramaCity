@@ -10,24 +10,37 @@ type Props = {
 export default function MainInfo({ register, watch }: Props) {
   return (
     <Fieldset title="Información principal">
-      <select {...register("typeId")}>
+      <select className="p-2" {...register("typeId")}>
         <option>Casa</option>
         <option>Departamento</option>
       </select>
 
-      <select {...register("operation")}>
+      <select className="p-2" {...register("operation")}>
         <option>Venta</option>
         <option>Alquiler</option>
       </select>
 
-      <input type="text" required placeholder="Título" {...register("title")} />
       <input
+        className="p-2"
+        type="text"
+        required
+        placeholder="Título"
+        {...register("title")}
+      />
+      <input
+        className="p-2"
         type="text"
         required
         placeholder="Descripción"
         {...register("description")}
       />
-      <input type="text" required placeholder="Precio" {...register("price")} />
+      <input
+        className="p-2"
+        type="text"
+        required
+        placeholder="Precio"
+        {...register("price")}
+      />
     </Fieldset>
   );
 }

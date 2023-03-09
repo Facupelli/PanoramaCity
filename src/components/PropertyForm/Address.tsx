@@ -13,15 +13,16 @@ export default function Address({ register, watch }: Props) {
 
   return (
     <Fieldset title="Dirección">
-      <select {...register("propertyInfo.city")}>
+      <select className="p-2" {...register("propertyInfo.city")}>
         <option>San Juan</option>
       </select>
-      <select {...register("propertyInfo.zone")}>
+      <select className="p-2" {...register("propertyInfo.zone")}>
         {provinces.map((province) => (
           <option key={province.id}>{province.nombre}</option>
         ))}
       </select>
       <input
+        className="p-2"
         type="text"
         required
         placeholder="Dirección"
@@ -29,6 +30,7 @@ export default function Address({ register, watch }: Props) {
       />
       {propertyType === "Deparamento" && (
         <input
+          className="p-2"
           type="text"
           required
           placeholder="Dirección"
@@ -36,6 +38,7 @@ export default function Address({ register, watch }: Props) {
         />
       )}
       <input
+        className="p-2"
         type="text"
         required
         placeholder="Orientación"

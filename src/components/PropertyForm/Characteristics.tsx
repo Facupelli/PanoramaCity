@@ -11,18 +11,21 @@ export default function Characteristics({ register, watch }: Props) {
   return (
     <Fieldset title="Características del inmueble">
       <input
+        className="p-2"
         type="text"
         required
         placeholder="Ambientes"
         {...register("propertyInfo.ambiences")}
       />
       <input
+        className="p-2"
         type="text"
         required
         placeholder="Baños"
         {...register("propertyInfo.bathrooms")}
       />
       <input
+        className="p-2"
         type="text"
         required
         placeholder="Habitaciones"
@@ -30,12 +33,14 @@ export default function Characteristics({ register, watch }: Props) {
       />
 
       <input
+        className="p-2"
         type="text"
         required
         placeholder="Superficie m²"
         {...register("propertyInfo.surface")}
       />
       <input
+        className="p-2"
         type="text"
         required
         placeholder="Año construcción"
