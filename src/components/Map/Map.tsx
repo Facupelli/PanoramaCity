@@ -42,6 +42,11 @@ export default function Map({ properties, setActiveProperty }: Props) {
       lat: -31.52471936821179,
       lng: -68.5823669732075,
     },
+    disableDefaultUI: true,
+    zoomControl: true,
+    zoomControlOptions: {
+      position: 3, // Right top
+    },
   };
 
   return (

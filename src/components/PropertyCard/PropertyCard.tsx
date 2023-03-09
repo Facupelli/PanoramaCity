@@ -2,6 +2,7 @@ import Image from "next/image";
 import Carousel from "nuka-carousel/lib/carousel";
 import ChevronLeft from "~/icons/ChevronLeft";
 import ChevronRight from "~/icons/ChevronRight";
+import Heart from "~/icons/Heart";
 import { type Property } from "~/types/model";
 import { formatPrice } from "../utils/price";
 import { formatSurface } from "../utils/surface";
@@ -88,8 +89,13 @@ export default function PropertyCard({ property }: Props) {
         </div>
         <div className="flex justify-between">
           <p className="text-lg font-bold">{formatPrice(property.price)}</p>
-          <div>
-            <button className="text-sm font-semibold text-oliva">FAV</button>
+          <div className="flex items-center">
+            <button
+              aria-label="fav-button"
+              className="text-sm font-semibold text-oliva"
+            >
+              <Heart />
+            </button>
           </div>
         </div>
       </section>
