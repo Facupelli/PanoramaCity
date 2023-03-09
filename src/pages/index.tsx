@@ -6,8 +6,10 @@ import { useState } from "react";
 
 import { api } from "~/utils/api";
 import NavBar from "~/components/NavBar";
-import MapContainer from "~/components/Map/MapContainer";
 import PropertyCard from "~/components/PropertyCard/PropertyCard";
+
+import { type Property } from "~/types/model";
+import Map from "~/components/Map/Map";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -111,7 +113,33 @@ const Home: NextPage = () => {
         orientation: "dfg",
       },
     },
+    {
+      id: "asdafvccx",
+      typeId: "ds",
+      type: { id: "avc", name: "Casa" },
+      userId: "sds",
+      description: "dgfgfdsdgf",
+      operation: "Dfgdfg",
+      price: 25000,
+      locationLat: -31.53323840446941,
+      locationLng: -68.48633982780866,
+      propertyInfo: {
+        id: "cvbn",
+        propertyId: "sfd",
+        ambiences: 2,
+        bathrooms: 1,
+        bedrooms: 2,
+        address: "Av. Libertador 238",
+        city: "San Juan",
+        zone: "Santa Lucía",
+        surface: 18400,
+        buildYear: 1998,
+        orientation: "dfg",
+      },
+    },
   ];
+
+  const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
 
   return (
     <>
@@ -126,10 +154,9 @@ const Home: NextPage = () => {
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
         <section className="relative ">
           <div className="fixed z-10 h-[calc(100vh_-_70px)] w-2/5 ">
-            <MapContainer
-              properties={properties}
+            <Map
+              properties={propertiesList}
               setActiveProperty={setActiveProperty}
-              activeProperty={activeProperty}
             />
           </div>
           <section className="ml-auto grid w-3/5 grid-cols-auto-fit justify-items-center gap-4 p-4">
