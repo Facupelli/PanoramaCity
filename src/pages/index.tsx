@@ -10,6 +10,7 @@ import PropertyCard from "~/components/PropertyCard/PropertyCard";
 
 import { type Property } from "~/types/model";
 import Map from "~/components/Map/Map";
+import ListFilter from "~/components/ListFilter";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -167,23 +168,26 @@ const Home: NextPage = () => {
       <NavBar />
 
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
-        <section className="relative ">
-          <div className="fixed z-10 h-[calc(100vh_-_70px)] w-2/5 ">
+        <div className="relative ">
+          <section className="fixed z-10 h-[calc(100vh_-_70px)] w-2/5 ">
             <Map
               properties={propertiesList}
               setActiveProperty={setActiveProperty}
             />
-          </div>
-          <section className="ml-auto grid w-3/5 grid-cols-auto-fit justify-items-center gap-4 p-4">
-            {properties.map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                activeProperty={activeProperty}
-              />
-            ))}
           </section>
-        </section>
+          <section className="ml-auto grid w-3/5 gap-4 p-4">
+            <ListFilter />
+            <div className="grid grid-cols-auto-fit justify-items-center gap-4">
+              {properties.map((property) => (
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                  activeProperty={activeProperty}
+                />
+              ))}
+            </div>
+          </section>
+        </div>
       </main>
     </>
   );

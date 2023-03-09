@@ -88,13 +88,13 @@ export default function PropertyCard({ property, activeProperty }: Props) {
           />
         </div>
       </Carousel>
-      <section
+      <div
         onClick={() => router.push(`/property/${property.id}`)}
         className="grid gap-y-1 py-2 px-4 font-barlow"
       >
         <p className=" text-sm text-neutral-600">{property.type?.name}</p>
         <div className="grid ">
-          <p className="font-semibold">{property.propertyInfo?.address}</p>
+          <h1 className="font-semibold">{property.propertyInfo?.address}</h1>
           <p className=" text-sm text-neutral-600">{`${property.propertyInfo?.zone}, ${property.propertyInfo?.city}`}</p>
         </div>
         <div className="flex gap-x-4 ">
@@ -107,7 +107,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
             <FavButton size={15} border />
           </div>
         </div>
-      </section>
+      </div>
     </article>
   );
 }
