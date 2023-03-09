@@ -6,6 +6,7 @@ import Tour from "~/icons/Tour";
 
 import { type MediaActive } from "~/pages/property/[id]";
 import { type Dispatch, type SetStateAction } from "react";
+import GoBackButton from "../UI/GoBackButton";
 
 type Props = {
   mediaActive: MediaActive;
@@ -16,6 +17,9 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
   return (
     <div className="flex items-center ">
       <div className="flex max-w-sm grow items-center gap-4 font-semibold">
+        <div className="flex grow items-center justify-center">
+          <GoBackButton />
+        </div>
         <button
           onClick={() => {
             setMediaActive({ images: false, video: false, tour: true });
