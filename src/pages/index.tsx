@@ -90,7 +90,7 @@ const Home: NextPage = () => {
       },
     },
     {
-      id: "asdafvccx",
+      id: "asdafvsccx",
       typeId: "ds",
       type: { id: "avc", name: "Casa" },
       userId: "sds",
@@ -161,7 +161,11 @@ const Home: NextPage = () => {
           </div>
           <section className="ml-auto grid w-3/5 grid-cols-auto-fit justify-items-center gap-4 p-4">
             {properties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
+              <PropertyCard
+                key={property.id}
+                property={property}
+                activeProperty={activeProperty}
+              />
             ))}
           </section>
         </section>

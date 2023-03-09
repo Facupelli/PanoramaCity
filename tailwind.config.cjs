@@ -20,7 +20,7 @@ const config = {
         "p-card": "330px",
       },
       gridTemplateColumns: {
-        "auto-fit": "repeat( auto-fit, minmax(330px, 1fr) )",
+        "auto-fit": "repeat( auto-fill, minmax(280px, 1fr) )",
       },
     },
   },

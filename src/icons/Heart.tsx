@@ -1,8 +1,8 @@
 export default function Heart() {
   return (
     <svg
-      width="18px"
-      height="18px"
+      width="15px"
+      height="15px"
       strokeWidth="1.5"
       viewBox="0 0 24 24"
       fill="none"

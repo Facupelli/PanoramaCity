@@ -3,14 +3,15 @@ import {
   SuperClusterAlgorithm,
 } from "@googlemaps/markerclusterer";
 import { useGoogleMap } from "@ubilabs/google-maps-react-hooks";
-import { useEffect, useState } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import { type Property } from "~/types/model";
 
 type Props = {
   properties: Property[];
+  setActiveProperty: Dispatch<SetStateAction<string>>;
 };
 
-export default function MapMarkers({ properties }: Props) {
+export default function MapMarkers({ properties, setActiveProperty }: Props) {
   const map = useGoogleMap();
 
   const [, setMarkers] = useState<Array<google.maps.Marker>>([]);
@@ -20,7 +21,7 @@ export default function MapMarkers({ properties }: Props) {
       return () => {};
     }
 
-    const initialBounds = new google.maps.LatLngBounds();
+    const initialBounds = new window.google.maps.LatLngBounds();
 
     const propertiesMarkers = properties.map((property) => {
       const position = { lat: property.locationLat, lng: property.locationLng };
@@ -34,7 +35,13 @@ export default function MapMarkers({ properties }: Props) {
 
       initialBounds.extend(position);
 
-      return new google.maps.Marker(markerOptions);
+      const marker = new window.google.maps.Marker(markerOptions);
+
+      marker.addListener("click", () => {
+        setActiveProperty(property.id);
+      });
+
+      return marker;
     });
 
     new MarkerClusterer({
