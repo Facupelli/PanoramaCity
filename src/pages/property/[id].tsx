@@ -17,6 +17,12 @@ type Props = {
   property?: Property;
 };
 
+export type MediaActive = {
+  tour: boolean;
+  images: boolean;
+  video: boolean;
+};
+
 const Home: NextPage = ({ property }: Props) => {
   console.log("PROPERTY", property);
 
@@ -50,6 +56,12 @@ const Home: NextPage = ({ property }: Props) => {
     },
   });
 
+  const [mediaActive, setMediaActive] = useState<MediaActive>({
+    tour: true,
+    images: false,
+    video: false,
+  });
+
   return (
     <>
       <Head>
@@ -73,7 +85,10 @@ const Home: NextPage = ({ property }: Props) => {
             ></iframe>
           </div>
           <section className="grid gap-y-10 px-24 py-10 font-barlow">
-            <GalleryButtons />
+            <GalleryButtons
+              mediaActive={mediaActive}
+              setMediaActive={setMediaActive}
+            />
             <PropertyHeader
               property={{
                 title: proper.title,

@@ -1,4 +1,4 @@
-export default function Image() {
+export default function Image({ color }: { color: string }) {
   return (
     <svg
       width="24px"
@@ -11,14 +11,14 @@ export default function Image() {
     >
       <path
         d="M21 3.6v16.8a.6.6 0 01-.6.6H3.6a.6.6 0 01-.6-.6V3.6a.6.6 0 01.6-.6h16.8a.6.6 0 01.6.6z"
-        stroke="#000000"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       ></path>
       <path
         d="M3 16l7-3 11 5M16 10a2 2 0 110-4 2 2 0 010 4z"
-        stroke="#000000"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
