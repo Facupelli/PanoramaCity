@@ -16,11 +16,14 @@ export type Property = {
   type?: PropertyType;
   userId: string;
   propertyInfo?: PropertyInfo;
+  title: string;
   description: string;
   operation: string;
   price: number;
   locationLat: number;
   locationLng: number;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type PropertyInfo = {

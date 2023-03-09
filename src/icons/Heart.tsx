@@ -1,8 +1,8 @@
-export default function Heart() {
+export default function Heart({ size }: { size: number }) {
   return (
     <svg
-      width="15px"
-      height="15px"
+      width={size}
+      height={size}
       strokeWidth="1.5"
       viewBox="0 0 24 24"
       fill="none"

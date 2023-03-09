@@ -1,13 +1,16 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Carousel from "nuka-carousel/lib/carousel";
+import { useRef } from "react";
+
+import FavButton from "../UI/FavButton";
 import ChevronLeft from "~/icons/ChevronLeft";
 import ChevronRight from "~/icons/ChevronRight";
-import Heart from "~/icons/Heart";
-import { formatPrice } from "../utils/price";
+
 import { formatSurface } from "../utils/surface";
+import { formatPrice } from "../utils/price";
+
 import { type Property } from "~/types/model";
-import { useRef } from "react";
 
 type Props = {
   property: Property;
@@ -26,7 +29,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
   return (
     <article
       ref={cardRef}
-      className={`w-full min-w-[280px] scroll-m-44 rounded-lg bg-white shadow-sm ${
+      className={`w-full min-w-[280px] cursor-pointer scroll-m-44 rounded-lg bg-white shadow-sm ${
         activeProperty === property.id
           ? "border border-oliva shadow-lg"
           : "border border-white"
@@ -85,7 +88,10 @@ export default function PropertyCard({ property, activeProperty }: Props) {
           />
         </div>
       </Carousel>
-      <section className="grid gap-y-1 py-2 px-4 font-barlow">
+      <section
+        onClick={() => router.push(`/property/${property.id}`)}
+        className="grid gap-y-1 py-2 px-4 font-barlow"
+      >
         <p className=" text-sm text-neutral-600">{property.type?.name}</p>
         <div className="grid ">
           <p className="font-semibold">{property.propertyInfo?.address}</p>
@@ -97,13 +103,8 @@ export default function PropertyCard({ property, activeProperty }: Props) {
         </div>
         <div className="flex justify-between">
           <p className="text-lg font-bold">{formatPrice(property.price)}</p>
-          <div className="flex items-center">
-            <button
-              aria-label="fav-button"
-              className="rounded-full border border-neutral-400 p-1 text-sm font-semibold text-oliva"
-            >
-              <Heart />
-            </button>
+          <div className="flex items-center ">
+            <FavButton size={15} border />
           </div>
         </div>
       </section>

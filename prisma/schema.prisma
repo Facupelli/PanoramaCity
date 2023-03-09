@@ -89,11 +89,15 @@ model Property {
     user            User            @relation(fields: [userId], references: [id])
     propertyInfo    PropertyInfo?
     amenities       Amenity[]
+    title           String
     description     String
     operation       String
     price           Int
     ambiences       Int
     bathrooms       Int
+
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
 }
 
 model PropertyInfo {
