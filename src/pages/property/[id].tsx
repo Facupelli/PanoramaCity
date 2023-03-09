@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps, type NextPage } from "next";
+import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import { prisma } from "~/server/db";
 import { ParsedUrlQuery } from "querystring";
@@ -7,6 +7,9 @@ import { useState } from "react";
 
 import NavBar from "~/components/NavBar";
 import GalleryButtons from "~/components/PropertyDetail/GalleryButtons";
+
+import IconDetails from "~/components/PropertyDetail/IconsDetail";
+import PropertyHeader from "~/components/PropertyDetail/PropertyHeader";
 
 import { type Property } from "~/types/model";
 
@@ -22,7 +25,7 @@ const Home: NextPage = ({ property }: Props) => {
     typeId: "ds",
     type: { id: "asd", name: "Departamento" },
     userId: "sds",
-    title: "Casa para alugar com 55m², 1 quarto e sem vaga",
+    title: "Departamento para alugar com 55m², 1 quarto e sem vaga",
     description:
       "Imóvel amplo para alugar com 1 quarto e 1 banheiro no total. Este imóvel fica situado no 4º andar. O condomínio é bem equipado com diversas instalações e fica localizado em Rua Fidencio Ramos no bairro Vila Olímpia em São Paulo. Está bem localizado, próximo a pontos de interesse de Vila Olímpia, tais como DeRose Method Vila Olímpia, Shopping Vila Olímpia, Shopping JK Iguatemi, Teatro Vento Forte, Parque do Povo e Estação Vila Olímpia.",
     operation: "Alquiler",
@@ -43,6 +46,7 @@ const Home: NextPage = ({ property }: Props) => {
       surface: 12000,
       buildYear: 1998,
       orientation: "oeste",
+      floor: 3,
     },
   });
 
@@ -68,16 +72,34 @@ const Home: NextPage = ({ property }: Props) => {
               allowFullScreen
             ></iframe>
           </div>
-          <section className="px-24 pt-10 font-barlow">
+          <section className="grid gap-y-10 px-24 py-10 font-barlow">
             <GalleryButtons />
-            <div className="pt-10">
-              <h1 className="text-2xl font-semibold">{proper.title}</h1>
-              <div className="pt-2">
-                <p className="text-neutral-500">{`${proper.propertyInfo?.address}, ${proper.propertyInfo?.zone}, ${proper.propertyInfo?.city}`}</p>
-                <p className="text-xs text-neutral-500">
-                  Publicado: {proper.createdAt.toDateString()}
-                </p>
-              </div>
+            <PropertyHeader
+              property={{
+                title: proper.title,
+                address: proper.propertyInfo?.address,
+                zone: proper.propertyInfo?.zone,
+                city: proper.propertyInfo?.city,
+                createdAt: proper.createdAt,
+              }}
+            />
+            <IconDetails property={proper} />
+            <div className="max-w-[75ch]">
+              <p>{proper.description}</p>
+            </div>
+            <div>
+              {/* <h3 className="text-lg font-semibold">Comodidades:</h3> */}
+            </div>
+            <div className="bg-red-200">
+              <iframe
+                width="100%"
+                height="350"
+                // style="border:0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}&q=${proper.locationLat},${proper.locationLng}&center=${proper.locationLat},${proper.locationLng}`}
+              ></iframe>
             </div>
             {/* {proper?.description} */}
           </section>

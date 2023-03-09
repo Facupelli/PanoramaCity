@@ -34,7 +34,7 @@ export type PropertyInfo = {
   address: string;
   city: string;
   zone: string;
-  floor?: string;
+  floor?: number;
   surface: number;
   buildYear: number;
   orientation: string;

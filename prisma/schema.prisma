@@ -93,8 +93,6 @@ model Property {
     description     String
     operation       String
     price           Int
-    ambiences       Int
-    bathrooms       Int
 
     createdAt     DateTime @default(now())
     updatedAt     DateTime @updatedAt
@@ -113,5 +111,7 @@ model PropertyInfo {
     surface         Int
     buildYear       Int
     orientation     String
+    ambiences       Int
+    bathrooms       Int
     bedrooms        Int
 }
