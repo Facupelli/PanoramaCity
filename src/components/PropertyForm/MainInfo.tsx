@@ -1,18 +1,23 @@
 import { UseFormWatch, type UseFormRegister } from "react-hook-form";
-import { type Property } from "~/types/model";
 import Fieldset from "../UI/FieldSet";
+import { type FormData } from "~/types/createProperty";
+import { type PropertyType, type Property } from "~/types/model";
 
 type Props = {
-  register: UseFormRegister<Property>;
-  watch: UseFormWatch<Property>;
+  register: UseFormRegister<FormData>;
+  watch: UseFormWatch<FormData>;
+  propertyTypes: PropertyType[];
 };
 
-export default function MainInfo({ register, watch }: Props) {
+export default function MainInfo({ register, watch, propertyTypes }: Props) {
   return (
     <Fieldset title="Información principal">
       <select className="p-2" {...register("typeId")}>
-        <option>Casa</option>
-        <option>Departamento</option>
+        {propertyTypes?.map((type) => (
+          <option value={type.id} key={type.id}>
+            {type.name}
+          </option>
+        ))}
       </select>
 
       <select className="p-2" {...register("operation")}>

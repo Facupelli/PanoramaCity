@@ -1,11 +1,11 @@
 import { UseFormWatch, type UseFormRegister } from "react-hook-form";
 import { provinces } from "~/assets/provinces";
-import { type Property } from "~/types/model";
 import Fieldset from "../UI/FieldSet";
+import { type FormData } from "~/types/createProperty";
 
 type Props = {
-  register: UseFormRegister<Property>;
-  watch: UseFormWatch<Property>;
+  register: UseFormRegister<FormData>;
+  watch: UseFormWatch<FormData>;
 };
 
 export default function Address({ register, watch }: Props) {
@@ -28,12 +28,12 @@ export default function Address({ register, watch }: Props) {
         placeholder="Dirección"
         {...register("propertyInfo.address")}
       />
-      {propertyType === "Deparamento" && (
+      {propertyType === "clf1mbf010000e7vkfto3gjcp" && (
         <input
           className="p-2"
           type="text"
           required
-          placeholder="Dirección"
+          placeholder="Piso"
           {...register("propertyInfo.floor")}
         />
       )}

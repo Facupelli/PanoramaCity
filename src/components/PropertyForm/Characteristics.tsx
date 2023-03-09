@@ -1,10 +1,10 @@
 import { UseFormWatch, type UseFormRegister } from "react-hook-form";
-import { type Property } from "~/types/model";
 import Fieldset from "../UI/FieldSet";
+import { type FormData } from "~/types/createProperty";
 
 type Props = {
-  register: UseFormRegister<Property>;
-  watch: UseFormWatch<Property>;
+  register: UseFormRegister<FormData>;
+  watch: UseFormWatch<FormData>;
 };
 
 export default function Characteristics({ register, watch }: Props) {

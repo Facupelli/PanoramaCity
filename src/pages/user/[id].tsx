@@ -4,6 +4,7 @@ import { prisma } from "~/server/db";
 import { ParsedUrlQuery } from "querystring";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { api } from "~/utils/api";
 
 import NavBar from "~/components/NavBar";
 import Address from "~/components/PropertyForm/Address";
@@ -11,25 +12,54 @@ import Characteristics from "~/components/PropertyForm/Characteristics";
 import MainInfo from "~/components/PropertyForm/MainInfo";
 import PageBtn from "~/components/UI/PageBtn";
 
-import { type Property, type User } from "~/types/model";
+import { type PropertyType, type Property, type User } from "~/types/model";
+import { type FormData } from "~/types/createProperty";
 
 type Props = {
   user?: User;
+  propertyTypes: PropertyType[];
 };
 
-const UserDetail: NextPage = ({ user }: Props) => {
+const UserDetail: NextPage = ({ user, propertyTypes }: Props) => {
+  const createProperty = api.property.createProperty.useMutation();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Property>();
+  } = useForm<FormData>();
 
   const steps = 3;
 
   const [step, setStep] = useState(1);
 
-  const onSubmit = (data: Property) => console.log(data);
+  const onSubmit = async (data: FormData) => {
+    const propertyData = {
+      typeId: data.typeId,
+      userId: "clezvzioy0000e72k4peul2fn",
+      price: Number(data.price),
+      title: data.title,
+      description: data.description,
+      operation: data.operation,
+      locationLat: "-31.51903368124165",
+      locationLng: "-68.57562343506707",
+      propertyInfo: {
+        ambiences: Number(data.propertyInfo.ambiences),
+        bedrooms: Number(data.propertyInfo.bedrooms),
+        bathrooms: Number(data.propertyInfo.bathrooms),
+        floor: Number(data.propertyInfo.floor),
+        surface: Number(data.propertyInfo.surface),
+        buildYear: Number(data.propertyInfo.buildYear),
+        address: data.propertyInfo.address,
+        city: data.propertyInfo.city,
+        zone: data.propertyInfo.zone,
+        orientation: data.propertyInfo.orientation,
+      },
+    };
+
+    createProperty.mutate(propertyData);
+  };
 
   return (
     <>
@@ -58,7 +88,13 @@ const UserDetail: NextPage = ({ user }: Props) => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="pt-4">
-            {step === 1 && <MainInfo register={register} watch={watch} />}
+            {step === 1 && (
+              <MainInfo
+                register={register}
+                watch={watch}
+                propertyTypes={propertyTypes}
+              />
+            )}
             {step === 2 && <Address register={register} watch={watch} />}
             {step === 3 && (
               <Characteristics register={register} watch={watch} />
@@ -100,13 +136,16 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as IParams;
-  const user = await prisma?.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: { id },
   });
 
+  const propertyTypes: PropertyType[] = await prisma.propertyType.findMany({});
+
   return {
     props: {
-      property: JSON.parse(JSON.stringify(user)),
+      user: JSON.parse(JSON.stringify(user)),
+      propertyTypes,
     },
     revalidate: 10,
   };
