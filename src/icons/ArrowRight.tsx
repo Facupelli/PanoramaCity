@@ -1,4 +1,4 @@
-export default function ArrowLeft({ size }: { size: number }) {
+export default function ArrowRight({ size }: { size: number }) {
   return (
     <svg
       width={size}
@@ -10,7 +10,7 @@ export default function ArrowLeft({ size }: { size: number }) {
       color="#000000"
     >
       <path
-        d="M18.5 12H6m0 0l6-6m-6 6l6 6"
+        d="M6 12h12.5m0 0l-6-6m6 6l-6 6"
         stroke="#000000"
         strokeWidth="1.5"
         strokeLinecap="round"

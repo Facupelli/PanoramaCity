@@ -31,6 +31,7 @@ export type PropertyInfo = {
   propertyId: string;
   ambiences: number;
   bathrooms: number;
+  bedrooms: number;
   address: string;
   city: string;
   zone: string;
@@ -38,5 +39,8 @@ export type PropertyInfo = {
   surface: number;
   buildYear: number;
   orientation: string;
-  bedrooms: number;
+};
+
+export type User = {
+  id: string;
 };

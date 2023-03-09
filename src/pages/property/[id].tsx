@@ -23,7 +23,7 @@ export type MediaActive = {
   video: boolean;
 };
 
-const Home: NextPage = ({ property }: Props) => {
+const PropertyDetail: NextPage = ({ property }: Props) => {
   console.log("PROPERTY", property);
 
   const [proper, setProper] = useState<Property>({
@@ -124,7 +124,7 @@ const Home: NextPage = ({ property }: Props) => {
   );
 };
 
-export default Home;
+export default PropertyDetail;
 
 interface IParams extends ParsedUrlQuery {
   id: string;
