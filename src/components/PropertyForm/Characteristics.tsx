@@ -5,11 +5,12 @@ import { type FormData } from "~/types/createProperty";
 type Props = {
   register: UseFormRegister<FormData>;
   watch: UseFormWatch<FormData>;
+  step: number;
 };
 
-export default function Characteristics({ register, watch }: Props) {
+export default function Characteristics({ register, watch, step }: Props) {
   return (
-    <Fieldset title="Características del inmueble">
+    <>
       <div className="grid">
         <label htmlFor="ambiences">Ambientes</label>
         <input
@@ -69,6 +70,6 @@ export default function Characteristics({ register, watch }: Props) {
           {...register("propertyInfo.buildYear")}
         />
       </div>
-    </Fieldset>
+    </>
   );
 }

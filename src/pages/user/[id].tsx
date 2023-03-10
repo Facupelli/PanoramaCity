@@ -16,11 +16,14 @@ import PageBtn from "~/components/UI/PageBtn";
 
 import { type PropertyType, type Property, type User } from "~/types/model";
 import { type FormData } from "~/types/createProperty";
+import Fieldset from "~/components/UI/FieldSet";
 
 type Props = {
   user?: User;
   propertyTypes: PropertyType[];
 };
+
+export const steps = 3;
 
 const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
   const { data: sessionData } = useSession();
@@ -33,8 +36,6 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
     watch,
     formState: { errors },
   } = useForm<FormData>();
-
-  const steps = 3;
 
   const [step, setStep] = useState(1);
 
@@ -85,12 +86,10 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
       <NavBar />
 
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
-        <div className="mx-auto max-w-6xl px-10 py-10 font-barlow">
+        <div className="mx-auto max-w-6xl px-24 py-10 font-barlow">
           <div className="flex items-baseline justify-between gap-24 ">
-            <h1 className="text-xl font-semibold">Publicar un inmueble</h1>
-            <p>
-              Paso {step} de {steps}
-            </p>
+            <h1 className="text-2xl font-semibold">Publicar un inmueble</h1>
+
             <div className="h-[3px] grow rounded-lg bg-white">
               <div
                 className={`h-[3px] rounded-lg bg-marino transition-all delay-100 duration-200 ease-out ${
@@ -102,37 +101,51 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
 
           <form onSubmit={handleSubmit(onSubmit)} className="pt-4">
             {step === 1 && (
-              <MainInfo
-                register={register}
-                watch={watch}
-                propertyTypes={propertyTypes}
-              />
+              <Fieldset title="Información principal" step={step}>
+                <MainInfo
+                  register={register}
+                  watch={watch}
+                  propertyTypes={propertyTypes}
+                />
+              </Fieldset>
             )}
-            {step === 2 && <Address register={register} watch={watch} />}
+            {step === 2 && (
+              <Fieldset title="Dirección del inmueble" step={step}>
+                <Address register={register} watch={watch} step={step} />
+              </Fieldset>
+            )}
             {step === 3 && (
-              <Characteristics register={register} watch={watch} />
+              <Fieldset title="Características del inmueble" step={step}>
+                <Characteristics
+                  register={register}
+                  watch={watch}
+                  step={step}
+                />
+              </Fieldset>
             )}
 
-            <div className="flex items-center justify-center gap-2">
-              {step !== 1 && (
-                <PageBtn
-                  type="prev"
-                  handleClick={() => setStep((prev) => (prev -= 1))}
-                />
-              )}
-              {step === 3 ? (
-                <button
-                  type="submit"
-                  className="rounded bg-white p-2 text-sm font-semibold"
-                >
-                  FINALIZAR
-                </button>
-              ) : (
-                <PageBtn
-                  type="next"
-                  handleClick={() => setStep((prev) => (prev += 1))}
-                />
-              )}
+            <div className="grid grid-cols-6">
+              <div className="col-span-4 col-start-3 flex items-center justify-center gap-2 ">
+                {step !== 1 && (
+                  <PageBtn
+                    type="prev"
+                    handleClick={() => setStep((prev) => (prev -= 1))}
+                  />
+                )}
+                {step === 3 ? (
+                  <button
+                    type="submit"
+                    className="rounded bg-oliva py-2 px-4 text-sm font-semibold text-white"
+                  >
+                    FINALIZAR
+                  </button>
+                ) : (
+                  <PageBtn
+                    type="next"
+                    handleClick={() => setStep((prev) => (prev += 1))}
+                  />
+                )}
+              </div>
             </div>
           </form>
         </div>

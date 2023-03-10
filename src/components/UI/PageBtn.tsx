@@ -13,8 +13,8 @@ export default function PageBtn({ type, handleClick }: Props) {
       className="rounded border border-neutral-200 bg-white py-1 px-4"
       onClick={handleClick}
     >
-      {type === "next" && <ArrowRight size={20} />}
-      {type === "prev" && <ArrowLeft size={20} />}
+      {type === "next" && <ArrowRight size={26} />}
+      {type === "prev" && <ArrowLeft size={26} />}
     </button>
   );
 }

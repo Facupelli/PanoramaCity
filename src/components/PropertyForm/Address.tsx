@@ -10,9 +10,10 @@ import Autocomplete from "react-google-autocomplete";
 type Props = {
   register: UseFormRegister<FormData>;
   watch: UseFormWatch<FormData>;
+  step: number;
 };
 
-export default function Address({ register, watch }: Props) {
+export default function Address({ register, watch, step }: Props) {
   const propertyType = watch("typeId");
   const address = watch("propertyInfo.address");
 
@@ -21,24 +22,36 @@ export default function Address({ register, watch }: Props) {
   useEffect(() => {}, [address]);
 
   return (
-    <Fieldset title="Dirección">
+    <>
       <div className="grid">
-        <label htmlFor="city">Ciudad</label>
-        <select id="city" className="p-2" {...register("propertyInfo.city")}>
+        <label htmlFor="city" className="pb-2 text-neutral-900">
+          Ciudad
+        </label>
+        <select
+          id="city"
+          className="rounded-md p-2"
+          {...register("propertyInfo.city")}
+        >
           <option>San Juan</option>
         </select>
       </div>
 
       <div className="grid">
-        <label htmlFor="zone">Departamento</label>
-        <select id="zone" className="p-2" {...register("propertyInfo.zone")}>
+        <label htmlFor="zone" className="pb-2 text-neutral-900">
+          Departamento
+        </label>
+        <select
+          id="zone"
+          className="rounded-md p-2"
+          {...register("propertyInfo.zone")}
+        >
           {provinces.map((province) => (
             <option key={province.id}>{province.nombre}</option>
           ))}
         </select>
       </div>
 
-      <Autocomplete
+      {/* <Autocomplete
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}
         onPlaceSelected={(place) => {
           console.log(place);
@@ -47,15 +60,17 @@ export default function Address({ register, watch }: Props) {
           types: ["address"],
           setComponentRestrictions: "ar",
         }}
-      />
+      /> */}
 
       {/* <Autocomplete /> */}
 
       <div className="grid">
-        <label htmlFor="address">Dirección</label>
+        <label htmlFor="address" className="pb-2 text-neutral-900">
+          Dirección
+        </label>
         <input
           id="address"
-          className="p-2"
+          className="rounded-md p-2"
           type="text"
           required
           placeholder="Los Cedros 4234 oeste"
@@ -65,10 +80,12 @@ export default function Address({ register, watch }: Props) {
 
       {propertyType === "clf1mbf010000e7vkfto3gjcp" && (
         <div className="grid">
-          <label htmlFor="floor">Piso</label>
+          <label htmlFor="floor" className="pb-2 text-neutral-900">
+            Piso
+          </label>
           <input
             id="floor"
-            className="p-2"
+            className="rounded-md p-2"
             type="text"
             required
             placeholder="3"
@@ -78,16 +95,18 @@ export default function Address({ register, watch }: Props) {
       )}
 
       <div className="grid">
-        <label htmlFor="orientation">Orientación</label>
+        <label htmlFor="orientation" className="pb-2 text-neutral-900">
+          Orientación
+        </label>
         <input
           id="orientation"
-          className="p-2"
+          className="rounded-md p-2"
           type="text"
           required
           placeholder="Oeste"
           {...register("propertyInfo.orientation")}
         />
       </div>
-    </Fieldset>
+    </>
   );
 }

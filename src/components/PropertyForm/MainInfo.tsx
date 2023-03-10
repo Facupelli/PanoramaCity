@@ -11,7 +11,7 @@ type Props = {
 
 export default function MainInfo({ register, watch, propertyTypes }: Props) {
   return (
-    <Fieldset title="Información principal">
+    <>
       <div className="grid">
         <label htmlFor="type">Tipo de inmueble</label>
         <select id="type" className="p-2" {...register("typeId")}>
@@ -45,10 +45,9 @@ export default function MainInfo({ register, watch, propertyTypes }: Props) {
 
       <div className="grid">
         <label htmlFor="description">Descripción</label>
-        <input
+        <textarea
           id="description"
           className="p-2"
-          type="text"
           required
           placeholder="Breve Descripción del inmueble"
           {...register("description")}
@@ -66,6 +65,6 @@ export default function MainInfo({ register, watch, propertyTypes }: Props) {
           {...register("price")}
         />
       </div>
-    </Fieldset>
+    </>
   );
 }
