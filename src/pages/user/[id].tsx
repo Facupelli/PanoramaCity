@@ -4,6 +4,7 @@ import axios from "axios";
 import { prisma } from "~/server/db";
 import { ParsedUrlQuery } from "querystring";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
@@ -13,10 +14,10 @@ import Address from "~/components/PropertyForm/Address";
 import Characteristics from "~/components/PropertyForm/Characteristics";
 import MainInfo from "~/components/PropertyForm/MainInfo";
 import PageBtn from "~/components/UI/PageBtn";
+import Fieldset from "~/components/UI/FieldSet";
 
 import { type PropertyType, type User, type Operation } from "~/types/model";
-import { type FormData } from "~/types/createProperty";
-import Fieldset from "~/components/UI/FieldSet";
+import { validationSchema, type FormData } from "~/types/createProperty";
 
 type Props = {
   user?: User;
@@ -40,7 +41,9 @@ const UserDetail: NextPage<Props> = ({
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
+
+  console.log(errors);
 
   const [step, setStep] = useState(1);
 
