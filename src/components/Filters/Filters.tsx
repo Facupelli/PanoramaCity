@@ -1,20 +1,24 @@
 import { useForm } from "react-hook-form";
-import { type Operation, type PropertyType } from "~/types/model";
+import { api } from "~/utils/api";
 import RadioFilters from "../UI/RadioFilters";
+
+import { type Operation, type PropertyType } from "~/types/model";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export type FiltersData = {
   type: string[];
   operation: string;
   price: {
-    min: number;
-    max: number;
+    min: string;
+    max: string;
   };
-  ambiences: string[];
-  bathrooms: string[];
-  bedrooms: string[];
+  ambiences: string;
+  bathrooms: string;
+  bedrooms: string;
   surface: {
-    min: number;
-    max: number;
+    min: string;
+    max: string;
   };
 };
 
@@ -23,10 +27,35 @@ type Props = {
   types: PropertyType[];
 };
 
-export default function Filters({ operations, types }: Props) {
-  const { register, handleSubmit } = useForm<FiltersData>();
+const initialState = {
+  type: ["", ""],
+  operation: "all",
+  price: {
+    min: "",
+    max: "",
+  },
+  ambiences: "",
+  bathrooms: "",
+  bedrooms: "",
+  surface: {
+    min: "",
+    max: "",
+  },
+};
 
-  const onSubmit = (data: FiltersData) => console.log(data);
+export default function Filters({ operations, types }: Props) {
+  const { register, handleSubmit, reset } = useForm<FiltersData>({
+    defaultValues: initialState,
+  });
+
+  const getFilteredProperties =
+    api.property.getFilteredProperties.useMutation();
+
+  const onSubmit = async (data: FiltersData) => {
+    console.log(data);
+    const properties = getFilteredProperties.mutate(data);
+    console.log(properties);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white">
@@ -62,7 +91,7 @@ export default function Filters({ operations, types }: Props) {
             className="rounded-sm border border-neutral-300 p-2"
             {...register("operation")}
           >
-            <option>Todos</option>
+            <option value="all">Todos</option>
             {operations?.map((operation) => (
               <option key={operation.id} value={operation.id}>
                 {operation.name}
@@ -157,7 +186,10 @@ export default function Filters({ operations, types }: Props) {
         </div>
       </div>
       <div className="flex items-center justify-between border-t border-marino bg-white  p-3 ">
-        <button className="rounded-sm border border-marino p-2">
+        <button
+          className="rounded-sm border border-marino p-2"
+          onClick={() => reset(initialState)}
+        >
           Limpiar filtros
         </button>
         <button className="rounded-sm border-none bg-oliva p-2 font-semibold text-white">

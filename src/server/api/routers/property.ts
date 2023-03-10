@@ -4,10 +4,74 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { prisma } from "~/server/db";
 
 export const propertyRouter = createTRPCRouter({
-  getAllProperties: publicProcedure.query(async () => {
-    try {
-    } catch (e) {}
-  }),
+  getFilteredProperties: publicProcedure
+    .input(
+      z.object({
+        ambiences: z.string().optional(),
+        bathrooms: z.string().optional(),
+        bedrooms: z.string().optional(),
+        operation: z.string().optional(),
+        price: z.object({
+          min: z.string().optional(),
+          max: z.string().optional(),
+        }),
+        surface: z.object({
+          min: z.string().optional(),
+          max: z.string().optional(),
+        }),
+        type: z.string().array().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      let wherePipe: any = { propertyInfo: {} };
+
+      if (input.price.min && input.price.max) {
+        wherePipe.price = {
+          gte: Number(input.price.min),
+          lte: Number(input.price.max),
+        };
+      }
+
+      if (input.type && input.type?.length !== 2) {
+        wherePipe.typeId = input.type[0];
+      }
+
+      if (input.operation) {
+        wherePipe.operationId = input.operation;
+      }
+
+      if (input.surface.min && input.surface.max) {
+        wherePipe.propertyInfo.surface = {
+          gte: Number(input.surface.min),
+          lte: Number(input.surface.max),
+        };
+      }
+
+      if (input.ambiences) {
+        console.log("NUMBER", Number(input.ambiences));
+        wherePipe.propertyInfo.ambiences = { gte: Number(input.ambiences) };
+      }
+
+      if (input.bathrooms) {
+        wherePipe.propertyInfo.bathrooms = { gte: Number(input.bathrooms) };
+      }
+
+      if (input.bedrooms) {
+        wherePipe.propertyInfo.bedrooms = { gte: Number(input.bedrooms) };
+      }
+
+      console.log("PIPE", wherePipe);
+
+      try {
+        const properties = await prisma.property.findMany({
+          where: wherePipe,
+        });
+        return properties;
+      } catch (err) {
+        console.log(err);
+        return { error: "error fetching properties" };
+      }
+    }),
 
   createProperty: publicProcedure
     .input(

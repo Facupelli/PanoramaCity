@@ -13,9 +13,9 @@ type Props = {
     | `type.${number}`
     | "price.min"
     | "price.max"
-    | `ambiences.${number}`
-    | `bathrooms.${number}`
-    | `bedrooms.${number}`
+    | `ambiences`
+    | `bathrooms`
+    | `bedrooms`
     | "surface.min"
     | "surface.max";
 };
