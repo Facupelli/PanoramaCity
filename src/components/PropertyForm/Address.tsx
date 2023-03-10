@@ -22,14 +22,21 @@ export default function Address({ register, watch }: Props) {
 
   return (
     <Fieldset title="Dirección">
-      <select className="p-2" {...register("propertyInfo.city")}>
-        <option>San Juan</option>
-      </select>
-      <select className="p-2" {...register("propertyInfo.zone")}>
-        {provinces.map((province) => (
-          <option key={province.id}>{province.nombre}</option>
-        ))}
-      </select>
+      <div className="grid">
+        <label htmlFor="city">Ciudad</label>
+        <select id="city" className="p-2" {...register("propertyInfo.city")}>
+          <option>San Juan</option>
+        </select>
+      </div>
+
+      <div className="grid">
+        <label htmlFor="zone">Departamento</label>
+        <select id="zone" className="p-2" {...register("propertyInfo.zone")}>
+          {provinces.map((province) => (
+            <option key={province.id}>{province.nombre}</option>
+          ))}
+        </select>
+      </div>
 
       <Autocomplete
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}
@@ -44,29 +51,43 @@ export default function Address({ register, watch }: Props) {
 
       {/* <Autocomplete /> */}
 
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Dirección"
-        {...register("propertyInfo.address")}
-      />
-      {propertyType === "clf1mbf010000e7vkfto3gjcp" && (
+      <div className="grid">
+        <label htmlFor="address">Dirección</label>
         <input
+          id="address"
           className="p-2"
           type="text"
           required
-          placeholder="Piso"
-          {...register("propertyInfo.floor")}
+          placeholder="Los Cedros 4234 oeste"
+          {...register("propertyInfo.address")}
         />
+      </div>
+
+      {propertyType === "clf1mbf010000e7vkfto3gjcp" && (
+        <div className="grid">
+          <label htmlFor="floor">Piso</label>
+          <input
+            id="floor"
+            className="p-2"
+            type="text"
+            required
+            placeholder="3"
+            {...register("propertyInfo.floor")}
+          />
+        </div>
       )}
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Orientación"
-        {...register("propertyInfo.orientation")}
-      />
+
+      <div className="grid">
+        <label htmlFor="orientation">Orientación</label>
+        <input
+          id="orientation"
+          className="p-2"
+          type="text"
+          required
+          placeholder="Oeste"
+          {...register("propertyInfo.orientation")}
+        />
+      </div>
     </Fieldset>
   );
 }

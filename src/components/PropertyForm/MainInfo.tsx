@@ -12,40 +12,60 @@ type Props = {
 export default function MainInfo({ register, watch, propertyTypes }: Props) {
   return (
     <Fieldset title="Información principal">
-      <select className="p-2" {...register("typeId")}>
-        {propertyTypes?.map((type) => (
-          <option value={type.id} key={type.id}>
-            {type.name}
-          </option>
-        ))}
-      </select>
+      <div className="grid">
+        <label htmlFor="type">Tipo de inmueble</label>
+        <select id="type" className="p-2" {...register("typeId")}>
+          {propertyTypes?.map((type) => (
+            <option value={type.id} key={type.id}>
+              {type.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <select className="p-2" {...register("operation")}>
-        <option>Venta</option>
-        <option>Alquiler</option>
-      </select>
+      <div className="grid">
+        <label htmlFor="operation">Operación</label>
+        <select id="operation" className="p-2" {...register("operation")}>
+          <option>Venta</option>
+          <option>Alquiler</option>
+        </select>
+      </div>
 
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Título"
-        {...register("title")}
-      />
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Descripción"
-        {...register("description")}
-      />
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Precio"
-        {...register("price")}
-      />
+      <div className="grid">
+        <label htmlFor="title">Título</label>
+        <input
+          id="title"
+          className="p-2"
+          type="text"
+          required
+          placeholder="Departamento en San Juan centro 540m"
+          {...register("title")}
+        />
+      </div>
+
+      <div className="grid">
+        <label htmlFor="description">Descripción</label>
+        <input
+          id="description"
+          className="p-2"
+          type="text"
+          required
+          placeholder="Breve Descripción del inmueble"
+          {...register("description")}
+        />
+      </div>
+
+      <div className="grid">
+        <label htmlFor="price">Precio</label>
+        <input
+          id="price"
+          className="p-2"
+          type="text"
+          required
+          placeholder="15.000"
+          {...register("price")}
+        />
+      </div>
     </Fieldset>
   );
 }

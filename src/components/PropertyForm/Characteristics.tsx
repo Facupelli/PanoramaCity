@@ -10,42 +10,65 @@ type Props = {
 export default function Characteristics({ register, watch }: Props) {
   return (
     <Fieldset title="Características del inmueble">
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Ambientes"
-        {...register("propertyInfo.ambiences")}
-      />
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Baños"
-        {...register("propertyInfo.bathrooms")}
-      />
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Habitaciones"
-        {...register("propertyInfo.bedrooms")}
-      />
+      <div className="grid">
+        <label htmlFor="ambiences">Ambientes</label>
+        <input
+          id="ambiences"
+          className="p-2"
+          type="text"
+          required
+          placeholder="4"
+          {...register("propertyInfo.ambiences")}
+        />
+      </div>
 
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Superficie m²"
-        {...register("propertyInfo.surface")}
-      />
-      <input
-        className="p-2"
-        type="text"
-        required
-        placeholder="Año construcción"
-        {...register("propertyInfo.buildYear")}
-      />
+      <div className="grid">
+        <label htmlFor="bathromms">Baños</label>
+        <input
+          id="bathrooms"
+          className="p-2"
+          type="text"
+          required
+          placeholder="2"
+          {...register("propertyInfo.bathrooms")}
+        />
+      </div>
+
+      <div className="grid">
+        <label htmlFor="bedrooms">Habitaciones</label>
+        <input
+          id="bedrooms"
+          className="p-2"
+          type="text"
+          required
+          placeholder="2"
+          {...register("propertyInfo.bedrooms")}
+        />
+      </div>
+
+      <div className="grid">
+        <label htmlFor="surface">Superficie m²</label>
+        <input
+          id="surface"
+          className="p-2"
+          type="text"
+          required
+          placeholder="1200"
+          {...register("propertyInfo.surface")}
+        />
+      </div>
+
+      <div className="grid">
+        <label htmlFor="buildYear">Año construcción</label>
+        <input
+          id="buildYear"
+          className="p-2"
+          type="text"
+          required
+          placeholder="2003"
+          {...register("propertyInfo.buildYear")}
+        />
+      </div>
     </Fieldset>
   );
 }
