@@ -15,7 +15,7 @@ export default function Characteristics({ register, watch, step }: Props) {
         <label htmlFor="ambiences">Ambientes</label>
         <input
           id="ambiences"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           type="text"
           required
           placeholder="4"
@@ -27,7 +27,7 @@ export default function Characteristics({ register, watch, step }: Props) {
         <label htmlFor="bathromms">Baños</label>
         <input
           id="bathrooms"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           type="text"
           required
           placeholder="2"
@@ -39,7 +39,7 @@ export default function Characteristics({ register, watch, step }: Props) {
         <label htmlFor="bedrooms">Habitaciones</label>
         <input
           id="bedrooms"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           type="text"
           required
           placeholder="2"
@@ -51,7 +51,7 @@ export default function Characteristics({ register, watch, step }: Props) {
         <label htmlFor="surface">Superficie m²</label>
         <input
           id="surface"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           type="text"
           required
           placeholder="1200"
@@ -63,7 +63,7 @@ export default function Characteristics({ register, watch, step }: Props) {
         <label htmlFor="buildYear">Año construcción</label>
         <input
           id="buildYear"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           type="text"
           required
           placeholder="2003"

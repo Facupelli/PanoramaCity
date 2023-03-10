@@ -14,18 +14,23 @@ import Characteristics from "~/components/PropertyForm/Characteristics";
 import MainInfo from "~/components/PropertyForm/MainInfo";
 import PageBtn from "~/components/UI/PageBtn";
 
-import { type PropertyType, type Property, type User } from "~/types/model";
+import { type PropertyType, type User, type Operation } from "~/types/model";
 import { type FormData } from "~/types/createProperty";
 import Fieldset from "~/components/UI/FieldSet";
 
 type Props = {
   user?: User;
   propertyTypes: PropertyType[];
+  operations: Operation[];
 };
 
 export const steps = 3;
 
-const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
+const UserDetail: NextPage<Props> = ({
+  user,
+  propertyTypes,
+  operations,
+}: Props) => {
   const { data: sessionData } = useSession();
 
   const createProperty = api.property.createProperty.useMutation();
@@ -55,7 +60,7 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
       price: Number(data.price),
       title: data.title,
       description: data.description,
-      operation: data.operation,
+      operationId: data.operationId,
       locationLat: -31.51903398124165,
       locationLng: -68.57562323506707,
       propertyInfo: {
@@ -72,7 +77,7 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
       },
     };
 
-    // createProperty.mutate(propertyData);
+    createProperty.mutate(propertyData);
   };
 
   return (
@@ -106,6 +111,7 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
                   register={register}
                   watch={watch}
                   propertyTypes={propertyTypes}
+                  operations={operations}
                 />
               </Fieldset>
             )}
@@ -167,11 +173,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
   });
 
   const propertyTypes: PropertyType[] = await prisma.propertyType.findMany({});
+  const operations: Operation[] = await prisma.operation.findMany({});
 
   return {
     props: {
       user: JSON.parse(JSON.stringify(user)),
       propertyTypes,
+      operations,
     },
     revalidate: 10,
   };

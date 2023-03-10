@@ -29,7 +29,7 @@ export default function Address({ register, watch, step }: Props) {
         </label>
         <select
           id="city"
-          className="rounded-md p-2"
+          className="rounded-md border border-neutral-200 p-2"
           {...register("propertyInfo.city")}
         >
           <option>San Juan</option>
@@ -42,7 +42,7 @@ export default function Address({ register, watch, step }: Props) {
         </label>
         <select
           id="zone"
-          className="rounded-md p-2"
+          className="rounded-md border border-neutral-200 p-2"
           {...register("propertyInfo.zone")}
         >
           {provinces.map((province) => (
@@ -70,7 +70,7 @@ export default function Address({ register, watch, step }: Props) {
         </label>
         <input
           id="address"
-          className="rounded-md p-2"
+          className="rounded-md border border-neutral-200 p-2"
           type="text"
           required
           placeholder="Los Cedros 4234 oeste"
@@ -85,7 +85,7 @@ export default function Address({ register, watch, step }: Props) {
           </label>
           <input
             id="floor"
-            className="rounded-md p-2"
+            className="rounded-md border border-neutral-200 p-2"
             type="text"
             required
             placeholder="3"
@@ -100,7 +100,7 @@ export default function Address({ register, watch, step }: Props) {
         </label>
         <input
           id="orientation"
-          className="rounded-md p-2"
+          className="rounded-md border border-neutral-200 p-2"
           type="text"
           required
           placeholder="Oeste"

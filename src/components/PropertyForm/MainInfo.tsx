@@ -1,20 +1,30 @@
 import { UseFormWatch, type UseFormRegister } from "react-hook-form";
 import Fieldset from "../UI/FieldSet";
 import { type FormData } from "~/types/createProperty";
-import { type PropertyType, type Property } from "~/types/model";
+import { type PropertyType, type Operation } from "~/types/model";
 
 type Props = {
   register: UseFormRegister<FormData>;
   watch: UseFormWatch<FormData>;
   propertyTypes: PropertyType[];
+  operations: Operation[];
 };
 
-export default function MainInfo({ register, watch, propertyTypes }: Props) {
+export default function MainInfo({
+  register,
+  watch,
+  propertyTypes,
+  operations,
+}: Props) {
   return (
     <>
       <div className="grid">
         <label htmlFor="type">Tipo de inmueble</label>
-        <select id="type" className="p-2" {...register("typeId")}>
+        <select
+          id="type"
+          className="rounded-md border border-neutral-200  p-2"
+          {...register("typeId")}
+        >
           {propertyTypes?.map((type) => (
             <option value={type.id} key={type.id}>
               {type.name}
@@ -25,9 +35,16 @@ export default function MainInfo({ register, watch, propertyTypes }: Props) {
 
       <div className="grid">
         <label htmlFor="operation">Operación</label>
-        <select id="operation" className="p-2" {...register("operation")}>
-          <option>Venta</option>
-          <option>Alquiler</option>
+        <select
+          id="operation"
+          className="rounded-md border border-neutral-200  p-2"
+          {...register("operationId")}
+        >
+          {operations?.map((operation) => (
+            <option value={operation.id} key={operation.id}>
+              {operation.name}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -35,7 +52,7 @@ export default function MainInfo({ register, watch, propertyTypes }: Props) {
         <label htmlFor="title">Título</label>
         <input
           id="title"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           type="text"
           required
           placeholder="Departamento en San Juan centro 540m"
@@ -47,7 +64,7 @@ export default function MainInfo({ register, watch, propertyTypes }: Props) {
         <label htmlFor="description">Descripción</label>
         <textarea
           id="description"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           required
           placeholder="Breve Descripción del inmueble"
           {...register("description")}
@@ -58,7 +75,7 @@ export default function MainInfo({ register, watch, propertyTypes }: Props) {
         <label htmlFor="price">Precio</label>
         <input
           id="price"
-          className="p-2"
+          className="rounded-md border border-neutral-200  p-2"
           type="text"
           required
           placeholder="15.000"

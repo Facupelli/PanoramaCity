@@ -16,7 +16,7 @@ export type FormData = {
   };
   title: string;
   description: string;
-  operation: string;
+  operationId: string;
   price: number;
   locationLat: string;
   locationLng: string;

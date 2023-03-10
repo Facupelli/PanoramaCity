@@ -16,7 +16,7 @@ export const propertyRouter = createTRPCRouter({
         userId: z.string(),
         title: z.string(),
         description: z.string(),
-        operation: z.string(),
+        operationId: z.string(),
         price: z.number(),
         locationLat: z.number(),
         locationLng: z.number(),
@@ -41,11 +41,11 @@ export const propertyRouter = createTRPCRouter({
       try {
         newProperty = await prisma.property.create({
           data: {
-            typeId: input.typeId,
-            userId: input.userId,
+            propertyType: { connect: { id: input.typeId } },
+            user: { connect: { id: input.userId } },
             title: input.title,
             description: input.description,
-            operation: input.operation,
+            operation: { connect: { id: input.operationId } },
             price: Number(input.price),
             locationLat: input.locationLat,
             locationLng: input.locationLng,
@@ -68,7 +68,7 @@ export const propertyRouter = createTRPCRouter({
               zone: input.propertyInfo.zone,
               surface: Number(input.propertyInfo.surface),
               buildYear: Number(input.propertyInfo.buildYear),
-              orientation: input.operation,
+              orientation: input.propertyInfo.orientation,
             },
           });
         }

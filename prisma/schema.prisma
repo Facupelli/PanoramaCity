@@ -69,6 +69,12 @@ model VerificationToken {
 
 // Properties
 
+model Operation {
+    id              String          @id @default(cuid())
+    name            String      @unique
+    properties      Property[]
+}
+
 model PropertyType {
     id              String          @id @default(cuid())
     name            String          @unique
@@ -91,7 +97,8 @@ model Property {
     amenities       Amenity[]
     title           String
     description     String
-    operation       String
+    operationId     String
+    operation       Operation       @relation(fields: [operationId], references: [id])
     price           Int
     locationLat     Float
     locationLng     Float

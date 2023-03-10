@@ -4,6 +4,12 @@ export type PropertyType = {
   properties?: Property[];
 };
 
+export type Operation = {
+  id: string;
+  name: string;
+  properties?: Property[];
+};
+
 export type Amenity = {
   id: string;
   name: string;
@@ -18,7 +24,8 @@ export type Property = {
   propertyInfo?: PropertyInfo;
   title: string;
   description: string;
-  operation: string;
+  operationId: string;
+  operation?: Operation;
   price: number;
   locationLat: number;
   locationLng: number;
