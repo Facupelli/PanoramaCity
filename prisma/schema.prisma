@@ -93,8 +93,8 @@ model Property {
     description     String
     operation       String
     price           Int
-    locationLat     String
-    locationLng     String
+    locationLat     Float
+    locationLng     Float
 
     createdAt     DateTime @default(now())
     updatedAt     DateTime @updatedAt

@@ -20,7 +20,7 @@ type Props = {
   propertyTypes: PropertyType[];
 };
 
-const UserDetail: NextPage = ({ user, propertyTypes }: Props) => {
+const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
   const createProperty = api.property.createProperty.useMutation();
 
   const {
@@ -37,18 +37,18 @@ const UserDetail: NextPage = ({ user, propertyTypes }: Props) => {
   const onSubmit = async (data: FormData) => {
     const propertyData = {
       typeId: data.typeId,
-      userId: "clezvzioy0000e72k4peul2fn",
+      userId: "clf1qkpio0004e72o5em2rakq",
       price: Number(data.price),
       title: data.title,
       description: data.description,
       operation: data.operation,
-      locationLat: "-31.51903368124165",
-      locationLng: "-68.57562343506707",
+      locationLat: -31.51903368124165,
+      locationLng: -68.57562343506707,
       propertyInfo: {
         ambiences: Number(data.propertyInfo.ambiences),
         bedrooms: Number(data.propertyInfo.bedrooms),
         bathrooms: Number(data.propertyInfo.bathrooms),
-        floor: Number(data.propertyInfo.floor),
+        floor: Number(data.propertyInfo.floor ?? 0),
         surface: Number(data.propertyInfo.surface),
         buildYear: Number(data.propertyInfo.buildYear),
         address: data.propertyInfo.address,

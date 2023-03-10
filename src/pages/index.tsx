@@ -1,4 +1,4 @@
-import { type NextPage } from "next";
+import { GetServerSideProps, type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -11,149 +11,154 @@ import PropertyCard from "~/components/PropertyCard/PropertyCard";
 import { type Property } from "~/types/model";
 import Map from "~/components/Map/Map";
 import ListFilter from "~/components/ListFilter";
+import { prisma } from "~/server/db";
 
-const Home: NextPage = () => {
+type Props = {
+  properties: Property[];
+};
+
+const Home: NextPage<Props> = ({ properties }: Props) => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   const [activeProperty, setActiveProperty] = useState<string>("");
 
-  const properties = [
-    {
-      id: "sdasd",
-      typeId: "ds",
-      type: { id: "asd", name: "Departamento" },
-      userId: "sds",
-      title: "string",
-      description: "dgfgfdsdgf",
-      operation: "Dfgdfg",
-      price: 8500,
-      locationLat: -31.52471936821179,
-      locationLng: -68.5823669732075,
-      createdAt: new Date("01/04/2022"),
-      updatedAt: new Date("01/04/2022"),
-      propertyInfo: {
-        id: "sdf",
-        propertyId: "sfd",
-        ambiences: 2,
-        bathrooms: 1,
-        bedrooms: 2,
-        address: "Calle Los Cedros 4234",
-        city: "San Juan",
-        zone: "Rivadavia",
-        surface: 12000,
-        buildYear: 1998,
-        orientation: "dfg",
-      },
-    },
-    {
-      id: "sdytrrtyasd",
-      typeId: "ds",
-      type: { id: "afd", name: "Departamento" },
-      userId: "sds",
-      title: "string",
-      description: "dgfgfdsdgf",
-      operation: "Dfgdfg",
-      price: 11000,
-      locationLat: -31.521715506516014,
-      locationLng: -68.58110400550659,
-      createdAt: new Date("01/04/2022"),
-      updatedAt: new Date("01/04/2022"),
-      propertyInfo: {
-        id: "ert",
-        propertyId: "sfd",
-        ambiences: 3,
-        bathrooms: 1,
-        bedrooms: 2,
-        address: "Sergio Boggian, 543",
-        city: "San Juan",
-        zone: "Rivadavia",
-        surface: 23000,
-        buildYear: 2015,
-        orientation: "dfg",
-      },
-    },
-    {
-      id: "ghdfd",
-      typeId: "ds",
-      type: { id: "avc", name: "Casa" },
-      userId: "sds",
-      title: "string",
-      description: "dgfgfdsdgf",
-      operation: "Dfgdfg",
-      price: 54000,
-      locationLat: -31.529170907268195,
-      locationLng: -68.5197871440546,
-      createdAt: new Date("01/04/2022"),
-      updatedAt: new Date("01/04/2022"),
-      propertyInfo: {
-        id: "cvbn",
-        propertyId: "sfd",
-        ambiences: 4,
-        bathrooms: 1,
-        bedrooms: 2,
-        address: "Obispo Slaguero 585",
-        city: "San Juan",
-        zone: "Rivadavia",
-        surface: 9200,
-        buildYear: 1998,
-        orientation: "dfg",
-      },
-    },
-    {
-      id: "asdafvsccx",
-      typeId: "ds",
-      type: { id: "avc", name: "Casa" },
-      userId: "sds",
-      title: "string",
-      description: "dgfgfdsdgf",
-      operation: "Dfgdfg",
-      price: 25000,
-      locationLat: -31.527268731827387,
-      locationLng: -68.53377754533042,
-      createdAt: new Date("01/04/2022"),
-      updatedAt: new Date("01/04/2022"),
-      propertyInfo: {
-        id: "cvbn",
-        propertyId: "sfd",
-        ambiences: 2,
-        bathrooms: 1,
-        bedrooms: 2,
-        address: "Av. Vélez Sársfield 148",
-        city: "San Juan",
-        zone: "Rivadavia",
-        surface: 18400,
-        buildYear: 1998,
-        orientation: "dfg",
-      },
-    },
-    {
-      id: "asdafvccx",
-      typeId: "ds",
-      type: { id: "avc", name: "Casa" },
-      userId: "sds",
-      title: "string",
-      description: "dgfgfdsdgf",
-      operation: "Dfgdfg",
-      price: 25000,
-      locationLat: -31.53323840446941,
-      locationLng: -68.48633982780866,
-      createdAt: new Date("01/04/2022"),
-      updatedAt: new Date("01/04/2022"),
-      propertyInfo: {
-        id: "cvbn",
-        propertyId: "sfd",
-        ambiences: 2,
-        bathrooms: 1,
-        bedrooms: 2,
-        address: "Av. Libertador 238",
-        city: "San Juan",
-        zone: "Santa Lucía",
-        surface: 18400,
-        buildYear: 1998,
-        orientation: "dfg",
-      },
-    },
-  ];
+  // const properties = [
+  //   {
+  //     id: "sdasd",
+  //     typeId: "ds",
+  //     type: { id: "asd", name: "Departamento" },
+  //     userId: "sds",
+  //     title: "string",
+  //     description: "dgfgfdsdgf",
+  //     operation: "Dfgdfg",
+  //     price: 8500,
+  //     locationLat: -31.52471936821179,
+  //     locationLng: -68.5823669732075,
+  //     createdAt: new Date("01/04/2022"),
+  //     updatedAt: new Date("01/04/2022"),
+  //     propertyInfo: {
+  //       id: "sdf",
+  //       propertyId: "sfd",
+  //       ambiences: 2,
+  //       bathrooms: 1,
+  //       bedrooms: 2,
+  //       address: "Calle Los Cedros 4234",
+  //       city: "San Juan",
+  //       zone: "Rivadavia",
+  //       surface: 12000,
+  //       buildYear: 1998,
+  //       orientation: "dfg",
+  //     },
+  //   },
+  //   {
+  //     id: "sdytrrtyasd",
+  //     typeId: "ds",
+  //     type: { id: "afd", name: "Departamento" },
+  //     userId: "sds",
+  //     title: "string",
+  //     description: "dgfgfdsdgf",
+  //     operation: "Dfgdfg",
+  //     price: 11000,
+  //     locationLat: -31.521715506516014,
+  //     locationLng: -68.58110400550659,
+  //     createdAt: new Date("01/04/2022"),
+  //     updatedAt: new Date("01/04/2022"),
+  //     propertyInfo: {
+  //       id: "ert",
+  //       propertyId: "sfd",
+  //       ambiences: 3,
+  //       bathrooms: 1,
+  //       bedrooms: 2,
+  //       address: "Sergio Boggian, 543",
+  //       city: "San Juan",
+  //       zone: "Rivadavia",
+  //       surface: 23000,
+  //       buildYear: 2015,
+  //       orientation: "dfg",
+  //     },
+  //   },
+  //   {
+  //     id: "ghdfd",
+  //     typeId: "ds",
+  //     type: { id: "avc", name: "Casa" },
+  //     userId: "sds",
+  //     title: "string",
+  //     description: "dgfgfdsdgf",
+  //     operation: "Dfgdfg",
+  //     price: 54000,
+  //     locationLat: -31.529170907268195,
+  //     locationLng: -68.5197871440546,
+  //     createdAt: new Date("01/04/2022"),
+  //     updatedAt: new Date("01/04/2022"),
+  //     propertyInfo: {
+  //       id: "cvbn",
+  //       propertyId: "sfd",
+  //       ambiences: 4,
+  //       bathrooms: 1,
+  //       bedrooms: 2,
+  //       address: "Obispo Slaguero 585",
+  //       city: "San Juan",
+  //       zone: "Rivadavia",
+  //       surface: 9200,
+  //       buildYear: 1998,
+  //       orientation: "dfg",
+  //     },
+  //   },
+  //   {
+  //     id: "asdafvsccx",
+  //     typeId: "ds",
+  //     type: { id: "avc", name: "Casa" },
+  //     userId: "sds",
+  //     title: "string",
+  //     description: "dgfgfdsdgf",
+  //     operation: "Dfgdfg",
+  //     price: 25000,
+  //     locationLat: -31.527268731827387,
+  //     locationLng: -68.53377754533042,
+  //     createdAt: new Date("01/04/2022"),
+  //     updatedAt: new Date("01/04/2022"),
+  //     propertyInfo: {
+  //       id: "cvbn",
+  //       propertyId: "sfd",
+  //       ambiences: 2,
+  //       bathrooms: 1,
+  //       bedrooms: 2,
+  //       address: "Av. Vélez Sársfield 148",
+  //       city: "San Juan",
+  //       zone: "Rivadavia",
+  //       surface: 18400,
+  //       buildYear: 1998,
+  //       orientation: "dfg",
+  //     },
+  //   },
+  //   {
+  //     id: "asdafvccx",
+  //     typeId: "ds",
+  //     type: { id: "avc", name: "Casa" },
+  //     userId: "sds",
+  //     title: "string",
+  //     description: "dgfgfdsdgf",
+  //     operation: "Dfgdfg",
+  //     price: 25000,
+  //     locationLat: -31.53323840446941,
+  //     locationLng: -68.48633982780866,
+  //     createdAt: new Date("01/04/2022"),
+  //     updatedAt: new Date("01/04/2022"),
+  //     propertyInfo: {
+  //       id: "cvbn",
+  //       propertyId: "sfd",
+  //       ambiences: 2,
+  //       bathrooms: 1,
+  //       bedrooms: 2,
+  //       address: "Av. Libertador 238",
+  //       city: "San Juan",
+  //       zone: "Santa Lucía",
+  //       surface: 18400,
+  //       buildYear: 1998,
+  //       orientation: "dfg",
+  //     },
+  //   },
+  // ];
 
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
 
@@ -194,6 +199,18 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const properties = await prisma.property.findMany({
+    include: { propertyType: true, propertyInfo: true },
+  });
+
+  return {
+    props: {
+      properties: JSON.parse(JSON.stringify(properties)),
+    },
+  };
+};
 
 // const AuthShowcase: React.FC = () => {
 //   const { data: sessionData } = useSession();

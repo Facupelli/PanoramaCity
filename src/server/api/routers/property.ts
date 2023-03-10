@@ -4,6 +4,11 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { prisma } from "~/server/db";
 
 export const propertyRouter = createTRPCRouter({
+  getAllProperties: publicProcedure.query(async () => {
+    try {
+    } catch (e) {}
+  }),
+
   createProperty: publicProcedure
     .input(
       z.object({
@@ -13,8 +18,8 @@ export const propertyRouter = createTRPCRouter({
         description: z.string(),
         operation: z.string(),
         price: z.number(),
-        locationLat: z.string(),
-        locationLng: z.string(),
+        locationLat: z.number(),
+        locationLng: z.number(),
         //PropertyInfo
         propertyInfo: z.object({
           ambiences: z.number(),
