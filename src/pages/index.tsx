@@ -3,22 +3,29 @@ import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
-
+import { prisma } from "~/server/db";
 import { api } from "~/utils/api";
+
 import NavBar from "~/components/NavBar";
 import PropertyCard from "~/components/PropertyCard/PropertyCard";
-
-import { type Property } from "~/types/model";
 import Map from "~/components/Map/Map";
 import ListFilter from "~/components/ListFilter";
-import { prisma } from "~/server/db";
 import Modal from "~/components/UI/Modal";
+import Filters from "~/components/Filters/Filters";
+
+import {
+  type Operation,
+  type PropertyType,
+  type Property,
+} from "~/types/model";
 
 type Props = {
   properties: Property[];
+  operations: Operation[];
+  propertyTypes: PropertyType[];
 };
 
-const Home: NextPage<Props> = ({}: Props) => {
+const Home: NextPage<Props> = ({ operations, propertyTypes }: Props) => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [showFiltersModal, setShowFiltersModal] = useState(false);
 
@@ -178,7 +185,7 @@ const Home: NextPage<Props> = ({}: Props) => {
           setOpen={() => setShowFiltersModal(false)}
           title="Filtros"
         >
-          <div>hola</div>
+          <Filters operations={operations} types={propertyTypes} />
         </Modal>
       )}
 
@@ -217,9 +224,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
     include: { propertyType: true, propertyInfo: true },
   });
 
+  const operations = await prisma.operation.findMany({});
+  const propertyTypes = await prisma.propertyType.findMany({});
+
   return {
     props: {
       properties: JSON.parse(JSON.stringify(properties)),
+      operations,
+      propertyTypes,
     },
   };
 };
