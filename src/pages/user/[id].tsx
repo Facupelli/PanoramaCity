@@ -1,9 +1,11 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
+import axios from "axios";
 import { prisma } from "~/server/db";
 import { ParsedUrlQuery } from "querystring";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 
 import NavBar from "~/components/NavBar";
@@ -21,6 +23,8 @@ type Props = {
 };
 
 const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
+  const { data: sessionData } = useSession();
+
   const createProperty = api.property.createProperty.useMutation();
 
   const {
@@ -35,15 +39,24 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
   const [step, setStep] = useState(1);
 
   const onSubmit = async (data: FormData) => {
+    const parsedAddres = encodeURI(
+      `${data.propertyInfo.address} ${data.propertyInfo.city} Argentina`
+    );
+    const response = await axios(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
+    );
+
+    console.log("response", response.data);
+
     const propertyData = {
       typeId: data.typeId,
-      userId: "clf1qkpio0004e72o5em2rakq",
+      userId: sessionData?.user.id ?? "",
       price: Number(data.price),
       title: data.title,
       description: data.description,
       operation: data.operation,
-      locationLat: -31.51903368124165,
-      locationLng: -68.57562343506707,
+      locationLat: -31.51903398124165,
+      locationLng: -68.57562323506707,
       propertyInfo: {
         ambiences: Number(data.propertyInfo.ambiences),
         bedrooms: Number(data.propertyInfo.bedrooms),
@@ -58,7 +71,7 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
       },
     };
 
-    createProperty.mutate(propertyData);
+    // createProperty.mutate(propertyData);
   };
 
   return (

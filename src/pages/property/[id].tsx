@@ -24,8 +24,6 @@ export type MediaActive = {
 };
 
 const PropertyDetail: NextPage = ({ property }: Props) => {
-  console.log("PROPERTY", property);
-
   const [proper, setProper] = useState<Property>({
     id: "sdasd",
     typeId: "ds",
@@ -36,8 +34,8 @@ const PropertyDetail: NextPage = ({ property }: Props) => {
       "Imóvel amplo para alugar com 1 quarto e 1 banheiro no total. Este imóvel fica situado no 4º andar. O condomínio é bem equipado com diversas instalações e fica localizado em Rua Fidencio Ramos no bairro Vila Olímpia em São Paulo. Está bem localizado, próximo a pontos de interesse de Vila Olímpia, tais como DeRose Method Vila Olímpia, Shopping Vila Olímpia, Shopping JK Iguatemi, Teatro Vento Forte, Parque do Povo e Estação Vila Olímpia.",
     operation: "Alquiler",
     price: 8500,
-    locationLat: -31.52471936821179,
-    locationLng: -68.5823669732075,
+    locationLat: -31.529038,
+    locationLng: -68.532072,
     createdAt: new Date("01/04/2022"),
     updatedAt: new Date("01/04/2022"),
     propertyInfo: {

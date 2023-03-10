@@ -18,11 +18,13 @@
     "@trpc/next": "^10.9.0",
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
+    "axios": "^1.3.4",
     "next": "^13.2.1",
     "next-auth": "^4.19.0",
     "nuka-carousel": "^5.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-google-autocomplete": "^2.7.3",
     "react-hook-form": "^7.43.5",
     "superjson": "1.9.1",
     "zod": "^3.20.6"

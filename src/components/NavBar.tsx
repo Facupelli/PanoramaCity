@@ -13,16 +13,22 @@ export default function NavBar() {
         >
           Panorama City
         </Link>
-        <div className="flex gap-4 font-barlow text-sm text-white">
-          <button
-            onClick={sessionData ? () => void signOut() : () => void signIn()}
-          >
-            Iniciar Sesión
-          </button>
-          <button className="rounded border border-oliva p-2 text-oliva">
-            Registrarse
-          </button>
-        </div>
+        {sessionData ? (
+          <Link href={`/user/${sessionData.user.id}`} className="text-oliva">
+            {sessionData.user.name}
+          </Link>
+        ) : (
+          <div className="flex gap-4 font-barlow text-sm text-white">
+            <button
+              onClick={sessionData ? () => void signOut() : () => void signIn()}
+            >
+              Iniciar Sesión
+            </button>
+            <button className="rounded border border-oliva p-2 text-oliva">
+              Registrarse
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );
