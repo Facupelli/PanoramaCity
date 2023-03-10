@@ -18,12 +18,17 @@ type Props = {
     | `bedrooms`
     | "surface.min"
     | "surface.max";
+  active: string;
 };
 
-export default function RadioFilters({ register, field }: Props) {
+export default function RadioFilters({ register, field, active }: Props) {
   return (
     <div className="ml-auto flex gap-2 ">
-      <div className=" flex h-10 w-10 items-center justify-center rounded-full border border-marino">
+      <div
+        className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
+          active === "1" ? "border-oliva bg-neutral-100" : "border-marino"
+        }`}
+      >
         <label htmlFor={`${field}.1`} className="cursor-pointer">
           1+
         </label>
@@ -35,7 +40,11 @@ export default function RadioFilters({ register, field }: Props) {
           className="hidden"
         />
       </div>
-      <div className=" flex h-10 w-10 items-center justify-center rounded-full border border-marino">
+      <div
+        className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
+          active === "2" ? "border-oliva bg-neutral-100" : "border-marino"
+        }`}
+      >
         <label htmlFor={`${field}.2`} className="cursor-pointer">
           +2
         </label>
@@ -47,7 +56,11 @@ export default function RadioFilters({ register, field }: Props) {
           className="hidden"
         />
       </div>
-      <div className=" flex h-10 w-10 items-center justify-center rounded-full border border-marino">
+      <div
+        className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
+          active === "3" ? "border-oliva bg-neutral-100" : "border-marino"
+        }`}
+      >
         <label htmlFor={`${field}.3`} className="cursor-pointer">
           +3
         </label>
@@ -59,7 +72,11 @@ export default function RadioFilters({ register, field }: Props) {
           className="hidden"
         />
       </div>
-      <div className=" flex h-10 w-10 items-center justify-center rounded-full border border-marino">
+      <div
+        className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
+          active === "4" ? "border-oliva bg-neutral-100" : "border-marino"
+        }`}
+      >
         <label htmlFor={`${field}.4`} className="cursor-pointer">
           +4
         </label>

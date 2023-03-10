@@ -44,9 +44,13 @@ const initialState = {
 };
 
 export default function Filters({ operations, types }: Props) {
-  const { register, handleSubmit, reset } = useForm<FiltersData>({
+  const { register, handleSubmit, reset, watch } = useForm<FiltersData>({
     defaultValues: initialState,
   });
+
+  const ambiences = watch("ambiences");
+  const bathrooms = watch("bathrooms");
+  const bedrooms = watch("bedrooms");
 
   const getFilteredProperties =
     api.property.getFilteredProperties.useMutation();
@@ -142,21 +146,33 @@ export default function Filters({ operations, types }: Props) {
           <label className="py-2 font-semibold" htmlFor="ambiences">
             Ambientes
           </label>
-          <RadioFilters register={register} field="ambiences" />
+          <RadioFilters
+            register={register}
+            field="ambiences"
+            active={ambiences}
+          />
         </div>
 
         <div className="border-netrual-800 flex justify-between gap-2 border-b py-6">
           <label className="py-2 font-semibold" htmlFor="baths">
             Baños
           </label>
-          <RadioFilters register={register} field="bathrooms" />
+          <RadioFilters
+            register={register}
+            field="bathrooms"
+            active={bathrooms}
+          />
         </div>
 
         <div className="border-netrual-800 flex justify-between gap-2 border-b py-6">
           <label className="py-2 font-semibold" htmlFor="bedrooms">
             Habitaciones
           </label>
-          <RadioFilters register={register} field="bedrooms" />
+          <RadioFilters
+            register={register}
+            field="bedrooms"
+            active={bedrooms}
+          />
         </div>
 
         <div className="border-netrual-800 grid gap-2 pt-6">
