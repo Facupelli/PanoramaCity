@@ -86,11 +86,11 @@ const UserDetail: NextPage<Props> = ({ user, propertyTypes }: Props) => {
       <NavBar />
 
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
-        <div className="mx-auto max-w-6xl px-24 py-10 font-barlow">
-          <div className="flex items-baseline justify-between gap-24 ">
+        <div className="mx-auto max-w-6xl py-10 px-4 font-barlow sm:px-24">
+          <div className="flex flex-col items-baseline justify-between gap-2 sm:flex-row sm:gap-24 ">
             <h1 className="text-2xl font-semibold">Publicar un inmueble</h1>
 
-            <div className="h-[3px] grow rounded-lg bg-white">
+            <div className="h-[3px] w-full grow rounded-lg bg-white sm:w-auto">
               <div
                 className={`h-[3px] rounded-lg bg-marino transition-all delay-100 duration-200 ease-out ${
                   step === 1 && "w-[33%]"
