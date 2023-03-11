@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { api } from "~/utils/api";
+import { type Dispatch, type SetStateAction, useState } from "react";
+
 import RadioFilters from "../UI/RadioFilters";
 
-import { type Operation, type PropertyType } from "~/types/model";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { Property, type Operation, type PropertyType } from "~/types/model";
 
 export type FiltersData = {
   type: string[];
@@ -25,6 +25,8 @@ export type FiltersData = {
 type Props = {
   operations: Operation[];
   types: PropertyType[];
+  setPropertiesList: Dispatch<SetStateAction<Property[]>>;
+  setShowFiltersModal: Dispatch<SetStateAction<boolean>>;
 };
 
 const initialState = {
@@ -43,7 +45,12 @@ const initialState = {
   },
 };
 
-export default function Filters({ operations, types }: Props) {
+export default function Filters({
+  operations,
+  types,
+  setPropertiesList,
+  setShowFiltersModal,
+}: Props) {
   const { register, handleSubmit, reset, watch } = useForm<FiltersData>({
     defaultValues: initialState,
   });
@@ -56,9 +63,15 @@ export default function Filters({ operations, types }: Props) {
     api.property.getFilteredProperties.useMutation();
 
   const onSubmit = async (data: FiltersData) => {
-    console.log(data);
-    const properties = getFilteredProperties.mutate(data);
-    console.log(properties);
+    getFilteredProperties.mutate(data, {
+      onSuccess(data, variables, context) {
+        if (data.properties) {
+          setPropertiesList(data.properties);
+          console.log("SETEADO");
+          setShowFiltersModal(false);
+        }
+      },
+    });
   };
 
   return (

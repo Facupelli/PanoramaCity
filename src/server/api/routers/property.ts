@@ -25,26 +25,52 @@ export const propertyRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       let wherePipe: any = { propertyInfo: {} };
 
-      if (input.price.min && input.price.max) {
-        wherePipe.price = {
-          gte: Number(input.price.min),
-          lte: Number(input.price.max),
-        };
+      if (input.price.min || input.price.max) {
+        if (input.price.min && input.price.max) {
+          wherePipe.price = {
+            gte: Number(input.price.min),
+            lte: Number(input.price.max),
+          };
+        } else {
+          if (input.price.min) {
+            wherePipe.price = {
+              gte: Number(input.price.min),
+            };
+          }
+          if (input.price.max) {
+            wherePipe.price = {
+              lte: Number(input.price.max),
+            };
+          }
+        }
       }
 
       if (input.type && input.type?.length !== 2) {
         wherePipe.typeId = input.type[0];
       }
 
-      if (input.operation) {
+      if (input.operation !== "all") {
         wherePipe.operationId = input.operation;
       }
 
-      if (input.surface.min && input.surface.max) {
-        wherePipe.propertyInfo.surface = {
-          gte: Number(input.surface.min),
-          lte: Number(input.surface.max),
-        };
+      if (input.surface.min || input.surface.max) {
+        if (input.surface.min && input.surface.max) {
+          wherePipe.propertyInfo.surface = {
+            gte: Number(input.surface.min),
+            lte: Number(input.surface.max),
+          };
+        } else {
+          if (input.surface.min) {
+            wherePipe.propertyInfo.surface = {
+              gte: Number(input.surface.min),
+            };
+          }
+          if (input.surface.max) {
+            wherePipe.propertyInfo.surface = {
+              lte: Number(input.surface.max),
+            };
+          }
+        }
       }
 
       if (input.ambiences) {
@@ -65,8 +91,12 @@ export const propertyRouter = createTRPCRouter({
       try {
         const properties = await prisma.property.findMany({
           where: wherePipe,
+          include: {
+            propertyType: true,
+            propertyInfo: true,
+          },
         });
-        return properties;
+        return { properties };
       } catch (err) {
         console.log(err);
         return { error: "error fetching properties" };

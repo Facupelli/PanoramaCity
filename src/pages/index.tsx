@@ -189,7 +189,12 @@ const Home: NextPage<Props> = ({
           setOpen={() => setShowFiltersModal(false)}
           title="Filtros"
         >
-          <Filters operations={operations} types={propertyTypes} />
+          <Filters
+            operations={operations}
+            types={propertyTypes}
+            setPropertiesList={setPropertiesList}
+            setShowFiltersModal={setShowFiltersModal}
+          />
         </Modal>
       )}
 
@@ -206,7 +211,7 @@ const Home: NextPage<Props> = ({
           <section className="ml-auto grid w-3/5 gap-4 p-4">
             <ListFilter setShowFiltersModal={setShowFiltersModal} />
             <div className="grid grid-cols-auto-fit justify-items-center gap-4">
-              {properties.map((property) => (
+              {propertiesList.map((property) => (
                 <PropertyCard
                   key={property.id}
                   property={property}

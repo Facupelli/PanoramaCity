@@ -21,7 +21,7 @@ export type Property = {
   typeId: string;
   type?: PropertyType;
   userId: string;
-  propertyInfo?: PropertyInfo;
+  propertyInfo?: PropertyInfo | null;
   title: string;
   description: string;
   operationId: string;
@@ -42,7 +42,7 @@ export type PropertyInfo = {
   address: string;
   city: string;
   zone: string;
-  floor?: number;
+  floor: string | null;
   surface: number;
   buildYear: number;
   orientation: string;
