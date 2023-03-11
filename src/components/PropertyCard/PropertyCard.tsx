@@ -31,7 +31,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
   return (
     <article
       ref={cardRef}
-      className={`w-full min-w-[300px] cursor-pointer scroll-m-44 rounded-lg bg-white shadow-sm ${
+      className={`w-full min-w-[300px] cursor-pointer scroll-m-44 rounded-lg bg-white font-barlow shadow-sm ${
         activeProperty === property.id ? "animate-[blink_0.6s_ease-out_2]" : ""
       }`}
     >
@@ -90,7 +90,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
       </Carousel>
       <div
         onClick={() => router.push(`/property/${property.id}`)}
-        className="grid  gap-y-1 py-2 px-4 font-barlow"
+        className="grid  gap-y-1 py-2 px-4 "
       >
         <p className=" text-sm text-neutral-600">{property.type?.name}</p>
         <div className="grid ">
@@ -110,7 +110,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
           </div>
         </div>
       </div>
-      <div className="flex justify-between rounded-b-lg bg-neutral-50 py-2 px-4">
+      <div className="flex justify-between rounded-b-lg bg-neutral-50 py-2 px-4 ">
         <p className="text-xl font-bold">{formatPrice(property.price)}</p>
         <div className="flex items-center ">
           <FavButton size={15} border />

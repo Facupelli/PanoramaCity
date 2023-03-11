@@ -17,12 +17,15 @@ export default function ListFilter({ setShowFiltersModal }: Props) {
         </div>
         Filtrar
       </button>
-      <select className="rounded-sm border border-neutral-200 bg-white px-4 py-2 text-sm font-semibold">
-        <option>Más relevantes</option>
-        <option>Más nuevos</option>
-        <option>Menor costo</option>
-        <option>Mayor costo</option>
-      </select>
+      <div className="flex items-baseline gap-2">
+        <label className="text-sm text-neutral-500">Ordenar por</label>
+        <select className="rounded-sm border border-neutral-200 bg-white px-4 py-2 text-sm font-semibold">
+          <option value="relevant">Más relevantes</option>
+          <option value="newer">Más nuevos</option>
+          <option value="lower-price">Menor costo</option>
+          <option value="higher-price">Mayor costo</option>
+        </select>
+      </div>
     </div>
   );
 }
