@@ -5,6 +5,7 @@ import { type Dispatch, type SetStateAction, useState } from "react";
 import RadioFilters from "../UI/RadioFilters";
 
 import { Property, type Operation, type PropertyType } from "~/types/model";
+import { useFilterStore } from "~/zustand/store";
 
 export type FiltersData = {
   type: string[];
@@ -51,8 +52,11 @@ export default function Filters({
   setPropertiesList,
   setShowFiltersModal,
 }: Props) {
+  const filters = useFilterStore((state) => state.filters);
+  const setFilters = useFilterStore((state) => state.setFilters);
+
   const { register, handleSubmit, reset, watch } = useForm<FiltersData>({
-    defaultValues: initialState,
+    defaultValues: filters,
   });
 
   const ambiences = watch("ambiences");
@@ -63,6 +67,7 @@ export default function Filters({
     api.property.getFilteredProperties.useMutation();
 
   const onSubmit = async (data: FiltersData) => {
+    setFilters(data);
     getFilteredProperties.mutate(data, {
       onSuccess(data, variables, context) {
         if (data.properties) {
@@ -218,10 +223,14 @@ export default function Filters({
         <button
           className="rounded-sm bg-neutral-200  p-2 font-medium"
           onClick={() => reset(initialState)}
+          type="button"
         >
           Limpiar filtros
         </button>
-        <button className="rounded-sm border-none bg-oliva-s p-2 font-semibold text-neutral-800">
+        <button
+          type="submit"
+          className="rounded-sm border-none bg-oliva-s p-2 font-semibold text-neutral-800"
+        >
           Aplicar filtros
         </button>
       </div>
