@@ -19,7 +19,7 @@ export default function Characteristics({ register, watch, step }: Props) {
           type="text"
           required
           placeholder="4"
-          {...register("propertyInfo.ambiences")}
+          {...register("propertyInfo.ambiences", { valueAsNumber: true })}
         />
       </div>
 
@@ -31,7 +31,7 @@ export default function Characteristics({ register, watch, step }: Props) {
           type="text"
           required
           placeholder="2"
-          {...register("propertyInfo.bathrooms")}
+          {...register("propertyInfo.bathrooms", { valueAsNumber: true })}
         />
       </div>
 
@@ -43,7 +43,7 @@ export default function Characteristics({ register, watch, step }: Props) {
           type="text"
           required
           placeholder="2"
-          {...register("propertyInfo.bedrooms")}
+          {...register("propertyInfo.bedrooms", { valueAsNumber: true })}
         />
       </div>
 
@@ -55,7 +55,7 @@ export default function Characteristics({ register, watch, step }: Props) {
           type="text"
           required
           placeholder="1200"
-          {...register("propertyInfo.surface")}
+          {...register("propertyInfo.surface", { valueAsNumber: true })}
         />
       </div>
 
@@ -67,7 +67,7 @@ export default function Characteristics({ register, watch, step }: Props) {
           type="text"
           required
           placeholder="2003"
-          {...register("propertyInfo.buildYear")}
+          {...register("propertyInfo.buildYear", { valueAsNumber: true })}
         />
       </div>
     </>

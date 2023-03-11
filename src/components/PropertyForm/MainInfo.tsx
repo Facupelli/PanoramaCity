@@ -79,7 +79,7 @@ export default function MainInfo({
           type="text"
           required
           placeholder="15.000"
-          {...register("price")}
+          {...register("price", { valueAsNumber: true })}
         />
       </div>
     </>

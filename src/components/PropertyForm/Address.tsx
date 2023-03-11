@@ -89,7 +89,7 @@ export default function Address({ register, watch, step }: Props) {
             type="text"
             required
             placeholder="3"
-            {...register("propertyInfo.floor")}
+            {...register("propertyInfo.floor", { valueAsNumber: true })}
           />
         </div>
       )}

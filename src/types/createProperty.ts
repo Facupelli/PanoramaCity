@@ -26,9 +26,7 @@ export type FormData = {
 
 export const validationSchema = z.object({
   typeId: z.string(),
-  userId: z.string(),
   propertyInfo: z.object({
-    propertyId: z.string(),
     ambiences: z.number().gte(1),
     bathrooms: z.number().gte(0),
     bedrooms: z.number().gte(0),
@@ -44,6 +42,6 @@ export const validationSchema = z.object({
   description: z.string(),
   operationId: z.string(),
   price: z.number().gte(1),
-  locationLat: z.string(),
-  locationLng: z.string(),
+  // locationLat: z.string(),
+  // locationLng: z.string(),
 });
