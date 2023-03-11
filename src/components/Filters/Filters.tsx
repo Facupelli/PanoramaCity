@@ -203,7 +203,7 @@ export default function Filters({ operations, types }: Props) {
       </div>
       <div className="flex items-center justify-between  bg-neutral-100  p-3 ">
         <button
-          className="rounded-sm border border-marino bg-white p-2"
+          className="rounded-sm bg-neutral-200  p-2 font-medium"
           onClick={() => reset(initialState)}
         >
           Limpiar filtros

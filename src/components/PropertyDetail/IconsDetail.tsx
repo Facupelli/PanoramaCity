@@ -20,7 +20,7 @@ export default function IconDetails({ property }: Props) {
       <div className="flex gap-4">
         <div className="grid">
           <div>
-            <Ambiences />
+            <Ambiences stroke={1.5} />
           </div>
           <p className="text-sm text-neutral-500">
             {property.propertyInfo?.ambiences}{" "}
@@ -73,7 +73,7 @@ export default function IconDetails({ property }: Props) {
         </div>
         <div className="grid">
           <div>
-            <Ruler />
+            <Ruler stroke={1.5} />
           </div>
           <p className="text-sm text-neutral-500">
             {formatSurface(property.propertyInfo?.surface ?? 0)}m²

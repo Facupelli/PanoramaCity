@@ -11,6 +11,8 @@ import { formatSurface } from "../utils/surface";
 import { formatPrice } from "../utils/price";
 
 import { type Property } from "~/types/model";
+import Ruler from "~/icons/Ruler";
+import Ambiences from "~/icons/Ambiences";
 
 type Props = {
   property: Property;
@@ -30,9 +32,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
     <article
       ref={cardRef}
       className={`w-full min-w-[300px] cursor-pointer scroll-m-44 rounded-lg bg-white shadow-sm ${
-        activeProperty === property.id
-          ? "border border-oliva shadow-lg"
-          : "border border-white"
+        activeProperty === property.id ? "border border-oliva shadow-lg" : ""
       }`}
     >
       <Carousel
@@ -94,18 +94,26 @@ export default function PropertyCard({ property, activeProperty }: Props) {
       >
         <p className=" text-sm text-neutral-600">{property.type?.name}</p>
         <div className="grid ">
-          <h1 className="font-semibold">{property.propertyInfo?.address}</h1>
+          <h1 className="text-lg font-semibold">
+            {property.propertyInfo?.address}
+          </h1>
           <p className=" text-sm text-neutral-600">{`${property.propertyInfo?.zone}, ${property.propertyInfo?.city}`}</p>
         </div>
-        <div className="flex gap-x-4 ">
-          <p>{formatSurface(property.propertyInfo?.surface ?? 0)} m²</p>
-          <p>{property.propertyInfo?.ambiences} amb</p>
-        </div>
-        <div className="flex justify-between">
-          <p className="text-lg font-bold">{formatPrice(property.price)}</p>
-          <div className="flex items-center ">
-            <FavButton size={15} border />
+        <div className="flex gap-x-6 py-2">
+          <div className="flex items-center gap-1">
+            <Ruler stroke={1} />
+            <p>{formatSurface(property.propertyInfo?.surface ?? 0)} m²</p>
           </div>
+          <div className="flex items-center gap-1">
+            <Ambiences stroke={1} />
+            <p>{property.propertyInfo?.ambiences} amb</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-between rounded-b-lg bg-neutral-50 py-2 px-4">
+        <p className="text-xl font-bold">{formatPrice(property.price)}</p>
+        <div className="flex items-center ">
+          <FavButton size={15} border />
         </div>
       </div>
     </article>

@@ -146,7 +146,7 @@ const UserDetail: NextPage<Props> = ({
                 {step === 3 ? (
                   <button
                     type="submit"
-                    className="rounded bg-oliva py-2 px-4 text-sm font-semibold text-white"
+                    className="rounded bg-oliva-s py-2 px-4 text-sm font-semibold text-neutral-800"
                   >
                     FINALIZAR
                   </button>
