@@ -95,14 +95,16 @@ const UserDetail: NextPage<Props> = ({
 
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
         <div className="mx-auto max-w-6xl py-10 px-4 font-barlow sm:px-24">
-          <div className="flex flex-col items-baseline justify-between gap-2 sm:flex-row sm:gap-24 ">
-            <h1 className="text-2xl font-semibold">Publicar un inmueble</h1>
+          <div className="grid flex-col items-baseline justify-between gap-4 sm:grid-cols-6 sm:flex-row sm:gap-0 ">
+            <h1 className="text-2xl font-semibold sm:col-span-2">
+              Publicar un inmueble
+            </h1>
 
-            <div className="h-[3px] w-full grow rounded-lg bg-white sm:w-auto">
+            <div className="h-[3px] w-full grow rounded-lg bg-white  sm:col-span-4 sm:w-auto">
               <div
                 className={`h-[3px] rounded-lg bg-marino transition-all delay-100 duration-200 ease-out ${
-                  step === 1 && "w-[33%]"
-                } ${step === 2 && "w-[66%]"} ${step === 3 && "w-[99%]"}`}
+                  step === 1 && "w-[0%]"
+                } ${step === 2 && "w-[33%]"} ${step === 3 && "w-[66%]"}`}
               ></div>
             </div>
           </div>
