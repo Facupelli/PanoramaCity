@@ -32,7 +32,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
     <article
       ref={cardRef}
       className={`w-full min-w-[300px] cursor-pointer scroll-m-44 rounded-lg bg-white shadow-sm ${
-        activeProperty === property.id ? "border border-oliva shadow-lg" : ""
+        activeProperty === property.id ? "animate-[blink_0.6s_ease-out_2]" : ""
       }`}
     >
       <Carousel
@@ -90,7 +90,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
       </Carousel>
       <div
         onClick={() => router.push(`/property/${property.id}`)}
-        className="grid gap-y-1 py-2 px-4 font-barlow"
+        className="grid  gap-y-1 py-2 px-4 font-barlow"
       >
         <p className=" text-sm text-neutral-600">{property.type?.name}</p>
         <div className="grid ">

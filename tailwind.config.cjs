@@ -23,6 +23,11 @@ const config = {
       gridTemplateColumns: {
         "auto-fit": "repeat( auto-fill, minmax(300px, 1fr) )",
       },
+      keyframes: {
+        blink: {
+          "50%": { opacity: "25%" },
+        },
+      },
     },
   },
   plugins: [],
