@@ -12,6 +12,7 @@ const config = {
       colors: {
         marino: "#1f233f",
         oliva: "#90c228",
+        "oliva-s": "#BEE36D",
       },
       height: {
         nav: "70px",
@@ -20,7 +21,7 @@ const config = {
         "p-card": "330px",
       },
       gridTemplateColumns: {
-        "auto-fit": "repeat( auto-fill, minmax(280px, 1fr) )",
+        "auto-fit": "repeat( auto-fill, minmax(300px, 1fr) )",
       },
     },
   },

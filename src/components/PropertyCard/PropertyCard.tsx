@@ -29,7 +29,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
   return (
     <article
       ref={cardRef}
-      className={`w-full min-w-[280px] cursor-pointer scroll-m-44 rounded-lg bg-white shadow-sm ${
+      className={`w-full min-w-[300px] cursor-pointer scroll-m-44 rounded-lg bg-white shadow-sm ${
         activeProperty === property.id
           ? "border border-oliva shadow-lg"
           : "border border-white"

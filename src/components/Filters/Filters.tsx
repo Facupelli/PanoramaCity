@@ -201,14 +201,14 @@ export default function Filters({ operations, types }: Props) {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between border-t border-marino bg-white  p-3 ">
+      <div className="flex items-center justify-between  bg-neutral-100  p-3 ">
         <button
-          className="rounded-sm border border-marino p-2"
+          className="rounded-sm border border-marino bg-white p-2"
           onClick={() => reset(initialState)}
         >
           Limpiar filtros
         </button>
-        <button className="rounded-sm border-none bg-oliva p-2 font-semibold text-white">
+        <button className="rounded-sm border-none bg-oliva-s p-2 font-semibold text-neutral-800">
           Aplicar filtros
         </button>
       </div>
