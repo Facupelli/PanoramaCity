@@ -82,7 +82,7 @@ export default function Filters({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white">
       <div className="max-h-[calc(100vh_-_200px)] overflow-y-auto p-10">
-        <div className="border-netrual-800 grid gap-2 border-b pb-6">
+        <div className="border-netrual-800 grid gap-2 pb-6">
           <label className="pb-2 font-semibold">Tipo de inmueble</label>
           <div className="flex gap-10">
             {types?.map((type) => (
@@ -104,7 +104,7 @@ export default function Filters({
           </div>
         </div>
 
-        <div className="border-netrual-800 grid border-b py-6">
+        <div className="grid py-6">
           <label className="pb-2 font-semibold" htmlFor="operation">
             Operación
           </label>
@@ -122,7 +122,7 @@ export default function Filters({
           </select>
         </div>
 
-        <div className="border-netrual-800 grid gap-2 border-b py-6">
+        <div className="grid gap-2  py-6">
           <label className="pb-2 font-semibold" htmlFor="zone">
             Departamento
           </label>
@@ -134,7 +134,7 @@ export default function Filters({
           </select>
         </div>
 
-        <div className="border-netrual-800 grid gap-2 border-b py-6">
+        <div className="grid gap-2  py-6">
           <label className="pb-2 font-semibold" htmlFor="price">
             Precio
           </label>
@@ -160,7 +160,7 @@ export default function Filters({
           </div>
         </div>
 
-        <div className="border-netrual-800 flex items-center gap-2 border-b py-6">
+        <div className="flex items-center gap-2  py-6">
           <label className="py-2 font-semibold" htmlFor="ambiences">
             Ambientes
           </label>
@@ -171,7 +171,7 @@ export default function Filters({
           />
         </div>
 
-        <div className="border-netrual-800 flex justify-between gap-2 border-b py-6">
+        <div className="flex justify-between gap-2 py-6">
           <label className="py-2 font-semibold" htmlFor="baths">
             Baños
           </label>
@@ -182,7 +182,7 @@ export default function Filters({
           />
         </div>
 
-        <div className="border-netrual-800 flex justify-between gap-2 border-b py-6">
+        <div className="flex justify-between gap-2 py-6">
           <label className="py-2 font-semibold" htmlFor="bedrooms">
             Habitaciones
           </label>
@@ -193,7 +193,7 @@ export default function Filters({
           />
         </div>
 
-        <div className="border-netrual-800 grid gap-2 pt-6">
+        <div className="grid gap-2 pt-6">
           <label className="pb-2 font-semibold" htmlFor="surface">
             Superficie
           </label>
@@ -219,7 +219,7 @@ export default function Filters({
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between  bg-neutral-100  p-3 ">
+      <div className="flex items-center justify-between bg-neutral-100 p-3 ">
         <button
           className="rounded-sm bg-neutral-200  p-2 font-medium"
           onClick={() => reset(initialState)}
