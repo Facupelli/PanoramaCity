@@ -9,7 +9,7 @@ import { api } from "~/utils/api";
 import NavBar from "~/components/NavBar";
 import PropertyCard from "~/components/PropertyCard/PropertyCard";
 import Map from "~/components/Map/Map";
-import ListFilter from "~/components/ListFilter";
+import FilterNav from "~/components/FilterNav";
 import Modal from "~/components/UI/Modal";
 import Filters from "~/components/Filters/Filters";
 
@@ -31,8 +31,6 @@ const Home: NextPage<Props> = ({
   propertyTypes,
 }: Props) => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const [showFiltersModal, setShowFiltersModal] = useState(false);
-
   const [activeProperty, setActiveProperty] = useState<string>("");
 
   // const properties = [
@@ -183,21 +181,6 @@ const Home: NextPage<Props> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {showFiltersModal && (
-        <Modal
-          isOpen={showFiltersModal}
-          setOpen={() => setShowFiltersModal(false)}
-          title="Filtros"
-        >
-          <Filters
-            operations={operations}
-            types={propertyTypes}
-            setPropertiesList={setPropertiesList}
-            setShowFiltersModal={setShowFiltersModal}
-          />
-        </Modal>
-      )}
-
       <NavBar />
 
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
@@ -209,7 +192,12 @@ const Home: NextPage<Props> = ({
             />
           </section>
           <section className="ml-auto grid w-3/5 gap-4 p-4">
-            <ListFilter setShowFiltersModal={setShowFiltersModal} />
+            <FilterNav
+              // setShowFiltersModal={setShowFiltersModal}
+              setPropertiesList={setPropertiesList}
+              operations={operations}
+              propertyTypes={propertyTypes}
+            />
             <div className="grid grid-cols-auto-fit justify-items-center gap-4">
               {propertiesList.map((property) => (
                 <PropertyCard

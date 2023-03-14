@@ -54,6 +54,7 @@ export default function Filters({
 }: Props) {
   const filters = useFilterStore((state) => state.filters);
   const setFilters = useFilterStore((state) => state.setFilters);
+  const sort = useFilterStore((state) => state.sort);
 
   const { register, handleSubmit, reset, watch } = useForm<FiltersData>({
     defaultValues: filters,
@@ -68,15 +69,17 @@ export default function Filters({
 
   const onSubmit = async (data: FiltersData) => {
     setFilters(data);
-    getFilteredProperties.mutate(data, {
-      onSuccess(data, variables, context) {
-        if (data.properties) {
-          setPropertiesList(data.properties);
-          console.log("SETEADO");
-          setShowFiltersModal(false);
-        }
-      },
-    });
+    getFilteredProperties.mutate(
+      { ...data, sort },
+      {
+        onSuccess(data, variables, context) {
+          if (data.properties) {
+            setPropertiesList(data.properties);
+            setShowFiltersModal(false);
+          }
+        },
+      }
+    );
   };
 
   return (

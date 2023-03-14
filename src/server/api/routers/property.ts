@@ -20,10 +20,32 @@ export const propertyRouter = createTRPCRouter({
           max: z.string().optional(),
         }),
         type: z.string().array().optional(),
+        sort: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
+      let sortPipe: any = [];
       let wherePipe: any = { propertyInfo: {} };
+
+      //SORT
+
+      if (input.sort === "higher-price") {
+        sortPipe.push({ price: "desc" });
+      }
+
+      if (input.sort === "lower-price") {
+        sortPipe.push({ price: "asc" });
+      }
+
+      if (input.sort === "newest") {
+        sortPipe.push({ createdAt: "desc" });
+      }
+
+      if (input.sort === "oldest") {
+        sortPipe.push({ creaeted_at: "asc" });
+      }
+
+      //FILTER
 
       if (input.price.min || input.price.max) {
         if (input.price.min && input.price.max) {
@@ -95,6 +117,7 @@ export const propertyRouter = createTRPCRouter({
             propertyType: true,
             propertyInfo: true,
           },
+          orderBy: sortPipe,
         });
         return { properties };
       } catch (err) {
