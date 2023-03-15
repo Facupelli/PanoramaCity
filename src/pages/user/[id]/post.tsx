@@ -196,7 +196,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
-      user: JSON.parse(JSON.stringify(user)),
+      user: {
+        ...user,
+        emailVerified: user?.emailVerified
+          ? user.emailVerified.toISOString()
+          : "",
+      },
       propertyTypes,
       operations,
     },

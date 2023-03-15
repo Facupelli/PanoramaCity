@@ -221,7 +221,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      properties: JSON.parse(JSON.stringify(properties)),
+      properties: properties.map((property) => ({
+        ...property,
+        createdAt: property.createdAt.toISOString(),
+        updatedAt: property.updatedAt.toISOString(),
+      })),
       operations,
       propertyTypes,
     },

@@ -114,13 +114,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
         propertyInfo: true,
       },
     });
-
-    return {
-      props: {
-        property: JSON.parse(JSON.stringify(property)),
-      },
-      revalidate: 10,
-    };
+    if (property) {
+      return {
+        props: {
+          property: {
+            ...property,
+            createdAt: property.createdAt.toISOString(),
+            updatedAt: property.updatedAt.toISOString(),
+          },
+        },
+        revalidate: 10,
+      };
+    }
   } catch (err) {
     console.log(err);
   }
