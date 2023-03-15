@@ -1,7 +1,7 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import { prisma } from "~/server/db";
-import { ParsedUrlQuery } from "querystring";
+import { type ParsedUrlQuery } from "querystring";
 
 import { useState } from "react";
 
@@ -22,6 +22,9 @@ export type MediaActive = {
   images: boolean;
   video: boolean;
 };
+
+const NEXT_PUBLIC_GOOGLE_MAP_KEY = process.env
+  .NEXT_PUBLIC_GOOGLE_MAP_KEY as string;
 
 const PropertyDetail: NextPage = ({ property }: Props) => {
   const [mediaActive, setMediaActive] = useState<MediaActive>({
@@ -81,7 +84,7 @@ const PropertyDetail: NextPage = ({ property }: Props) => {
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}&q=${property.locationLat},${property.locationLng}&center=${property.locationLat},${property.locationLng}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${NEXT_PUBLIC_GOOGLE_MAP_KEY}&q=${property.locationLat},${property.locationLng}&center=${property.locationLat},${property.locationLng}`}
               ></iframe>
             </div>
             {/* {proper?.description} */}
@@ -102,7 +105,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as IParams;
 
   try {
-    const property = await prisma?.property.findUnique({
+    const property: Property | null = await prisma.property.findUnique({
       where: { id },
       include: {
         amenities: true,

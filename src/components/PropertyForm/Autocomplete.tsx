@@ -6,12 +6,14 @@ export default function Autocomplete() {
     placesService,
     placePredictions,
     getPlacePredictions,
-    isPlacePredictionsLoading,
+    // isPlacePredictionsLoading,
   } = usePlacesService({
     apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
   });
 
-  const [detail, setPlaceDetails] = useState();
+  const [, setPlaceDetails] = useState<google.maps.places.PlaceResult | null>(
+    null
+  );
 
   console.log(placePredictions);
 
@@ -20,11 +22,11 @@ export default function Autocomplete() {
     if (placePredictions.length)
       placesService?.getDetails(
         {
-          placeId: placePredictions[0].place_id,
+          placeId: placePredictions[0]?.place_id ?? "",
         },
-        (placeDetails: any) => setPlaceDetails(placeDetails)
+        (placeDetails) => setPlaceDetails(placeDetails)
       );
-  }, [placePredictions]);
+  }, [placePredictions, placesService]);
 
   return (
     <>

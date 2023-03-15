@@ -1,4 +1,4 @@
-export default function ({ color }: { color: string }) {
+export default function Video({ color }: { color: string }) {
   return (
     <svg
       width="24px"

@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { prisma } from "~/server/db";
+import { type OrderPipe, type WherePipe } from "~/types/api/getProperty";
 
 export const propertyRouter = createTRPCRouter({
   getFilteredProperties: publicProcedure
@@ -24,25 +25,25 @@ export const propertyRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input }) => {
-      let sortPipe: any = [];
-      let wherePipe: any = { propertyInfo: {} };
+      const orderPipe: OrderPipe = [];
+      const wherePipe: WherePipe = { propertyInfo: {} };
 
       //SORT
 
       if (input.sort === "higher-price") {
-        sortPipe.push({ price: "desc" });
+        orderPipe.push({ price: "desc" });
       }
 
       if (input.sort === "lower-price") {
-        sortPipe.push({ price: "asc" });
+        orderPipe.push({ price: "asc" });
       }
 
       if (input.sort === "newest") {
-        sortPipe.push({ createdAt: "desc" });
+        orderPipe.push({ createdAt: "desc" });
       }
 
       if (input.sort === "oldest") {
-        sortPipe.push({ creaeted_at: "asc" });
+        orderPipe.push({ createdAt: "asc" });
       }
 
       //FILTER
@@ -115,7 +116,7 @@ export const propertyRouter = createTRPCRouter({
             propertyType: true,
             propertyInfo: true,
           },
-          orderBy: sortPipe,
+          orderBy: orderPipe,
         });
         return { properties };
       } catch (err) {
@@ -196,7 +197,7 @@ export const propertyRouter = createTRPCRouter({
 
       try {
         if (newProperty && newPropertyInfo) {
-          const newPropertyMedia = await prisma.propertyMedia.create({
+          await prisma.propertyMedia.create({
             data: {
               property: { connect: { id: newProperty.id } },
               images: input.media.images,
@@ -221,7 +222,7 @@ export const propertyRouter = createTRPCRouter({
     )
     .mutation(async ({ input }) => {
       try {
-        const propertyModel = await prisma.propertyMedia.update({
+        await prisma.propertyMedia.update({
           where: { id: input.id },
           data: {
             images: input.images,

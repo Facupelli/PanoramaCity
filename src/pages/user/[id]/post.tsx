@@ -1,7 +1,7 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import { prisma } from "~/server/db";
-import { ParsedUrlQuery } from "querystring";
+import { type ParsedUrlQuery } from "querystring";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
@@ -15,11 +15,10 @@ import MainInfo from "~/components/PropertyForm/MainInfo";
 import PageBtn from "~/components/UI/PageBtn";
 import Fieldset from "~/components/UI/FieldSet";
 import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
-import UserLayout from "~/components/UI/Layouts/UserLayout";
+import GoBackButton from "~/components/UI/GoBackButton";
 
 import { type PropertyType, type User, type Operation } from "~/types/model";
 import { validationSchema, type FormData } from "~/types/createProperty";
-import GoBackButton from "~/components/UI/GoBackButton";
 
 type Props = {
   user?: User;
@@ -29,17 +28,13 @@ type Props = {
 
 export const steps = 4;
 
-const UserDetail: NextPage<Props> = ({
-  user,
-  propertyTypes,
-  operations,
-}: Props) => {
+const UserDetail: NextPage<Props> = ({ propertyTypes, operations }: Props) => {
   const { data: sessionData } = useSession();
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
   const createProperty = api.property.createProperty.useMutation();
 
@@ -49,7 +44,7 @@ const UserDetail: NextPage<Props> = ({
   //STEPS
   const [step, setStep] = useState(1);
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = (data: FormData) => {
     // const parsedAddres = encodeURI(
     //   `${data.propertyInfo.address} ${data.propertyInfo.city} Argentina`
     // );
@@ -88,7 +83,7 @@ const UserDetail: NextPage<Props> = ({
     setStep((prev) => (prev += 1));
   };
 
-  const handleNextPage = async () => {
+  const handleNextPage = () => {
     if (step === 4) {
       if (buttonRef.current) {
         return buttonRef.current.click();
@@ -119,10 +114,10 @@ const UserDetail: NextPage<Props> = ({
             <div className="h-[3px] w-full grow rounded-lg bg-white  sm:col-span-4 sm:w-auto">
               <div
                 className={`h-[3px] rounded-lg bg-marino transition-all delay-100 duration-200 ease-out ${
-                  step === 1 && "w-[0%]"
-                } ${step === 2 && "w-[25%]"} ${step === 3 && "w-[50%]"} ${
-                  step === 4 && "w-[75%]"
-                }`}
+                  step === 1 ? "w-[0%]" : ""
+                } ${step === 2 ? "w-[25%]" : ""} ${
+                  step === 3 ? "w-[50%]" : ""
+                } ${step === 4 ? "w-[75%]" : ""}`}
               ></div>
             </div>
           </div>

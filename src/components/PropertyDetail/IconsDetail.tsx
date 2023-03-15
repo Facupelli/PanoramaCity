@@ -59,7 +59,7 @@ export default function IconDetails({ property }: Props) {
               <Building />
             </div>
             <p className="text-sm text-neutral-500">
-              {`${property.propertyInfo?.floor}°`} piso
+              {`${property.propertyInfo?.floor as string}°`} piso
             </p>
           </div>
         )}

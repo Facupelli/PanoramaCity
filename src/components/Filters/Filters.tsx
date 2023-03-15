@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import { api } from "~/utils/api";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 
 import RadioFilters from "../UI/RadioFilters";
 
-import { Property, type Operation, type PropertyType } from "~/types/model";
+import {
+  type Property,
+  type Operation,
+  type PropertyType,
+} from "~/types/model";
 import { useFilterStore } from "~/zustand/store";
 
 export type FiltersData = {
@@ -67,12 +71,12 @@ export default function Filters({
   const getFilteredProperties =
     api.property.getFilteredProperties.useMutation();
 
-  const onSubmit = async (data: FiltersData) => {
+  const onSubmit = (data: FiltersData) => {
     setFilters(data);
     getFilteredProperties.mutate(
       { ...data, sort },
       {
-        onSuccess(data, variables, context) {
+        onSuccess(data) {
           if (data.properties) {
             setPropertiesList(data.properties);
             setShowFiltersModal(false);

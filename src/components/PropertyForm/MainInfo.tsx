@@ -1,5 +1,4 @@
-import { UseFormWatch, type UseFormRegister } from "react-hook-form";
-import Fieldset from "../UI/FieldSet";
+import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
 import { type FormData } from "~/types/createProperty";
 import { type PropertyType, type Operation } from "~/types/model";
 
@@ -12,7 +11,7 @@ type Props = {
 
 export default function MainInfo({
   register,
-  watch,
+  // watch,
   propertyTypes,
   operations,
 }: Props) {

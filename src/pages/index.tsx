@@ -1,17 +1,12 @@
-import { GetServerSideProps, type NextPage } from "next";
+import { type GetServerSideProps, type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { prisma } from "~/server/db";
-import { api } from "~/utils/api";
 
 import NavBar from "~/components/NavBar";
 import PropertyCard from "~/components/PropertyCard/PropertyCard";
 import Map from "~/components/Map/Map";
 import FilterNav from "~/components/FilterNav";
-import Modal from "~/components/UI/Modal";
-import Filters from "~/components/Filters/Filters";
 
 import {
   type Operation,

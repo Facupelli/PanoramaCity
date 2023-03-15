@@ -1,6 +1,11 @@
 import { useS3Upload } from "next-s3-upload";
 import Image from "next/image";
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useRef,
+  type ChangeEvent,
+} from "react";
 
 type Props = {
   setUrls: Dispatch<SetStateAction<string[]>>;
@@ -18,23 +23,25 @@ export default function ImagesUpload({ setUrls, urls }: Props) {
 
   const { uploadToS3 } = useS3Upload();
 
-  const handleFilesChange = async ({ target }: { target: any }) => {
-    const files: File[] = Array.from(target.files);
+  const handleFilesChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files: File[] = Array.from(e.target.files);
 
-    for (let index = 0; index < files.length; index++) {
-      const file = files[index];
-      if (file) {
-        const { url } = await uploadToS3(file, {
-          endpoint: {
-            request: {
-              body: {
-                propertyId: "sdf",
+      for (let index = 0; index < files.length; index++) {
+        const file = files[index];
+        if (file) {
+          const { url } = await uploadToS3(file, {
+            endpoint: {
+              request: {
+                body: {
+                  propertyId: "sdf",
+                },
               },
             },
-          },
-        });
+          });
 
-        setUrls((prev) => [...prev, url]);
+          setUrls((prev) => [...prev, url]);
+        }
       }
     }
   };

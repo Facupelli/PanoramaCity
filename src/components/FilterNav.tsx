@@ -27,7 +27,7 @@ export default function FilterNav({
   operations,
   propertyTypes,
 }: Props) {
-  const { register, handleSubmit, reset, watch } = useForm<{ sort: string }>({
+  const { register } = useForm<{ sort: string }>({
     defaultValues: { sort: "" },
   });
   const setSort = useFilterStore((state) => state.setSort);
@@ -42,7 +42,7 @@ export default function FilterNav({
     getFilteredProperties.mutate(
       { ...filters, sort },
       {
-        onSuccess(data, variables, context) {
+        onSuccess(data) {
           if (data.properties) {
             setPropertiesList(data.properties);
             setShowFiltersModal(false);

@@ -1,11 +1,8 @@
-import { UseFormWatch, type UseFormRegister } from "react-hook-form";
+import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
 import { provinces } from "~/assets/provinces";
-import Fieldset from "../UI/FieldSet";
 import { type FormData } from "~/types/createProperty";
-import axios from "axios";
-import { useEffect } from "react";
 // import Autocomplete from "./Autocomplete";
-import Autocomplete from "react-google-autocomplete";
+// import Autocomplete from "react-google-autocomplete";
 
 type Props = {
   register: UseFormRegister<FormData>;
@@ -13,13 +10,8 @@ type Props = {
   step: number;
 };
 
-export default function Address({ register, watch, step }: Props) {
+export default function Address({ register, watch }: Props) {
   const propertyType = watch("typeId");
-  const address = watch("propertyInfo.address");
-
-  const getPredictions = async (input: string) => {};
-
-  useEffect(() => {}, [address]);
 
   return (
     <>

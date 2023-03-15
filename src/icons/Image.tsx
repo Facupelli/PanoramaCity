@@ -1,4 +1,4 @@
-export default function Image({ color }: { color: string }) {
+export default function ImageIcon({ color }: { color: string }) {
   return (
     <svg
       width="24px"

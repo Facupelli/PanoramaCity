@@ -18,7 +18,7 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
 
   useEffect(() => {
     if (!map) {
-      return () => {};
+      return;
     }
 
     const initialBounds = new window.google.maps.LatLngBounds();
@@ -57,7 +57,7 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
     return () => {
       propertiesMarkers.forEach((marker) => marker.setMap(null));
     };
-  }, [map]);
+  }, [map, properties, setActiveProperty]);
 
   return null;
 }

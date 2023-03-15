@@ -37,7 +37,7 @@ export type Property = {
 export type PropertyMedia = {
   images: string[];
   video: string;
-  tour: string;
+  tour: string | null;
 };
 
 export type PropertyInfo = {

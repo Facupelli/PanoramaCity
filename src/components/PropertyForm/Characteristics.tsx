@@ -1,5 +1,4 @@
-import { UseFormWatch, type UseFormRegister } from "react-hook-form";
-import Fieldset from "../UI/FieldSet";
+import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
 import { type FormData } from "~/types/createProperty";
 
 type Props = {
@@ -8,7 +7,7 @@ type Props = {
   step: number;
 };
 
-export default function Characteristics({ register, watch, step }: Props) {
+export default function Characteristics({ register }: Props) {
   return (
     <>
       <div className="grid">

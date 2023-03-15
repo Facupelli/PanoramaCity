@@ -3,7 +3,7 @@ import { GoogleMapsProvider } from "@ubilabs/google-maps-react-hooks";
 //   MarkerClusterer,
 //   SuperClusterAlgorithm,
 // } from "@googlemaps/markerclusterer";
-import { Dispatch, SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { type Property } from "~/types/model";
 
 import MapMarkers from "./MapMarkers";
@@ -12,6 +12,9 @@ type Props = {
   properties: Property[];
   setActiveProperty: Dispatch<SetStateAction<string>>;
 };
+
+const NEXT_PUBLIC_GOOGLE_MAP_KEY = process.env
+  .NEXT_PUBLIC_GOOGLE_MAP_KEY as string;
 
 export default function Map({ properties, setActiveProperty }: Props) {
   const [mapContainer, setMapContainer] = useState<HTMLDivElement | null>(null);
@@ -31,7 +34,7 @@ export default function Map({ properties, setActiveProperty }: Props) {
 
   return (
     <GoogleMapsProvider
-      googleMapsAPIKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY!}
+      googleMapsAPIKey={NEXT_PUBLIC_GOOGLE_MAP_KEY}
       mapOptions={mapOptions}
       mapContainer={mapContainer}
 

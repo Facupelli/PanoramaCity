@@ -97,7 +97,9 @@ export default function PropertyCard({ property, activeProperty }: Props) {
           <h1 className="text-lg font-semibold">
             {property.propertyInfo?.address}
           </h1>
-          <p className=" text-sm text-neutral-600">{`${property.propertyInfo?.zone}, ${property.propertyInfo?.city}`}</p>
+          <p className=" text-sm text-neutral-600">{`${
+            property.propertyInfo?.zone ?? ""
+          }, ${property.propertyInfo?.city ?? ""}`}</p>
         </div>
         <div className="flex gap-x-6 py-2">
           <div className="flex items-center gap-1">
@@ -106,7 +108,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
           </div>
           <div className="flex items-center gap-1">
             <Ambiences stroke={1} />
-            <p>{property.propertyInfo?.ambiences} amb</p>
+            <p>{property.propertyInfo?.ambiences ?? 0} amb</p>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import FavButton from "../UI/FavButton";
 
 import Video from "~/icons/Video";
-import Image from "~/icons/Image";
+import ImageIcon from "~/icons/Image";
 import Tour from "~/icons/Tour";
 
 import { type MediaActive } from "~/pages/property/[id]";
@@ -39,7 +39,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
             mediaActive.images ? "bg-marino-s text-white" : "bg-white"
           }`}
         >
-          <Image color={mediaActive.images ? "#ffffff" : "#000000"} />
+          <ImageIcon color={mediaActive.images ? "#ffffff" : "#000000"} />
           Fotos
         </button>
         <button
