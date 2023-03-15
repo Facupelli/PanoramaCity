@@ -11,6 +11,7 @@ const config = {
       },
       colors: {
         marino: "#1f233f",
+        "marino-s": "#454D8C",
         oliva: "#90c228",
         "oliva-s": "#BEE36D",
       },
