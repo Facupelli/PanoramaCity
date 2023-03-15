@@ -1,8 +1,13 @@
 import { useS3Upload } from "next-s3-upload";
 import Image from "next/image";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from "react";
 
-export default function ImagesUpload() {
+type Props = {
+  setUrls: Dispatch<SetStateAction<string[]>>;
+  urls: string[];
+};
+
+export default function ImagesUpload({ setUrls, urls }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClickRef = () => {
@@ -11,11 +16,9 @@ export default function ImagesUpload() {
     }
   };
 
-  const [urls, setUrls] = useState<string[]>([]);
   const { uploadToS3 } = useS3Upload();
 
   const handleFilesChange = async ({ target }: { target: any }) => {
-    console.log(target);
     const files: File[] = Array.from(target.files);
 
     for (let index = 0; index < files.length; index++) {
@@ -47,6 +50,7 @@ export default function ImagesUpload() {
         className="hidden"
       />
       <button
+        type="button"
         onClick={handleClickRef}
         className="justify-self-start rounded bg-oliva p-2 font-semibold text-neutral-900"
       >

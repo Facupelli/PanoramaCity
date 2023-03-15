@@ -5,7 +5,7 @@ import { prisma } from "~/server/db";
 import { ParsedUrlQuery } from "querystring";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 
@@ -34,17 +34,19 @@ const UserDetail: NextPage<Props> = ({
   operations,
 }: Props) => {
   const { data: sessionData } = useSession();
-
-  const createProperty = api.property.createProperty.useMutation();
-
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
+  const createProperty = api.property.createProperty.useMutation();
 
-  const [step, setStep] = useState(4);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  //IMAGES
+  const [urls, setUrls] = useState<string[]>([]);
+  //STEPS
+  const [step, setStep] = useState(1);
 
   const onSubmit = async (data: FormData) => {
     // const parsedAddres = encodeURI(
@@ -76,9 +78,21 @@ const UserDetail: NextPage<Props> = ({
         zone: data.propertyInfo.zone,
         orientation: data.propertyInfo.orientation,
       },
+      media: {
+        images: urls,
+      },
     };
 
     createProperty.mutate(propertyData);
+    setStep((prev) => (prev += 1));
+  };
+
+  const handleNextPage = async () => {
+    if (step === 4) {
+      if (buttonRef.current) {
+        return buttonRef.current.click();
+      }
+    }
     setStep((prev) => (prev += 1));
   };
 
@@ -137,7 +151,7 @@ const UserDetail: NextPage<Props> = ({
             )}
             {step === 4 && (
               <Fieldset title="Fotos del inmueble" step={step}>
-                <ImagesUpload />
+                <ImagesUpload setUrls={setUrls} urls={urls} />
               </Fieldset>
             )}
 
@@ -149,21 +163,16 @@ const UserDetail: NextPage<Props> = ({
                     handleClick={() => setStep((prev) => (prev -= 1))}
                   />
                 )}
-                {step === 3 ? (
-                  <button
-                    type="submit"
-                    className="rounded bg-oliva-s py-2 px-4 text-sm font-semibold text-neutral-800"
-                  >
-                    Siguiente
-                  </button>
-                ) : (
-                  <PageBtn
-                    type="next"
-                    handleClick={() => setStep((prev) => (prev += 1))}
-                  />
-                )}
+                {<PageBtn type="next" handleClick={handleNextPage} />}
               </div>
             </div>
+            <button
+              ref={buttonRef}
+              type="submit"
+              className="hidden rounded bg-oliva-s py-2 px-4 text-sm font-semibold text-neutral-800"
+            >
+              Siguiente
+            </button>
           </form>
         </div>
       </main>

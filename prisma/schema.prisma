@@ -128,7 +128,7 @@ model PropertyMedia {
     id              String        @id @default(cuid())
     images          String[]
     video           String
-    tour            String
+    tour            String?
     propertyId      String        @unique
     property        Property      @relation(fields: [propertyId], references: [id])
 }

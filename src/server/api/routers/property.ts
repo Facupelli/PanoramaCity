@@ -148,6 +148,9 @@ export const propertyRouter = createTRPCRouter({
           buildYear: z.number(),
           orientation: z.string(),
         }),
+        media: z.object({
+          images: z.string().array(),
+        }),
       })
     )
     .mutation(async ({ input }) => {
@@ -191,6 +194,45 @@ export const propertyRouter = createTRPCRouter({
         console.log("createProperty newPropertyInfo error:", err);
       }
 
-      return { created: true, newProperty };
+      try {
+        if (newProperty && newPropertyInfo) {
+          const newPropertyMedia = await prisma.propertyMedia.create({
+            data: {
+              property: { connect: { id: newProperty.id } },
+              images: input.media.images,
+              video: "das",
+            },
+          });
+        }
+        return { created: true, newProperty };
+      } catch (err) {
+        console.log("createProperty newPropertyMedia error:", err);
+      }
+    }),
+
+  putPropertyImages: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        images: z.string().array(),
+        video: z.string(),
+        tour: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      try {
+        const propertyModel = await prisma.propertyMedia.update({
+          where: { id: input.id },
+          data: {
+            images: input.images,
+            video: input.video,
+            tour: input.tour,
+          },
+        });
+
+        return { created: true };
+      } catch (err) {
+        console.log("PutPropertyImages create media model error:", err);
+      }
     }),
 });
