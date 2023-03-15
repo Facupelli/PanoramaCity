@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+export type File = {
+  name: string;
+  type: string;
+};
+
 export type FormData = {
   typeId: string;
   userId: string;

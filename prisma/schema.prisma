@@ -94,6 +94,7 @@ model Property {
     userId          String
     user            User            @relation(fields: [userId], references: [id])
     propertyInfo    PropertyInfo?
+    media           PropertyMedia?
     amenities       Amenity[]
     title           String
     description     String
@@ -121,4 +122,13 @@ model PropertyInfo {
     ambiences       Int
     bathrooms       Int
     bedrooms        Int
+}
+
+model PropertyMedia {
+    id              String        @id @default(cuid())
+    images          String[]
+    video           String
+    tour            String
+    propertyId      String        @unique
+    property        Property      @relation(fields: [propertyId], references: [id])
 }

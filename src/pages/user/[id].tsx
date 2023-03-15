@@ -5,7 +5,7 @@ import { prisma } from "~/server/db";
 import { ParsedUrlQuery } from "querystring";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 
@@ -17,7 +17,8 @@ import PageBtn from "~/components/UI/PageBtn";
 import Fieldset from "~/components/UI/FieldSet";
 
 import { type PropertyType, type User, type Operation } from "~/types/model";
-import { validationSchema, type FormData } from "~/types/createProperty";
+import { File, validationSchema, type FormData } from "~/types/createProperty";
+import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
 
 type Props = {
   user?: User;
@@ -25,7 +26,7 @@ type Props = {
   operations: Operation[];
 };
 
-export const steps = 3;
+export const steps = 4;
 
 const UserDetail: NextPage<Props> = ({
   user,
@@ -43,20 +44,17 @@ const UserDetail: NextPage<Props> = ({
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
 
-  console.log(errors);
-
   const [step, setStep] = useState(1);
 
   const onSubmit = async (data: FormData) => {
-    const parsedAddres = encodeURI(
-      `${data.propertyInfo.address} ${data.propertyInfo.city} Argentina`
-    );
-    const response = await axios(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
-    );
+    // const parsedAddres = encodeURI(
+    //   `${data.propertyInfo.address} ${data.propertyInfo.city} Argentina`
+    // );
+    // const response = await axios(
+    //   `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
+    // );
 
-    console.log("response", response.data);
-
+    // console.log("response", response.data);
     const propertyData = {
       typeId: data.typeId,
       userId: sessionData?.user.id ?? "",
@@ -64,8 +62,8 @@ const UserDetail: NextPage<Props> = ({
       title: data.title,
       description: data.description,
       operationId: data.operationId,
-      locationLat: -31.51903398124165,
-      locationLng: -68.57562323506707,
+      locationLat: -31.549338520859266,
+      locationLng: -68.54317943487884,
       propertyInfo: {
         ambiences: Number(data.propertyInfo.ambiences),
         bedrooms: Number(data.propertyInfo.bedrooms),
@@ -81,6 +79,7 @@ const UserDetail: NextPage<Props> = ({
     };
 
     createProperty.mutate(propertyData);
+    setStep((prev) => (prev += 1));
   };
 
   return (
@@ -134,6 +133,11 @@ const UserDetail: NextPage<Props> = ({
                 />
               </Fieldset>
             )}
+            {step === 4 && (
+              <Fieldset title="Fotos del inmueble">
+                <ImagesUpload />
+              </Fieldset>
+            )}
 
             <div className="grid grid-cols-6">
               <div className="col-span-4 col-start-3 flex items-center justify-center gap-2 ">
@@ -148,7 +152,7 @@ const UserDetail: NextPage<Props> = ({
                     type="submit"
                     className="rounded bg-oliva-s py-2 px-4 text-sm font-semibold text-neutral-800"
                   >
-                    FINALIZAR
+                    Siguiente
                   </button>
                 ) : (
                   <PageBtn

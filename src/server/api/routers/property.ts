@@ -108,8 +108,6 @@ export const propertyRouter = createTRPCRouter({
         wherePipe.propertyInfo.bedrooms = { gte: Number(input.bedrooms) };
       }
 
-      console.log("PIPE", wherePipe);
-
       try {
         const properties = await prisma.property.findMany({
           where: wherePipe,
@@ -153,7 +151,7 @@ export const propertyRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input }) => {
-      let newProperty;
+      let newProperty, newPropertyInfo;
 
       try {
         newProperty = await prisma.property.create({
@@ -174,7 +172,7 @@ export const propertyRouter = createTRPCRouter({
 
       try {
         if (newProperty) {
-          await prisma.propertyInfo.create({
+          newPropertyInfo = await prisma.propertyInfo.create({
             data: {
               property: { connect: { id: newProperty.id } },
               ambiences: Number(input.propertyInfo.ambiences),
