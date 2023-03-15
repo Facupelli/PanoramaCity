@@ -16,6 +16,10 @@ const config = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "panorama-city.s3.sa-east-1.amazonaws.com",
+      },
     ],
   },
 

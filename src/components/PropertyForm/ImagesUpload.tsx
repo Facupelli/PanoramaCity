@@ -1,4 +1,5 @@
 import { useS3Upload } from "next-s3-upload";
+import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
 export default function ImagesUpload() {
@@ -33,10 +34,13 @@ export default function ImagesUpload() {
         onChange={handleFilesChange}
       />
 
-      <div>
-        {urls.map((url, index) => (
-          <div key={url}>
-            File {index}: ${url}
+      <div className="grid grid-cols-auto-s3 gap-2 pt-4 ">
+        {urls.map((url) => (
+          <div
+            className="relative aspect-video w-[250px] bg-neutral-50 "
+            key={url}
+          >
+            <Image src={url} fill alt={url} style={{ objectFit: "contain" }} />
           </div>
         ))}
       </div>

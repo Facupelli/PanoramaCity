@@ -134,7 +134,7 @@ const UserDetail: NextPage<Props> = ({
               </Fieldset>
             )}
             {step === 4 && (
-              <Fieldset title="Fotos del inmueble">
+              <Fieldset title="Fotos del inmueble" step={step}>
                 <ImagesUpload />
               </Fieldset>
             )}
