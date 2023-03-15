@@ -44,7 +44,7 @@ const UserDetail: NextPage<Props> = ({
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
 
   const onSubmit = async (data: FormData) => {
     // const parsedAddres = encodeURI(
@@ -103,7 +103,9 @@ const UserDetail: NextPage<Props> = ({
               <div
                 className={`h-[3px] rounded-lg bg-marino transition-all delay-100 duration-200 ease-out ${
                   step === 1 && "w-[0%]"
-                } ${step === 2 && "w-[33%]"} ${step === 3 && "w-[66%]"}`}
+                } ${step === 2 && "w-[25%]"} ${step === 3 && "w-[50%]"} ${
+                  step === 4 && "w-[75%]"
+                }`}
               ></div>
             </div>
           </div>
