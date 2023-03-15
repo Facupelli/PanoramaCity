@@ -94,7 +94,7 @@ model Property {
     userId          String
     user            User            @relation(fields: [userId], references: [id])
     propertyInfo    PropertyInfo?
-    media           PropertyMedia?
+    propertyMedia   PropertyMedia?
     amenities       Amenity[]
     title           String
     description     String

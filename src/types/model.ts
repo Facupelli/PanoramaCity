@@ -22,6 +22,7 @@ export type Property = {
   type?: PropertyType;
   userId: string;
   propertyInfo?: PropertyInfo | null;
+  propertyMedia?: PropertyMedia | null;
   title: string;
   description: string;
   operationId: string;
@@ -31,6 +32,12 @@ export type Property = {
   locationLng: number;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type PropertyMedia = {
+  images: string[];
+  video: string;
+  tour: string;
 };
 
 export type PropertyInfo = {

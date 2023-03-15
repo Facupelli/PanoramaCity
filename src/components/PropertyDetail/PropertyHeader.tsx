@@ -13,9 +13,9 @@ export default function PropertyHeader({ property }: Props) {
     <div>
       <h1 className="text-2xl font-semibold">{property.title}</h1>
       <div className="pt-2">
-        <p className="text-neutral-500">{`${property.address}, ${property.city}`}</p>
+        <p className="text-neutral-500">{`${property.address}, ${property.zone}, ${property.city}`}</p>
         <p className="text-xs text-neutral-500">
-          Publicado: {property.createdAt.toDateString()}
+          Publicado: {new Date(property.createdAt).toDateString()}
         </p>
       </div>
     </div>

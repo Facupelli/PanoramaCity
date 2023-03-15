@@ -1,11 +1,10 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
-import axios from "axios";
 import { prisma } from "~/server/db";
 import { ParsedUrlQuery } from "querystring";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 
@@ -15,10 +14,10 @@ import Characteristics from "~/components/PropertyForm/Characteristics";
 import MainInfo from "~/components/PropertyForm/MainInfo";
 import PageBtn from "~/components/UI/PageBtn";
 import Fieldset from "~/components/UI/FieldSet";
+import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
 
 import { type PropertyType, type User, type Operation } from "~/types/model";
-import { File, validationSchema, type FormData } from "~/types/createProperty";
-import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
+import { validationSchema, type FormData } from "~/types/createProperty";
 
 type Props = {
   user?: User;
