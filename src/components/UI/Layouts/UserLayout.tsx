@@ -17,6 +17,9 @@ export default function UserLayout({ children }: Props) {
           <li>
             <Link href={`/user/${userId}/properties`}>Mis inmuebles</Link>
           </li>
+          <li>
+            <Link href={`/user/${userId}/properties`}>Mis favoritos</Link>
+          </li>
         </ul>
       </nav>
       <div className="w-full bg-neutral-200">{children}</div>

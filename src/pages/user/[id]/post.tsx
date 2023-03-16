@@ -28,7 +28,10 @@ type Props = {
 
 export const steps = 4;
 
-const UserDetail: NextPage<Props> = ({ propertyTypes, operations }: Props) => {
+const UserPostProperty: NextPage<Props> = ({
+  propertyTypes,
+  operations,
+}: Props) => {
   const { data: sessionData } = useSession();
   const {
     register,
@@ -179,7 +182,7 @@ const UserDetail: NextPage<Props> = ({ propertyTypes, operations }: Props) => {
   );
 };
 
-export default UserDetail;
+export default UserPostProperty;
 
 interface IParams extends ParsedUrlQuery {
   id: string;

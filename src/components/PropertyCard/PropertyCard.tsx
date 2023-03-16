@@ -16,7 +16,7 @@ import Ambiences from "~/icons/Ambiences";
 
 type Props = {
   property: Property;
-  activeProperty: string;
+  activeProperty?: string;
 };
 
 export default function PropertyCard({ property, activeProperty }: Props) {
