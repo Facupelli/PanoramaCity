@@ -1,12 +1,13 @@
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import { type ParsedUrlQuery } from "querystring";
+import { prisma } from "~/server/db";
 
 import NavBar from "~/components/NavBar";
 import PropertyCard from "~/components/PropertyCard/PropertyCard";
 import UserLayout from "~/components/UI/Layouts/UserLayout";
-import { prisma } from "~/server/db";
-import { User } from "~/types/model";
+
+import { type User } from "~/types/model";
 
 type Props = {
   user: User;
