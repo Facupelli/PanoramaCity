@@ -1,8 +1,8 @@
 export default function Bath() {
   return (
     <svg
-      width="24px"
-      height="24px"
+      width="30px"
+      height="30px"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       fill="none"

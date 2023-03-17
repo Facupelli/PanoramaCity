@@ -1,8 +1,8 @@
 export default function Ruler({ stroke }: { stroke: number }) {
   return (
     <svg
-      width="24px"
-      height="24px"
+      width="30px"
+      height="30px"
       strokeWidth={stroke}
       viewBox="0 0 24 24"
       fill="none"

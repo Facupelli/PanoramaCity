@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Whatsapp from "~/icons/Whatsapp";
 import { type User } from "~/types/model";
 
 type Props = {
@@ -29,8 +30,9 @@ export default function OwnerData({ user }: Props) {
             teléfono: <b className="font-semibold">2647455690</b>
           </p>
         </div>
-        <button className="rounded-sm bg-green-500 py-1 text-white">
+        <button className="flex items-center justify-center gap-2 rounded-sm bg-green-500 py-1 text-white">
           enviar Whatsapp
+          <Whatsapp />
         </button>
       </div>
     </aside>

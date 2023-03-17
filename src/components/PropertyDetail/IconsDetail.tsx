@@ -36,8 +36,8 @@ export default function IconDetails({ property }: Props) {
           <p className="text-sm text-neutral-500">
             {property.propertyInfo?.bedrooms}{" "}
             {property.propertyInfo && property.propertyInfo.bedrooms > 1
-              ? "habitaciones"
-              : "habitación"}
+              ? "dormitorios"
+              : "dormitorio"}
           </p>
         </div>
         <div className="grid">

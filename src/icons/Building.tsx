@@ -1,8 +1,8 @@
 export default function Building() {
   return (
     <svg
-      width="24px"
-      height="24px"
+      width="30px"
+      height="30px"
       strokeWidth="1.5"
       viewBox="0 0 24 24"
       fill="none"
