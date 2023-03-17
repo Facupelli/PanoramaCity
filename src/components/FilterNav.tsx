@@ -27,11 +27,13 @@ export default function FilterNav({
   operations,
   propertyTypes,
 }: Props) {
-  const { register } = useForm<{ sort: string }>({
-    defaultValues: { sort: "" },
-  });
+  const sort = useFilterStore((state) => state.sort);
   const setSort = useFilterStore((state) => state.setSort);
   const filters = useFilterStore((state) => state.filters);
+
+  const { register } = useForm<{ sort: string }>({
+    defaultValues: { sort: sort },
+  });
 
   const getFilteredProperties =
     api.property.getFilteredProperties.useMutation();

@@ -12,7 +12,7 @@ const config = {
       colors: {
         "m-blue": "#1D2A36",
         "s-blue": "#2C3E50",
-        "m-white": "#FAEBD7",
+        "m-white": "#faf7f2",
         "m-black": "#232323",
       },
       height: {

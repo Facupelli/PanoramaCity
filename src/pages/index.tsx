@@ -212,7 +212,7 @@ const Home: NextPage<Props> = ({
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const properties = await prisma.property.findMany({
+  const properties: Property[] = await prisma.property.findMany({
     include: { propertyType: true, propertyInfo: true },
   });
 

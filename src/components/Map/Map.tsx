@@ -3,8 +3,14 @@ import { GoogleMapsProvider } from "@ubilabs/google-maps-react-hooks";
 //   MarkerClusterer,
 //   SuperClusterAlgorithm,
 // } from "@googlemaps/markerclusterer";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useState,
+  useCallback,
+} from "react";
 import { type Property } from "~/types/model";
+import MapCanvas from "./MapCanvas";
 
 import MapMarkers from "./MapMarkers";
 
@@ -18,6 +24,12 @@ const NEXT_PUBLIC_GOOGLE_MAP_KEY = process.env
 
 export default function Map({ properties, setActiveProperty }: Props) {
   const [mapContainer, setMapContainer] = useState<HTMLDivElement | null>(null);
+  const mapRef = useCallback(
+    (node: React.SetStateAction<HTMLDivElement | null>) => {
+      node && setMapContainer(node);
+    },
+    []
+  );
 
   const mapOptions = {
     zoom: 12,
@@ -37,15 +49,14 @@ export default function Map({ properties, setActiveProperty }: Props) {
       googleMapsAPIKey={NEXT_PUBLIC_GOOGLE_MAP_KEY}
       mapOptions={mapOptions}
       mapContainer={mapContainer}
-
-      // onLoadMap={onLoad}
     >
-      <div className="h-screen" ref={(node) => setMapContainer(node)}>
-        <MapMarkers
-          properties={properties}
-          setActiveProperty={setActiveProperty}
-        />
-      </div>
+      {/* <div className="h-screen" ref={(node) => setMapContainer(node)}> */}
+      <MapCanvas ref={mapRef} />
+      <MapMarkers
+        properties={properties}
+        setActiveProperty={setActiveProperty}
+      />
+      {/* </div> */}
     </GoogleMapsProvider>
   );
 }
