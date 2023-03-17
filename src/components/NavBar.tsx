@@ -1,5 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import LogOut from "~/icons/LogOut";
 
 export default function NavBar() {
   const { data: sessionData } = useSession();
@@ -14,17 +15,21 @@ export default function NavBar() {
           Panorama City
         </Link>
         {sessionData ? (
-          <Link href={`/user/${sessionData.user.id}`} className="text-m-white">
-            {sessionData.user.name}
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/user/${sessionData.user.id}`}
+              className="text-m-white"
+            >
+              {sessionData.user.name}
+            </Link>
+            <button aria-label="log-out-btn" onClick={() => void signOut()}>
+              <LogOut />
+            </button>
+          </div>
         ) : (
           <div className="flex gap-4 font-barlow text-sm text-white">
-            <button
-              onClick={sessionData ? () => void signOut() : () => void signIn()}
-            >
-              Iniciar Sesión
-            </button>
-            <button className="rounded border border-s-blue p-2 text-s-blue">
+            <button onClick={() => void signIn()}>Iniciar Sesión</button>
+            <button className="rounded border border-t-blue p-2 text-t-blue">
               Registrarse
             </button>
           </div>
