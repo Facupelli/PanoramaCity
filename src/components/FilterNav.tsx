@@ -76,7 +76,7 @@ export default function FilterNav({
       <div className="flex justify-between pb-4 font-barlow">
         <button
           onClick={() => setShowFiltersModal(true)}
-          className="flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold "
+          className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold shadow-sm "
         >
           <div>
             <Filter />
@@ -88,7 +88,7 @@ export default function FilterNav({
           <select
             {...register("sort")}
             onChange={handleOnChange}
-            className="cursor-pointer rounded-xl bg-white px-4 py-2 text-sm font-semibold"
+            className="cursor-pointer rounded-lg bg-white px-4 py-2 text-sm font-semibold shadow-sm"
           >
             <option value="">Más relevantes</option>
             <option value="newest">Más nuevos</option>

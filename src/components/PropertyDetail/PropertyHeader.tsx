@@ -17,7 +17,12 @@ export default function PropertyHeader({ property }: Props) {
           property.zone ?? ""
         }, ${property.city ?? ""}`}</p>
         <p className="text-xs text-neutral-500">
-          Publicado: {new Date(property.createdAt).toDateString()}
+          Publicado:{" "}
+          {new Date(property.createdAt).toLocaleDateString("es-AR", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
         </p>
       </div>
     </div>
