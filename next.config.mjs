@@ -20,6 +20,10 @@ const config = {
         protocol: "https",
         hostname: "panorama-city.s3.sa-east-1.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 

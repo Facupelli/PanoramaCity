@@ -21,6 +21,7 @@ export type Property = {
   typeId: string;
   type?: PropertyType;
   userId: string;
+  user?: User;
   propertyInfo?: PropertyInfo | null;
   propertyMedia?: PropertyMedia | null;
   title: string;
@@ -57,9 +58,9 @@ export type PropertyInfo = {
 
 export type User = {
   id: string;
-  name: string;
-  email: string;
-  emailVerified: Date;
-  image: string;
+  name: string | null;
+  email: string | null;
+  emailVerified: Date | null;
+  image: string | null;
   properties?: Property[];
 };

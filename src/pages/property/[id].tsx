@@ -12,6 +12,7 @@ import PropertyHeader from "~/components/PropertyDetail/PropertyHeader";
 
 import { type Property } from "~/types/model";
 import Gallery from "~/components/PropertyDetail/Gallery";
+import OwnerData from "~/components/PropertyDetail/OwnerData";
 
 type Props = {
   property?: Property;
@@ -26,7 +27,7 @@ export type MediaActive = {
 const NEXT_PUBLIC_GOOGLE_MAP_KEY = process.env
   .NEXT_PUBLIC_GOOGLE_MAP_KEY as string;
 
-const PropertyDetail: NextPage = ({ property }: Props) => {
+const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
   const [mediaActive, setMediaActive] = useState<MediaActive>({
     tour: true,
     images: false,
@@ -55,7 +56,9 @@ const PropertyDetail: NextPage = ({ property }: Props) => {
               mediaActive={mediaActive}
             />
           )}
-          <section className="grid gap-y-10 px-24 py-10 font-barlow">
+          <section className="relative grid gap-y-10 px-24 py-10 font-barlow">
+            {property.user && <OwnerData user={property.user} />}
+
             <GalleryButtons
               mediaActive={mediaActive}
               setMediaActive={setMediaActive}
@@ -112,6 +115,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         propertyType: true,
         propertyMedia: true,
         propertyInfo: true,
+        user: true,
       },
     });
     if (property) {
