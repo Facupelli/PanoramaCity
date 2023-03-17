@@ -5,16 +5,16 @@ export default function NavBar() {
   const { data: sessionData } = useSession();
 
   return (
-    <nav className="fixed z-20 w-full bg-marino ">
+    <nav className="fixed z-20 w-full bg-m-blue ">
       <div className="flex h-nav items-center justify-between px-8">
         <Link
           href="/"
-          className="font-regular font-archivo text-2xl text-white"
+          className="font-regular font-archivo text-2xl text-m-white"
         >
           Panorama City
         </Link>
         {sessionData ? (
-          <Link href={`/user/${sessionData.user.id}`} className="text-oliva">
+          <Link href={`/user/${sessionData.user.id}`} className="text-m-white">
             {sessionData.user.name}
           </Link>
         ) : (
@@ -24,7 +24,7 @@ export default function NavBar() {
             >
               Iniciar Sesión
             </button>
-            <button className="rounded border border-oliva p-2 text-oliva">
+            <button className="rounded border border-s-blue p-2 text-s-blue">
               Registrarse
             </button>
           </div>

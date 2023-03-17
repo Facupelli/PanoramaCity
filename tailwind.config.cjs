@@ -10,10 +10,10 @@ const config = {
         archivo: ["Archivo Narrow", "sans-serif"],
       },
       colors: {
-        marino: "#1f233f",
-        "marino-s": "#454D8C",
-        oliva: "#90c228",
-        "oliva-s": "#BEE36D",
+        "m-blue": "#1D2A36",
+        "s-blue": "#2C3E50",
+        "m-white": "#FAEBD7",
+        "m-black": "#232323",
       },
       height: {
         nav: "70px",

@@ -59,7 +59,7 @@ export default function ImagesUpload({ setUrls, urls }: Props) {
       <button
         type="button"
         onClick={handleClickRef}
-        className="justify-self-start rounded bg-oliva p-2 font-semibold text-neutral-900"
+        className="justify-self-start rounded bg-s-blue p-2 font-semibold text-white"
       >
         Elegir archivos
       </button>

@@ -9,7 +9,7 @@ export default function FavButton({ size, border }: Props) {
   return (
     <button
       aria-label="fav-button"
-      className={`rounded-full  p-1 text-sm font-semibold text-oliva ${
+      className={`rounded-full  p-1 text-sm font-semibold text-m-black ${
         border ? "border border-neutral-400" : ""
       }`}
     >

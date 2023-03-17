@@ -116,7 +116,7 @@ const UserPostProperty: NextPage<Props> = ({
 
             <div className="h-[3px] w-full grow rounded-lg bg-white  sm:col-span-4 sm:w-auto">
               <div
-                className={`h-[3px] rounded-lg bg-marino transition-all delay-100 duration-200 ease-out ${
+                className={`h-[3px] rounded-lg bg-s-blue transition-all delay-100 duration-200 ease-out ${
                   step === 1 ? "w-[0%]" : ""
                 } ${step === 2 ? "w-[25%]" : ""} ${
                   step === 3 ? "w-[50%]" : ""
@@ -170,7 +170,7 @@ const UserPostProperty: NextPage<Props> = ({
             <button
               ref={buttonRef}
               type="submit"
-              className="hidden rounded bg-oliva-s py-2 px-4 text-sm font-semibold text-neutral-800"
+              className="hidden rounded bg-s-blue py-2 px-4 text-sm font-semibold text-white"
             >
               Siguiente
             </button>

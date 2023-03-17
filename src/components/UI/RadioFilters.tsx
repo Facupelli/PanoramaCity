@@ -26,11 +26,13 @@ export default function RadioFilters({ register, field, active }: Props) {
     <div className="ml-auto flex gap-2 ">
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
-          active === "1" ? "border-oliva bg-neutral-100" : "border-marino"
+          active === "1"
+            ? "border-[#79AADB] bg-neutral-100 font-medium"
+            : "border-s-blue"
         }`}
       >
         <label htmlFor={`${field}.1`} className="cursor-pointer">
-          1+
+          +1
         </label>
         <input
           id={`${field}.1`}
@@ -42,7 +44,9 @@ export default function RadioFilters({ register, field, active }: Props) {
       </div>
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
-          active === "2" ? "border-oliva bg-neutral-100" : "border-marino"
+          active === "2"
+            ? "border-[#79AADB] bg-neutral-100 font-medium"
+            : "border-s-blue"
         }`}
       >
         <label htmlFor={`${field}.2`} className="cursor-pointer">
@@ -58,7 +62,9 @@ export default function RadioFilters({ register, field, active }: Props) {
       </div>
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
-          active === "3" ? "border-oliva bg-neutral-100" : "border-marino"
+          active === "3"
+            ? "border-[#79AADB] bg-neutral-100 font-medium"
+            : "border-s-blue"
         }`}
       >
         <label htmlFor={`${field}.3`} className="cursor-pointer">
@@ -74,7 +80,9 @@ export default function RadioFilters({ register, field, active }: Props) {
       </div>
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-full border  ${
-          active === "4" ? "border-oliva bg-neutral-100" : "border-marino"
+          active === "4"
+            ? "border-[#79AADB] bg-neutral-100 font-medium"
+            : "border-s-blue"
         }`}
       >
         <label htmlFor={`${field}.4`} className="cursor-pointer">

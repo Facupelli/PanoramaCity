@@ -24,8 +24,8 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: false, video: false, tour: true });
           }}
-          className={`flex grow items-center justify-around rounded-md border border-neutral-200 p-3 ${
-            mediaActive.tour ? "bg-marino-s text-white" : "bg-white"
+          className={`flex grow items-center justify-around rounded border border-neutral-200 p-3 ${
+            mediaActive.tour ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
           <Tour color={mediaActive.tour ? "#ffffff" : "#000000"} />
@@ -35,8 +35,8 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: true, video: false, tour: false });
           }}
-          className={`flex grow items-center justify-around rounded-md border border-neutral-200 p-3 ${
-            mediaActive.images ? "bg-marino-s text-white" : "bg-white"
+          className={`flex grow items-center justify-around rounded border border-neutral-200 p-3 ${
+            mediaActive.images ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
           <ImageIcon color={mediaActive.images ? "#ffffff" : "#000000"} />
@@ -46,8 +46,8 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: false, video: true, tour: false });
           }}
-          className={`flex grow items-center justify-around rounded-md border border-neutral-200 p-3 ${
-            mediaActive.video ? "bg-marino-s text-white" : "bg-white"
+          className={`flex grow items-center justify-around rounded border border-neutral-200 p-3 ${
+            mediaActive.video ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
           <Video color={mediaActive.video ? "#ffffff" : "#000000"} />

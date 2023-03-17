@@ -236,7 +236,7 @@ export default function Filters({
         </button>
         <button
           type="submit"
-          className="rounded-sm border-none bg-oliva-s p-2 font-semibold text-neutral-800"
+          className="rounded-sm border-none bg-m-black p-2 font-semibold text-m-white"
         >
           Aplicar filtros
         </button>

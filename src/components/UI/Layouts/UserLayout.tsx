@@ -9,7 +9,7 @@ export default function UserLayout({ children }: Props) {
   const userId = router.query.id as string;
   return (
     <div className="grid min-h-screen grid-cols-[170px_1fr]">
-      <nav className="bg-marino-s px-4 py-10 font-barlow text-neutral-100 shadow">
+      <nav className="bg-s-blue px-4 py-10 font-barlow text-neutral-100 shadow">
         <ul className="grid gap-2">
           <li>
             <Link href={`/user/${userId}/post`}>Publicar inmueble</Link>
