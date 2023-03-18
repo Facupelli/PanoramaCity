@@ -22,6 +22,7 @@ export const propertyRouter = createTRPCRouter({
         }),
         type: z.string().array().optional(),
         sort: z.string().optional(),
+        amenities: z.string().array().optional(),
       })
     )
     .mutation(async ({ input }) => {
@@ -107,6 +108,16 @@ export const propertyRouter = createTRPCRouter({
 
       if (input.bedrooms) {
         wherePipe.propertyInfo.bedrooms = { gte: Number(input.bedrooms) };
+      }
+
+      if (input.amenities && input.amenities[0]) {
+        wherePipe.amenities = {
+          some: {
+            id: {
+              in: input.amenities,
+            },
+          },
+        };
       }
 
       try {

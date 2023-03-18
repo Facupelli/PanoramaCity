@@ -26,6 +26,7 @@ export const useFilterStore = create<FilterState>()(
           min: "",
           max: "",
         },
+        amenities: [""],
       },
       setFilters: (filters) => set(() => ({ filters })),
       sort: "",

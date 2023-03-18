@@ -12,18 +12,21 @@ import {
   type Operation,
   type PropertyType,
   type Property,
+  type Amenity,
 } from "~/types/model";
 
 type Props = {
   properties: Property[];
   operations: Operation[];
   propertyTypes: PropertyType[];
+  amenities: Amenity[];
 };
 
 const Home: NextPage<Props> = ({
   properties,
   operations,
   propertyTypes,
+  amenities,
 }: Props) => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [activeProperty, setActiveProperty] = useState<string>("");
@@ -192,6 +195,7 @@ const Home: NextPage<Props> = ({
               setPropertiesList={setPropertiesList}
               operations={operations}
               propertyTypes={propertyTypes}
+              amenities={amenities}
             />
             <div className="grid grid-cols-auto-fit justify-items-center gap-4">
               {propertiesList.map((property) => (
@@ -218,6 +222,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   const operations = await prisma.operation.findMany({});
   const propertyTypes = await prisma.propertyType.findMany({});
+  const amenities = await prisma.amenity.findMany({});
 
   return {
     props: {
@@ -228,6 +233,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       })),
       operations,
       propertyTypes,
+      amenities,
     },
   };
 };

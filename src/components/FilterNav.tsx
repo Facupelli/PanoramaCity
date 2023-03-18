@@ -10,6 +10,7 @@ import {
   type Operation,
   type PropertyType,
   type Property,
+  type Amenity,
 } from "~/types/model";
 import { api } from "~/utils/api";
 import { useFilterStore } from "~/zustand/store";
@@ -20,12 +21,14 @@ type Props = {
   setPropertiesList: Dispatch<SetStateAction<Property[]>>;
   operations: Operation[];
   propertyTypes: PropertyType[];
+  amenities: Amenity[];
 };
 
 export default function FilterNav({
   setPropertiesList,
   operations,
   propertyTypes,
+  amenities,
 }: Props) {
   const sort = useFilterStore((state) => state.sort);
   const setSort = useFilterStore((state) => state.setSort);
@@ -69,6 +72,7 @@ export default function FilterNav({
             types={propertyTypes}
             setPropertiesList={setPropertiesList}
             setShowFiltersModal={setShowFiltersModal}
+            amenities={amenities}
           />
         </Modal>
       )}

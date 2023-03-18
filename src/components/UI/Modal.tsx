@@ -13,7 +13,7 @@ export default function Modal({ title, children, isOpen, setOpen }: Props) {
     <>
       <dialog
         open={isOpen}
-        className="fixed  top-1/2 z-40 min-w-[700px] -translate-y-1/2 rounded border-none bg-transparent  p-0 font-barlow shadow-lg"
+        className="fixed top-1/2 z-40 w-[700px] -translate-y-1/2 rounded border-none bg-transparent  p-0 font-barlow shadow-lg"
       >
         {title && (
           <div className="flex items-center justify-between rounded-t bg-neutral-100 p-6">

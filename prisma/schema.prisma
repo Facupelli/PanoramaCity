@@ -102,7 +102,7 @@ model Property {
     propertyInfo    PropertyInfo?
     propertyMedia   PropertyMedia?
     amenities       Amenity[]
-    utilities        Utility[]
+    utilities       Utility[]
     title           String
     description     String
     operationId     String

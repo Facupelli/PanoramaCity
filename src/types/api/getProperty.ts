@@ -14,6 +14,13 @@ export type WherePipe = {
     bathrooms?: { gte?: number };
     bedrooms?: { gte?: number };
   };
+  amenities?: {
+    some: {
+      id: {
+        in: string[];
+      };
+    };
+  };
 };
 
 export type OrderPipe = Array<object>;

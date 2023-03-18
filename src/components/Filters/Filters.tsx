@@ -8,6 +8,7 @@ import {
   type Property,
   type Operation,
   type PropertyType,
+  type Amenity,
 } from "~/types/model";
 import { useFilterStore } from "~/zustand/store";
 
@@ -25,6 +26,7 @@ export type FiltersData = {
     min: string;
     max: string;
   };
+  amenities: string[];
 };
 
 type Props = {
@@ -32,6 +34,7 @@ type Props = {
   types: PropertyType[];
   setPropertiesList: Dispatch<SetStateAction<Property[]>>;
   setShowFiltersModal: Dispatch<SetStateAction<boolean>>;
+  amenities: Amenity[];
 };
 
 const initialState = {
@@ -48,6 +51,7 @@ const initialState = {
     min: "",
     max: "",
   },
+  amenities: [""],
 };
 
 export default function Filters({
@@ -55,6 +59,7 @@ export default function Filters({
   types,
   setPropertiesList,
   setShowFiltersModal,
+  amenities,
 }: Props) {
   const filters = useFilterStore((state) => state.filters);
   const setFilters = useFilterStore((state) => state.setFilters);
@@ -67,6 +72,7 @@ export default function Filters({
   const ambiences = watch("ambiences");
   const bathrooms = watch("bathrooms");
   const bedrooms = watch("bedrooms");
+  const amenitiesFilter = watch("amenities");
 
   const getFilteredProperties =
     api.property.getFilteredProperties.useMutation();
@@ -129,7 +135,7 @@ export default function Filters({
           </select>
         </div>
 
-        <div className="grid gap-2  py-6">
+        <div className="grid gap-2 py-6">
           <label className="pb-2 font-semibold" htmlFor="zone">
             Departamento
           </label>
@@ -200,7 +206,7 @@ export default function Filters({
           />
         </div>
 
-        <div className="grid gap-2 pt-6">
+        <div className="grid gap-2 py-6">
           <label className="pb-2 font-semibold" htmlFor="surface">
             Superficie
           </label>
@@ -225,7 +231,37 @@ export default function Filters({
             </div>
           </div>
         </div>
+
+        <div className="grid gap-2 pt-6">
+          <label className="pb-2 font-semibold" htmlFor="surface">
+            Comodidades
+          </label>
+          <div className="flex flex-wrap gap-x-2 gap-y-3">
+            {amenities?.map((amenity) => (
+              <div key={amenity.id}>
+                <label
+                  className={`cursor-pointer rounded border p-1 ${
+                    amenitiesFilter?.find((a) => a === amenity.id)
+                      ? "border-t-blue text-t-blue "
+                      : "border-white"
+                  }`}
+                  htmlFor={`amenity/${amenity.name}`}
+                >
+                  {amenity.name}
+                </label>
+                <input
+                  {...register("amenities")}
+                  className="hidden"
+                  value={amenity.id}
+                  type="checkbox"
+                  id={`amenity/${amenity.name}`}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
       <div className="flex items-center justify-between bg-neutral-100 p-3 ">
         <button
           className="rounded-sm bg-neutral-200  p-2 font-medium"
