@@ -15,7 +15,7 @@ export type WherePipe = {
     bedrooms?: { gte?: number };
   };
   amenities?: {
-    some: {
+    every: {
       id: {
         in: string[];
       };

@@ -98,7 +98,6 @@ export const propertyRouter = createTRPCRouter({
       }
 
       if (input.ambiences) {
-        console.log("NUMBER", Number(input.ambiences));
         wherePipe.propertyInfo.ambiences = { gte: Number(input.ambiences) };
       }
 
@@ -112,7 +111,7 @@ export const propertyRouter = createTRPCRouter({
 
       if (input.amenities && input.amenities[0]) {
         wherePipe.amenities = {
-          some: {
+          every: {
             id: {
               in: input.amenities,
             },

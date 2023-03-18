@@ -84,8 +84,12 @@ export default function Filters({
       {
         onSuccess(data) {
           if (data.properties) {
-            setPropertiesList(data.properties);
-            setShowFiltersModal(false);
+            if (data.properties.length > 0) {
+              setPropertiesList(data.properties);
+              setShowFiltersModal(false);
+              return;
+            }
+            //MENSAJE PROPIEDADES NO ENCONTRAdAS
           }
         },
       }
