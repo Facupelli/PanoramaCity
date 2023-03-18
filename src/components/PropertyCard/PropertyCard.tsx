@@ -105,7 +105,7 @@ export default function PropertyCard({ property, activeProperty }: Props) {
             </div>
             <div className="flex items-center gap-1">
               <Bath size={24} stroke={1} />
-              <p>{formatSurface(property.propertyInfo?.bathrooms ?? 0)} m²</p>
+              <p>{formatSurface(property.propertyInfo?.bathrooms ?? 0)} bañ</p>
             </div>
           </div>
         </div>
