@@ -10,7 +10,7 @@ type Props = {
 
 export default function PropertyHeader({ property }: Props) {
   return (
-    <div>
+    <section>
       <h1 className="text-2xl font-semibold">{property.title}</h1>
       <div className="pt-2">
         <p className="text-neutral-500">{`${property.address ?? ""}, ${
@@ -25,6 +25,6 @@ export default function PropertyHeader({ property }: Props) {
           })}
         </p>
       </div>
-    </div>
+    </section>
   );
 }

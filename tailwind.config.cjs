@@ -25,6 +25,7 @@ const config = {
       gridTemplateColumns: {
         "auto-fit": "repeat( auto-fill, minmax(300px, 1fr) )",
         "auto-s3": "repeat( auto-fill, minmax(250px, 1fr) )",
+        "auto-utilities": "repeat( auto-fill, minmax(200px, 1fr) )",
       },
       keyframes: {
         blink: {

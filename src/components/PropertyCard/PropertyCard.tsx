@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 import Carousel from "nuka-carousel/lib/carousel";
 import { useRef } from "react";
 
@@ -14,6 +13,7 @@ import { type Property } from "~/types/model";
 import Ruler from "~/icons/Ruler";
 import Ambiences from "~/icons/Ambiences";
 import Link from "next/link";
+import Bath from "~/icons/Bath";
 
 type Props = {
   property: Property;
@@ -21,8 +21,6 @@ type Props = {
 };
 
 export default function PropertyCard({ property, activeProperty }: Props) {
-  const router = useRouter();
-
   const cardRef = useRef<HTMLDivElement>(null);
 
   if (property.id === activeProperty && cardRef.current) {
@@ -102,12 +100,12 @@ export default function PropertyCard({ property, activeProperty }: Props) {
           </div>
           <div className="flex gap-x-6 py-2">
             <div className="flex items-center gap-1">
-              <Ruler stroke={1} />
-              <p>{formatSurface(property.propertyInfo?.surface ?? 0)} m²</p>
+              <Ambiences size={24} stroke={1} />
+              <p>{property.propertyInfo?.ambiences ?? 0} amb</p>
             </div>
             <div className="flex items-center gap-1">
-              <Ambiences stroke={1} />
-              <p>{property.propertyInfo?.ambiences ?? 0} amb</p>
+              <Bath size={24} stroke={1} />
+              <p>{formatSurface(property.propertyInfo?.bathrooms ?? 0)} m²</p>
             </div>
           </div>
         </div>

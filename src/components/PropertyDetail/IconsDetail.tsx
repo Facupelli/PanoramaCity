@@ -16,11 +16,11 @@ type Props = {
 
 export default function IconDetails({ property }: Props) {
   return (
-    <div className="grid gap-2">
+    <section className="grid gap-2">
       <div className="flex gap-4">
         <div className="grid">
           <div>
-            <Ambiences stroke={1.5} />
+            <Ambiences size={30} stroke={1.5} />
           </div>
           <p className="text-sm text-neutral-500">
             {property.propertyInfo?.ambiences}{" "}
@@ -42,7 +42,7 @@ export default function IconDetails({ property }: Props) {
         </div>
         <div className="grid">
           <div>
-            <Bath />
+            <Bath size={30} stroke={1.5} />
           </div>
           <p className="text-sm text-neutral-500">
             {property.propertyInfo?.bathrooms}{" "}
@@ -88,6 +88,6 @@ export default function IconDetails({ property }: Props) {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

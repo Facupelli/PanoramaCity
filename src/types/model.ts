@@ -16,6 +16,12 @@ export type Amenity = {
   properties?: Property[];
 };
 
+export type Utility = {
+  id: string;
+  name: string;
+  properties?: Property[];
+};
+
 export type Property = {
   id: string;
   typeId: string;
@@ -24,6 +30,8 @@ export type Property = {
   user?: User;
   propertyInfo?: PropertyInfo | null;
   propertyMedia?: PropertyMedia | null;
+  amenities?: Amenity[];
+  utilities?: Utility[];
   title: string;
   description: string;
   operationId: string;

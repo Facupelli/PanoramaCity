@@ -1,8 +1,14 @@
-export default function Ambiences({ stroke }: { stroke: number }) {
+export default function Ambiences({
+  stroke,
+  size,
+}: {
+  stroke: number;
+  size: number;
+}) {
   return (
     <svg
-      width="30px"
-      height="30px"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       strokeWidth={stroke}
       fill="none"

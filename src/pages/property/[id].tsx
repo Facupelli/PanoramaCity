@@ -9,10 +9,10 @@ import NavBar from "~/components/NavBar";
 import GalleryButtons from "~/components/PropertyDetail/GalleryButtons";
 import IconDetails from "~/components/PropertyDetail/IconsDetail";
 import PropertyHeader from "~/components/PropertyDetail/PropertyHeader";
-
-import { type Property } from "~/types/model";
 import Gallery from "~/components/PropertyDetail/Gallery";
 import OwnerData from "~/components/PropertyDetail/OwnerData";
+
+import { type Property } from "~/types/model";
 
 type Props = {
   property?: Property;
@@ -73,13 +73,32 @@ const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
               }}
             />
             <IconDetails property={property} />
-            <div className="max-w-[75ch]">
+            <section className="max-w-[75ch]">
               <p>{property.description}</p>
-            </div>
-            <div>
-              {/* <h3 className="text-lg font-semibold">Comodidades:</h3> */}
-            </div>
-            <div className="bg-red-200">
+            </section>
+            <section className="grid gap-8 border-t border-b border-neutral-300 py-8">
+              <section className="grid gap-4">
+                <h2 className="text-lg font-semibold">Comodidades:</h2>
+                <ul className="grid grid-cols-auto-utilities gap-2">
+                  {property.amenities?.map((amenity) => (
+                    <li key={amenity.id} className="list-inside list-disc">
+                      <span className="relative -left-2">{amenity.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <section className="grid gap-4">
+                <h2 className="text-lg font-semibold">Utilidades:</h2>
+                <ul className="grid grid-cols-auto-utilities gap-2">
+                  {property.utilities?.map((utility) => (
+                    <li key={utility.id} className="list-inside list-disc">
+                      <span className="relative -left-2">{utility.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </section>
+            <section className="bg-red-200">
               <iframe
                 width="100%"
                 height="350"
@@ -89,8 +108,7 @@ const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
                 referrerPolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/place?key=${NEXT_PUBLIC_GOOGLE_MAP_KEY}&q=${property.locationLat},${property.locationLng}&center=${property.locationLat},${property.locationLng}`}
               ></iframe>
-            </div>
-            {/* {proper?.description} */}
+            </section>
           </section>
         </div>
       </main>
@@ -112,6 +130,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       where: { id },
       include: {
         amenities: true,
+        utilities: true,
         propertyType: true,
         propertyMedia: true,
         propertyInfo: true,

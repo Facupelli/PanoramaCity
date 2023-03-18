@@ -15,7 +15,7 @@ type Props = {
 
 export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
   return (
-    <div className="flex items-center ">
+    <section className="flex items-center ">
       <div className="flex max-w-sm grow items-center gap-4 font-semibold">
         <div className="flex grow items-center justify-center">
           <GoBackButton />
@@ -57,6 +57,6 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
       <div className="ml-auto">
         <FavButton size={20} />
       </div>
-    </div>
+    </section>
   );
 }
