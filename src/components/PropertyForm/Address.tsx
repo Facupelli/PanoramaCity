@@ -1,5 +1,6 @@
 import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
 import { provinces } from "~/assets/provinces";
+import { san_juan_departamentos } from "~/assets/san_juan_departamentos";
 import { type FormData } from "~/types/createProperty";
 // import Autocomplete from "./Autocomplete";
 // import Autocomplete from "react-google-autocomplete";
@@ -17,14 +18,22 @@ export default function Address({ register, watch }: Props) {
     <>
       <div className="grid">
         <label htmlFor="city" className="pb-2 text-neutral-900">
-          Ciudad
+          Provincia
         </label>
         <select
           id="city"
           className="rounded-md border border-neutral-200 p-2"
           {...register("propertyInfo.city")}
         >
-          <option>San Juan</option>
+          {provinces.map((province) => (
+            <option
+              key={province.id}
+              value={province.nombre}
+              disabled={province.nombre !== "San Juan"}
+            >
+              {province.nombre}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -37,8 +46,10 @@ export default function Address({ register, watch }: Props) {
           className="rounded-md border border-neutral-200 p-2"
           {...register("propertyInfo.zone")}
         >
-          {provinces.map((province) => (
-            <option key={province.id}>{province.nombre}</option>
+          {san_juan_departamentos.map((departamento) => (
+            <option key={departamento.id} value={departamento.nombre}>
+              {departamento.nombre}
+            </option>
           ))}
         </select>
       </div>
