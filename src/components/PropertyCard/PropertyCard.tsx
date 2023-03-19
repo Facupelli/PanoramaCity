@@ -10,7 +10,6 @@ import { formatSurface } from "../utils/surface";
 import { formatPrice } from "../utils/price";
 
 import { type Property } from "~/types/model";
-import Ruler from "~/icons/Ruler";
 import Ambiences from "~/icons/Ambiences";
 import Link from "next/link";
 import Bath from "~/icons/Bath";

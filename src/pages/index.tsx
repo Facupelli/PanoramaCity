@@ -1,7 +1,9 @@
 import { type GetServerSideProps, type NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { prisma } from "~/server/db";
+import { api } from "~/utils/api";
+import { useFilterStore } from "~/zustand/store";
 
 import NavBar from "~/components/NavBar";
 import PropertyCard from "~/components/PropertyCard/PropertyCard";
@@ -28,8 +30,45 @@ const Home: NextPage<Props> = ({
   propertyTypes,
   amenities,
 }: Props) => {
-  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [activeProperty, setActiveProperty] = useState<string>("");
+  const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
+
+  const filters = useFilterStore((state) => state.filters);
+  const sort = useFilterStore((state) => state.sort);
+
+  const getFilteredProperties =
+    api.property.getFilteredProperties.useMutation();
+
+  useEffect(() => {
+    if (
+      filters.ambiences ||
+      filters.amenities[0] ||
+      filters.bathrooms ||
+      filters.bedrooms ||
+      filters.operation !== "all" ||
+      filters.type[0] ||
+      filters.surface.max ||
+      filters.surface.min ||
+      filters.price.max ||
+      filters.price.min ||
+      sort
+    ) {
+      getFilteredProperties.mutate(
+        { ...filters, sort },
+        {
+          onSuccess(data) {
+            if (data.properties) {
+              if (data.properties.length > 0) {
+                setPropertiesList(data.properties);
+                return;
+              }
+              //MENSAJE PROPIEDADES NO ENCONTRAdAS
+            }
+          },
+        }
+      );
+    }
+  }, [filters]);
 
   // const properties = [
   //   {
@@ -168,8 +207,6 @@ const Home: NextPage<Props> = ({
   //     },
   //   },
   // ];
-
-  const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
 
   return (
     <>
