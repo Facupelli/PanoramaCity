@@ -5,17 +5,18 @@ import {
   useState,
 } from "react";
 import { useForm } from "react-hook-form";
+import { useFilterStore } from "~/zustand/store";
+
 import Filter from "~/icons/Filter";
+import Filters from "./Filters/Filters";
+import Modal from "./UI/Modal";
+
 import {
   type Operation,
   type PropertyType,
   type Property,
   type Amenity,
 } from "~/types/model";
-import { api } from "~/utils/api";
-import { useFilterStore } from "~/zustand/store";
-import Filters from "./Filters/Filters";
-import Modal from "./UI/Modal";
 
 type Props = {
   setPropertiesList: Dispatch<SetStateAction<Property[]>>;
@@ -32,32 +33,17 @@ export default function FilterNav({
 }: Props) {
   const sort = useFilterStore((state) => state.sort);
   const setSort = useFilterStore((state) => state.setSort);
-  const filters = useFilterStore((state) => state.filters);
 
   const { register } = useForm<{ sort: string }>({
     defaultValues: { sort: sort },
   });
 
-  const getFilteredProperties =
-    api.property.getFilteredProperties.useMutation();
+  const [showFiltersModal, setShowFiltersModal] = useState(false);
 
   const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const sort = e.target.value;
     setSort(sort);
-    getFilteredProperties.mutate(
-      { ...filters, sort },
-      {
-        onSuccess(data) {
-          if (data.properties) {
-            setPropertiesList(data.properties);
-            setShowFiltersModal(false);
-          }
-        },
-      }
-    );
   };
-
-  const [showFiltersModal, setShowFiltersModal] = useState(false);
 
   return (
     <>

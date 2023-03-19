@@ -1,6 +1,6 @@
 import { type GetServerSideProps, type NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { prisma } from "~/server/db";
 import { api } from "~/utils/api";
 import { useFilterStore } from "~/zustand/store";
@@ -30,6 +30,7 @@ const Home: NextPage<Props> = ({
   propertyTypes,
   amenities,
 }: Props) => {
+  const hasMounted = useRef(false);
   const [activeProperty, setActiveProperty] = useState<string>("");
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
 
@@ -40,35 +41,40 @@ const Home: NextPage<Props> = ({
     api.property.getFilteredProperties.useMutation();
 
   useEffect(() => {
-    if (
-      filters.ambiences ||
-      filters.amenities[0] ||
-      filters.bathrooms ||
-      filters.bedrooms ||
-      filters.operation !== "all" ||
-      filters.type[0] ||
-      filters.surface.max ||
-      filters.surface.min ||
-      filters.price.max ||
-      filters.price.min ||
-      sort
-    ) {
-      getFilteredProperties.mutate(
-        { ...filters, sort },
-        {
-          onSuccess(data) {
-            if (data.properties) {
-              if (data.properties.length > 0) {
+    if (!hasMounted.current) {
+      if (
+        filters.ambiences ||
+        filters.amenities[0] ||
+        filters.bathrooms ||
+        filters.bedrooms ||
+        filters.operation !== "all" ||
+        filters.type[0] ||
+        filters.surface.max ||
+        filters.surface.min ||
+        filters.price.max ||
+        filters.price.min ||
+        sort
+      ) {
+        getFilteredProperties.mutate(
+          { ...filters, sort },
+          {
+            onSuccess(data) {
+              if (data.properties && data.properties.length > 0) {
                 setPropertiesList(data.properties);
                 return;
               }
               //MENSAJE PROPIEDADES NO ENCONTRAdAS
-            }
-          },
-        }
-      );
+            },
+          }
+        );
+      }
+      hasMounted.current = true;
     }
-  }, [filters]);
+
+    return () => {
+      hasMounted.current = false;
+    };
+  }, [filters, sort]);
 
   // const properties = [
   //   {

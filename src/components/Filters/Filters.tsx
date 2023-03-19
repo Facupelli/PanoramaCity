@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { api } from "~/utils/api";
 import { type Dispatch, type SetStateAction } from "react";
+import { useFilterStore } from "~/zustand/store";
 
 import RadioFilters from "../UI/RadioFilters";
 
@@ -10,7 +10,7 @@ import {
   type PropertyType,
   type Amenity,
 } from "~/types/model";
-import { useFilterStore } from "~/zustand/store";
+import { san_juan_departamentos } from "~/assets/san_juan_departamentos";
 
 export type FiltersData = {
   type: string[];
@@ -57,13 +57,12 @@ const initialState = {
 export default function Filters({
   operations,
   types,
-  setPropertiesList,
+  // setPropertiesList,
   setShowFiltersModal,
   amenities,
 }: Props) {
   const filters = useFilterStore((state) => state.filters);
   const setFilters = useFilterStore((state) => state.setFilters);
-  const sort = useFilterStore((state) => state.sort);
 
   const { register, handleSubmit, reset, watch } = useForm<FiltersData>({
     defaultValues: filters,
@@ -74,26 +73,9 @@ export default function Filters({
   const bedrooms = watch("bedrooms");
   const amenitiesFilter = watch("amenities");
 
-  const getFilteredProperties =
-    api.property.getFilteredProperties.useMutation();
-
   const onSubmit = (data: FiltersData) => {
     setFilters(data);
-    getFilteredProperties.mutate(
-      { ...data, sort },
-      {
-        onSuccess(data) {
-          if (data.properties) {
-            if (data.properties.length > 0) {
-              setPropertiesList(data.properties);
-              setShowFiltersModal(false);
-              return;
-            }
-            //MENSAJE PROPIEDADES NO ENCONTRAdAS
-          }
-        },
-      }
-    );
+    setShowFiltersModal(false);
   };
 
   return (
@@ -147,7 +129,10 @@ export default function Filters({
             id="zone"
             className="rounded-sm border border-neutral-300 p-2"
           >
-            <option>Todos</option>
+            <option value="all">Todos</option>
+            {san_juan_departamentos.map((departamento) => (
+              <option key={departamento.id}>{departamento.nombre}</option>
+            ))}
           </select>
         </div>
 
