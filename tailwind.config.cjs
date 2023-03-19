@@ -13,6 +13,7 @@ const config = {
         "m-blue": "#1D2A36",
         "s-blue": "#2C3E50",
         "t-blue": "#74A7D6",
+        "m-green": "#939C4E",
         "m-white": "#faf7f2",
         "m-black": "#232323",
       },

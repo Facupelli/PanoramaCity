@@ -45,6 +45,9 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  pages: {
+    newUser: "/auth/new-user",
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({

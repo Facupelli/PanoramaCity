@@ -28,7 +28,9 @@ export default function NavBar() {
           </div>
         ) : (
           <div className="flex gap-4 font-barlow text-sm text-white">
-            <button onClick={() => void signIn()}>Iniciar Sesión</button>
+            <button onClick={() => void signIn("google")}>
+              Iniciar Sesión
+            </button>
             <button className="rounded border border-t-blue p-2 text-t-blue">
               Registrarse
             </button>

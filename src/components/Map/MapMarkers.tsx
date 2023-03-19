@@ -3,13 +3,7 @@ import {
   SuperClusterAlgorithm,
 } from "@googlemaps/markerclusterer";
 import { useGoogleMap } from "@ubilabs/google-maps-react-hooks";
-import {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useState,
-  useRef,
-} from "react";
+import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
 import { type Property } from "~/types/model";
 
 type Props = {
@@ -24,7 +18,7 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
   const prevMarkersRef = useRef<google.maps.Marker[]>([]);
 
   function clearMarkers(markers: google.maps.Marker[]) {
-    for (let marker of markers) {
+    for (const marker of markers) {
       marker.setMap(null);
     }
   }
