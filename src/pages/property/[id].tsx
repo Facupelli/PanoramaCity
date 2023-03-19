@@ -2,6 +2,7 @@ import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import { prisma } from "~/server/db";
 import { type ParsedUrlQuery } from "querystring";
+import Image from "next/image";
 
 import { useState } from "react";
 
@@ -10,9 +11,9 @@ import GalleryButtons from "~/components/PropertyDetail/GalleryButtons";
 import IconDetails from "~/components/PropertyDetail/IconsDetail";
 import PropertyHeader from "~/components/PropertyDetail/PropertyHeader";
 import Gallery from "~/components/PropertyDetail/Gallery";
-import OwnerData from "~/components/PropertyDetail/OwnerData";
+import Whatsapp from "~/icons/Whatsapp";
 
-import { type Property } from "~/types/model";
+import { User, type Property } from "~/types/model";
 
 type Props = {
   property?: Property;
@@ -57,25 +58,36 @@ const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
             />
           )}
           <section className="relative grid gap-y-10 px-24 py-10 font-barlow">
-            {property.user && <OwnerData user={property.user} />}
+            <div className="grid grid-cols-7 gap-4">
+              <div className="col-span-5 grid gap-y-10">
+                <GalleryButtons
+                  mediaActive={mediaActive}
+                  setMediaActive={setMediaActive}
+                />
+                <PropertyHeader
+                  property={{
+                    title: property.title,
+                    address: property.propertyInfo?.address,
+                    zone: property.propertyInfo?.zone,
+                    city: property.propertyInfo?.city,
+                    createdAt: property.createdAt,
+                  }}
+                />
+                <IconDetails property={property} />
+                <section className="max-w-[75ch]">
+                  <p>{property.description}</p>
+                </section>
+              </div>
 
-            <GalleryButtons
-              mediaActive={mediaActive}
-              setMediaActive={setMediaActive}
-            />
-            <PropertyHeader
-              property={{
-                title: property.title,
-                address: property.propertyInfo?.address,
-                zone: property.propertyInfo?.zone,
-                city: property.propertyInfo?.city,
-                createdAt: property.createdAt,
-              }}
-            />
-            <IconDetails property={property} />
-            <section className="max-w-[75ch]">
-              <p>{property.description}</p>
-            </section>
+              <div className="col-span-2">
+                <div className="grid gap-y-4">
+                  {property.user?.companyName && (
+                    <RealEstateCard user={property.user} />
+                  )}
+                  {property.user && <OwnerData user={property.user} />}
+                </div>
+              </div>
+            </div>
             <section className="grid gap-8 border-t border-b border-neutral-300 py-8">
               <section className="grid gap-4">
                 <h2 className="text-lg font-semibold">Comodidades:</h2>
@@ -98,7 +110,7 @@ const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
                 </ul>
               </section>
             </section>
-            <section className="bg-red-200">
+            <section>
               <iframe
                 width="100%"
                 height="350"
@@ -113,6 +125,63 @@ const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
         </div>
       </main>
     </>
+  );
+};
+
+const RealEstateCard = ({ user }: { user: User }) => {
+  return (
+    <aside className="h-fit w-full rounded bg-white p-6 font-barlow shadow-md">
+      <div className="grid gap-4">
+        {user?.companyName && (
+          <div className="flex items-center justify-center gap-2">
+            {user.companyLogoUrl && (
+              <div className="relative h-10 w-10 rounded-full">
+                <Image
+                  src={user.companyLogoUrl}
+                  fill
+                  alt="company_logo"
+                  style={{ borderRadius: "100%" }}
+                />
+              </div>
+            )}
+            <p>{user.companyName}</p>
+          </div>
+        )}
+      </div>
+    </aside>
+  );
+};
+
+const OwnerData = ({ user }: { user: User }) => {
+  return (
+    <aside className="w-full rounded bg-white p-6 font-barlow shadow-md">
+      <p className="pb-2 text-sm text-neutral-500">publicado por</p>
+      <div className="flex items-center gap-4">
+        {user.image && (
+          <div className="relative h-10 w-10 rounded-full">
+            <Image
+              src={user.image}
+              fill
+              alt="user_pic"
+              style={{ borderRadius: "100%" }}
+            />
+          </div>
+        )}
+        <p className="font-semibold">{user.name}</p>
+      </div>
+      <div className="grid gap-4 pt-4">
+        <div className="grid gap-1">
+          <p>{user.email}</p>
+          <p>
+            teléfono: <b className="font-semibold">{user.phone}</b>
+          </p>
+        </div>
+        <button className="flex items-center justify-center gap-2 rounded-sm bg-green-500 py-1 text-white">
+          enviar Whatsapp
+          <Whatsapp />
+        </button>
+      </div>
+    </aside>
   );
 };
 
