@@ -71,4 +71,7 @@ export type User = {
   emailVerified: Date | null;
   image: string | null;
   properties?: Property[];
+  phone: string;
+  companyName?: string;
+  companyLogoUrl?: string;
 };

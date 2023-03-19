@@ -24,6 +24,10 @@ const config = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "e7.pngegg.com",
+      },
     ],
   },
 

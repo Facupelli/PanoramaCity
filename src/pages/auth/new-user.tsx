@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 import NavBar from "~/components/NavBar";
+import { api } from "~/utils/api";
 
 type NewUserForm = {
+  name: string;
   phone: string;
   companyName?: string;
   companyLogoUrl?: string;
@@ -16,8 +18,11 @@ const NewUser: NextPage = () => {
   const { data: sessionData } = useSession();
   const { register, handleSubmit } = useForm<NewUserForm>();
 
+  const putUserInfo = api.user.putUserInfo.useMutation();
+
   const onSubmit = (data: NewUserForm) => {
     console.log(data);
+    putUserInfo.mutate({ ...data, id: sessionData?.user.id });
   };
 
   return (
@@ -47,44 +52,60 @@ const NewUser: NextPage = () => {
               </Link>
             </p>
           </div>
-          <section className="grid max-w-[500px] gap-y-4 ">
-            <div className="grid">
-              <label>Teléfeno:</label>
-              <input
-                className="rounded-md border border-neutral-200 p-2"
-                type="text"
-                {...register("phone")}
-                placeholder="+54 264433998"
-              />
-            </div>
-            <p className="font-semibold">
-              Si tienes una inmobiliaria llena los siguientes campos:
-            </p>
-            <div className="grid">
-              <label>Nombre inmobiliaira:</label>
-              <input
-                className="rounded-md border border-neutral-200 p-2"
-                type="text"
-                {...register("companyName")}
-                placeholder="Zillow"
-              />
-            </div>
-            <div className="grid">
-              <label>Logo inmobiliaria:</label>
-              <input
-                className="rounded-md border border-neutral-200 p-2"
-                type="text"
-                {...register("companyLogoUrl")}
-                placeholder="https://milogo.png"
-              />
-            </div>
-            <button
-              type="submit"
-              className="rounded-sm border border-t-blue p-2 font-semibold text-t-blue"
+          {sessionData && (
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="grid max-w-[500px] gap-y-4 "
             >
-              FINALIZAR
-            </button>
-          </section>
+              <div className="grid">
+                <label>Nombre:</label>
+                <input
+                  className="rounded-md border border-neutral-200 p-2"
+                  type="text"
+                  {...register("name")}
+                  required
+                  defaultValue={sessionData.user.name as string}
+                />
+              </div>
+              <div className="grid">
+                <label>Teléfeno:</label>
+                <input
+                  className="rounded-md border border-neutral-200 p-2"
+                  type="text"
+                  {...register("phone")}
+                  placeholder="+54 264433998"
+                  required
+                />
+              </div>
+              <p className="font-semibold">
+                Si tienes una inmobiliaria llena los siguientes campos:
+              </p>
+              <div className="grid">
+                <label>Nombre inmobiliaira:</label>
+                <input
+                  className="rounded-md border border-neutral-200 p-2"
+                  type="text"
+                  {...register("companyName")}
+                  placeholder="Zillow"
+                />
+              </div>
+              <div className="grid">
+                <label>Logo inmobiliaria:</label>
+                <input
+                  className="rounded-md border border-neutral-200 p-2"
+                  type="text"
+                  {...register("companyLogoUrl")}
+                  placeholder="https://milogo.png"
+                />
+              </div>
+              <button
+                type="submit"
+                className="rounded-sm border border-t-blue p-2 font-semibold text-t-blue"
+              >
+                FINALIZAR
+              </button>
+            </form>
+          )}
         </div>
       </main>
     </>

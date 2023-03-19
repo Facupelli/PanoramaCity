@@ -27,9 +27,24 @@ export default function OwnerData({ user }: Props) {
         <div className="grid gap-1">
           <p>{user.email}</p>
           <p>
-            teléfono: <b className="font-semibold">2647455690</b>
+            teléfono: <b className="font-semibold">{user.phone}</b>
           </p>
         </div>
+        {user.companyName && (
+          <div className="flex items-center justify-center gap-2">
+            {user.companyLogoUrl && (
+              <div className="relative h-10 w-10 rounded-full">
+                <Image
+                  src={user.companyLogoUrl}
+                  fill
+                  alt="company_logo"
+                  style={{ borderRadius: "100%" }}
+                />
+              </div>
+            )}
+            <p>{user.companyName}</p>
+          </div>
+        )}
         <button className="flex items-center justify-center gap-2 rounded-sm bg-green-500 py-1 text-white">
           enviar Whatsapp
           <Whatsapp />
