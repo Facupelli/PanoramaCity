@@ -23,6 +23,7 @@ export const propertyRouter = createTRPCRouter({
         type: z.string().array().optional(),
         sort: z.string().optional(),
         amenities: z.string().array().optional(),
+        location: z.string(),
       })
     )
     .mutation(async ({ input }) => {
@@ -75,6 +76,10 @@ export const propertyRouter = createTRPCRouter({
 
       if (input.operation !== "all") {
         wherePipe.operationId = input.operation;
+      }
+
+      if (input.location !== "all") {
+        wherePipe.propertyInfo.zone = input.location;
       }
 
       if (input.surface.min || input.surface.max) {

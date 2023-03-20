@@ -27,6 +27,7 @@ export type FiltersData = {
     max: string;
   };
   amenities: string[];
+  location: string;
 };
 
 type Props = {
@@ -52,6 +53,7 @@ const initialState = {
     max: "",
   },
   amenities: [""],
+  loaction: "all",
 };
 
 export default function Filters({
@@ -128,6 +130,7 @@ export default function Filters({
           <select
             id="zone"
             className="rounded-sm border border-neutral-300 p-2"
+            {...register("location")}
           >
             <option value="all">Todos</option>
             {san_juan_departamentos.map((departamento) => (

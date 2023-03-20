@@ -27,6 +27,7 @@ export const useFilterStore = create<FilterState>()(
           max: "",
         },
         amenities: [""],
+        location: "all",
       },
       setFilters: (filters) => set(() => ({ filters })),
       sort: "",

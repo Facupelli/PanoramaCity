@@ -53,6 +53,7 @@ const Home: NextPage<Props> = ({
         filters.surface.min ||
         filters.price.max ||
         filters.price.min ||
+        filters.location ||
         sort
       ) {
         getFilteredProperties.mutate(

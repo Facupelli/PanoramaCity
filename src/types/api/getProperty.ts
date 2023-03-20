@@ -10,6 +10,7 @@ export type WherePipe = {
       gte?: number;
       lte?: number;
     };
+    zone?: string;
     ambiences?: { gte?: number };
     bathrooms?: { gte?: number };
     bedrooms?: { gte?: number };
