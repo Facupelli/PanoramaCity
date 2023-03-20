@@ -27,6 +27,8 @@ export type FormData = {
   price: number;
   locationLat: string;
   locationLng: string;
+  amenities: string[];
+  utilities: string[];
 };
 
 export const validationSchema = z.object({
@@ -47,6 +49,8 @@ export const validationSchema = z.object({
   description: z.string(),
   operationId: z.string(),
   price: z.number().gte(1),
+  amenities: z.string().array().optional(),
+  utilities: z.string().array().optional(),
   // locationLat: z.string(),
   // locationLng: z.string(),
 });

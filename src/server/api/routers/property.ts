@@ -146,6 +146,8 @@ export const propertyRouter = createTRPCRouter({
         price: z.number(),
         locationLat: z.number(),
         locationLng: z.number(),
+        amenities: z.object({ id: z.string() }).array().optional(),
+        utilities: z.object({ id: z.string() }).array().optional(),
         //PropertyInfo
         propertyInfo: z.object({
           ambiences: z.number(),
@@ -178,6 +180,8 @@ export const propertyRouter = createTRPCRouter({
             price: Number(input.price),
             locationLat: input.locationLat,
             locationLng: input.locationLng,
+            amenities: { connect: input.amenities },
+            utilities: { connect: input.utilities },
           },
         });
       } catch (err) {

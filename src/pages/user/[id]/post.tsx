@@ -17,20 +17,31 @@ import Fieldset from "~/components/UI/FieldSet";
 import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
 import GoBackButton from "~/components/UI/GoBackButton";
 
-import { type PropertyType, type User, type Operation } from "~/types/model";
+import {
+  type PropertyType,
+  type User,
+  type Operation,
+  type Amenity,
+  type Utility,
+} from "~/types/model";
 import { validationSchema, type FormData } from "~/types/createProperty";
+import Amenities from "~/components/PropertyForm/Amenities";
 
 type Props = {
   user?: User;
   propertyTypes: PropertyType[];
   operations: Operation[];
+  amenities: Amenity[];
+  utilities: Utility[];
 };
 
-export const steps = 4;
+export const steps = 5;
 
 const UserPostProperty: NextPage<Props> = ({
   propertyTypes,
   operations,
+  amenities,
+  utilities,
 }: Props) => {
   const { data: sessionData } = useSession();
   const {
@@ -80,6 +91,8 @@ const UserPostProperty: NextPage<Props> = ({
       media: {
         images: urls,
       },
+      amenities: data.amenities.map((amenityId) => ({ id: amenityId })),
+      utilities: data.utilities.map((utilityId) => ({ id: utilityId })),
     };
 
     createProperty.mutate(propertyData);
@@ -87,7 +100,7 @@ const UserPostProperty: NextPage<Props> = ({
   };
 
   const handleNextPage = () => {
-    if (step === 4) {
+    if (step === 5) {
       if (buttonRef.current) {
         return buttonRef.current.click();
       }
@@ -113,16 +126,6 @@ const UserPostProperty: NextPage<Props> = ({
             <h1 className=" text-2xl font-bold sm:col-span-2">
               Publicar un inmueble
             </h1>
-
-            <div className="h-[3px] w-full grow rounded-lg bg-white  sm:col-span-4 sm:w-auto">
-              <div
-                className={`h-[3px] rounded-lg bg-s-blue transition-all delay-100 duration-200 ease-out ${
-                  step === 1 ? "w-[0%]" : ""
-                } ${step === 2 ? "w-[25%]" : ""} ${
-                  step === 3 ? "w-[50%]" : ""
-                } ${step === 4 ? "w-[75%]" : ""}`}
-              ></div>
-            </div>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="pt-4">
@@ -151,6 +154,16 @@ const UserPostProperty: NextPage<Props> = ({
               </Fieldset>
             )}
             {step === 4 && (
+              <Fieldset title="Comodidades del inmueble" step={step}>
+                <Amenities
+                  register={register}
+                  watch={watch}
+                  amenities={amenities}
+                  utilites={utilities}
+                />
+              </Fieldset>
+            )}
+            {step === 5 && (
               <Fieldset title="Fotos del inmueble" step={step}>
                 <ImagesUpload setUrls={setUrls} urls={urls} />
               </Fieldset>
@@ -196,6 +209,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const propertyTypes: PropertyType[] = await prisma.propertyType.findMany({});
   const operations: Operation[] = await prisma.operation.findMany({});
+  const amenities: Amenity[] = await prisma.amenity.findMany({});
+  const utilities: Amenity[] = await prisma.utility.findMany({});
 
   return {
     props: {
@@ -207,6 +222,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       },
       propertyTypes,
       operations,
+      amenities,
+      utilities,
     },
     revalidate: 10,
   };

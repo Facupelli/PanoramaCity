@@ -1,5 +1,6 @@
 import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
 import { type FormData } from "~/types/createProperty";
+import { type Amenity } from "~/types/model";
 
 type Props = {
   register: UseFormRegister<FormData>;
@@ -11,7 +12,9 @@ export default function Characteristics({ register }: Props) {
   return (
     <>
       <div className="grid">
-        <label htmlFor="ambiences">Ambientes</label>
+        <label htmlFor="ambiences" className="font-semibold">
+          Ambientes
+        </label>
         <input
           id="ambiences"
           className="rounded-md border border-neutral-200  p-2"
@@ -23,7 +26,9 @@ export default function Characteristics({ register }: Props) {
       </div>
 
       <div className="grid">
-        <label htmlFor="bathromms">Baños</label>
+        <label htmlFor="bathromms" className="font-semibold">
+          Baños
+        </label>
         <input
           id="bathrooms"
           className="rounded-md border border-neutral-200  p-2"
@@ -35,7 +40,9 @@ export default function Characteristics({ register }: Props) {
       </div>
 
       <div className="grid">
-        <label htmlFor="bedrooms">Habitaciones</label>
+        <label htmlFor="bedrooms" className="font-semibold">
+          Habitaciones
+        </label>
         <input
           id="bedrooms"
           className="rounded-md border border-neutral-200  p-2"
@@ -47,7 +54,9 @@ export default function Characteristics({ register }: Props) {
       </div>
 
       <div className="grid">
-        <label htmlFor="surface">Superficie m²</label>
+        <label htmlFor="surface" className="font-semibold">
+          Superficie m²
+        </label>
         <input
           id="surface"
           className="rounded-md border border-neutral-200  p-2"
@@ -59,7 +68,9 @@ export default function Characteristics({ register }: Props) {
       </div>
 
       <div className="grid">
-        <label htmlFor="buildYear">Año construcción</label>
+        <label htmlFor="buildYear" className="font-semibold">
+          Año construcción
+        </label>
         <input
           id="buildYear"
           className="rounded-md border border-neutral-200  p-2"
