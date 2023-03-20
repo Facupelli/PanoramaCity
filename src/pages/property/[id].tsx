@@ -133,9 +133,9 @@ const RealEstateCard = ({ user }: { user: User }) => {
     <aside className="h-fit w-full rounded bg-white p-6 font-barlow shadow-md">
       <div className="grid gap-4">
         {user?.companyName && (
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center gap-4">
             {user.companyLogoUrl && (
-              <div className="relative h-10 w-10 rounded-full">
+              <div className="relative h-16 w-16 rounded-full">
                 <Image
                   src={user.companyLogoUrl}
                   fill
@@ -144,7 +144,7 @@ const RealEstateCard = ({ user }: { user: User }) => {
                 />
               </div>
             )}
-            <p>{user.companyName}</p>
+            <p className="font-bold">{user.companyName}</p>
           </div>
         )}
       </div>
@@ -155,7 +155,7 @@ const RealEstateCard = ({ user }: { user: User }) => {
 const OwnerData = ({ user }: { user: User }) => {
   return (
     <aside className="w-full rounded bg-white p-6 font-barlow shadow-md">
-      <p className="pb-2 text-sm text-neutral-500">publicado por</p>
+      <p className="pb-3 text-sm text-neutral-500">CONTACTO</p>
       <div className="flex items-center gap-4">
         {user.image && (
           <div className="relative h-10 w-10 rounded-full">

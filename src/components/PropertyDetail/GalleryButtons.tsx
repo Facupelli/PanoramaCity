@@ -24,7 +24,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: false, video: false, tour: true });
           }}
-          className={`flex grow items-center justify-around rounded border border-neutral-200 p-3 ${
+          className={`flex grow items-center justify-around rounded border border-neutral-200 px-6 py-2 ${
             mediaActive.tour ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
@@ -35,7 +35,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: true, video: false, tour: false });
           }}
-          className={`flex grow items-center justify-around rounded border border-neutral-200 p-3 ${
+          className={`flex grow items-center justify-around rounded border border-neutral-200 px-6 py-2 ${
             mediaActive.images ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
@@ -46,7 +46,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: false, video: true, tour: false });
           }}
-          className={`flex grow items-center justify-around rounded border border-neutral-200 p-3 ${
+          className={`flex grow items-center justify-around rounded border border-neutral-200 px-6 py-2 ${
             mediaActive.video ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
