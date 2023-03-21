@@ -2,11 +2,15 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import LogOut from "~/icons/LogOut";
 
-export default function NavBar() {
+export default function NavBar({ color }: { color?: string }) {
   const { data: sessionData } = useSession();
 
   return (
-    <nav className="fixed z-20 w-full bg-m-blue ">
+    <nav
+      className={`fixed z-20 w-full ${
+        color === "transparent" ? "bg-transparent" : "bg-m-blue"
+      }  `}
+    >
       <div className="flex h-nav items-center justify-between px-8">
         <Link
           href="/"

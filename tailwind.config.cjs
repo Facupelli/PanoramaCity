@@ -28,6 +28,10 @@ const config = {
         "auto-s3": "repeat( auto-fill, minmax(250px, 1fr) )",
         "auto-utilities": "repeat( auto-fill, minmax(200px, 1fr) )",
       },
+      backgroundImage: {
+        "landing-image":
+          "linear-gradient(rgba(0,0,0,.55) 70px,transparent 310px)",
+      },
       keyframes: {
         blink: {
           "50%": { opacity: "25%" },
