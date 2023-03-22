@@ -63,7 +63,7 @@ export default function FilterNav({
         </Modal>
       )}
 
-      <div className="flex justify-between pb-4 font-barlow">
+      <div className="flex justify-between font-barlow sm:pb-4">
         <button
           onClick={() => setShowFiltersModal(true)}
           className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold shadow-sm "

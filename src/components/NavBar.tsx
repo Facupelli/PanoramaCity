@@ -11,11 +11,8 @@ export default function NavBar({ color }: { color?: string }) {
         color === "transparent" ? "bg-transparent" : "bg-m-blue"
       }  `}
     >
-      <div className="flex h-nav items-center justify-between px-8">
-        <Link
-          href="/"
-          className="font-regular font-archivo text-2xl text-m-white"
-        >
+      <div className="flex h-nav items-center justify-between px-4 sm:px-8">
+        <Link href="/" className="font-archivo text-m-white sm:text-2xl">
           Panorama City
         </Link>
         {sessionData ? (

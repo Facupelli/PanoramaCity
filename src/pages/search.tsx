@@ -30,7 +30,10 @@ const Search: NextPage<Props> = ({
   propertyTypes,
   amenities,
 }: Props) => {
+  const [mobileViewList, setMobileViewList] = useState(true);
+
   const hasMounted = useRef(false);
+
   const [activeProperty, setActiveProperty] = useState<string>("");
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
 
@@ -87,15 +90,31 @@ const Search: NextPage<Props> = ({
 
       <NavBar />
 
-      <main className="min-h-screen bg-neutral-100 pt-[70px]">
-        <div className="relative ">
-          <section className="fixed z-10 h-[calc(100vh_-_70px)] w-2/5 ">
+      <main className="min-h-screen bg-neutral-100 pt-[70px] font-barlow">
+        <div className="relative flex flex-col-reverse sm:block">
+          <div className="fixed bottom-4 left-1/2 z-30 -translate-x-1/2 rounded bg-white py-2 px-4 font-medium shadow sm:hidden">
+            <button
+              onClick={() => {
+                setMobileViewList(!mobileViewList);
+                console.log("clik");
+              }}
+            >
+              {mobileViewList ? "Mapa" : "Lista"}
+            </button>
+          </div>
+          <section
+            className={`h-[calc(100vh_-_126px)] sm:fixed sm:z-10 sm:h-[calc(100vh_-_70px)] sm:w-2/5 ${
+              mobileViewList ? "hidden sm:block" : "block"
+            }`}
+          >
             <Map
               properties={propertiesList}
               setActiveProperty={setActiveProperty}
             />
           </section>
-          <section className="ml-auto grid w-3/5 gap-4 p-4">
+          <section
+            className={`grid h-14 gap-4 p-2 sm:ml-auto sm:block sm:w-3/5 sm:p-4 `}
+          >
             <FilterNav
               // setShowFiltersModal={setShowFiltersModal}
               setPropertiesList={setPropertiesList}
@@ -103,7 +122,11 @@ const Search: NextPage<Props> = ({
               propertyTypes={propertyTypes}
               amenities={amenities}
             />
-            <div className="grid grid-cols-auto-fit justify-items-center gap-4">
+            <div
+              className={`grid grid-cols-auto-fit justify-items-center gap-4 ${
+                mobileViewList ? "block" : "hidden sm:block"
+              }`}
+            >
               {propertiesList.map((property) => (
                 <PropertyCard
                   key={property.id}
