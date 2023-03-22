@@ -113,7 +113,7 @@ const Search: NextPage<Props> = ({
             />
           </section>
           <section
-            className={`grid h-14 gap-4 p-2 sm:ml-auto sm:block sm:w-3/5 sm:p-4 `}
+            className={`grid h-14 gap-4 p-4 sm:ml-auto sm:block sm:w-3/5`}
           >
             <FilterNav
               // setShowFiltersModal={setShowFiltersModal}

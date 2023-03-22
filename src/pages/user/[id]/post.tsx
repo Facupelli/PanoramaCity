@@ -170,7 +170,7 @@ const UserPostProperty: NextPage<Props> = ({
             )}
 
             <div className="grid grid-cols-6">
-              <div className="col-span-4 col-start-3 flex items-center justify-center gap-2 ">
+              <div className="col-span-4 col-start-2 flex items-center justify-center gap-2 sm:col-start-3 ">
                 {step !== 1 && (
                   <PageBtn
                     type="prev"

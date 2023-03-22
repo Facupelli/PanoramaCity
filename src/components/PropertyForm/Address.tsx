@@ -22,7 +22,7 @@ export default function Address({ register, watch }: Props) {
         </label>
         <select
           id="city"
-          className="rounded-md border border-neutral-200 p-2"
+          className="w-full rounded-md border border-neutral-200 p-2"
           {...register("propertyInfo.city")}
         >
           {provinces.map((province) => (

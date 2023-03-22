@@ -25,11 +25,11 @@ export default function Amenities({
         <label className="pb-2 font-semibold" htmlFor="surface">
           Comodidades
         </label>
-        <div className="grid grid-cols-3 gap-y-3">
+        <div className="grid grid-cols-2 gap-y-3 sm:grid-cols-3">
           {amenities?.map((amenity) => (
             <div key={amenity.id} className="col-span-1">
               <label
-                className={`cursor-pointer rounded-lg border p-1 ${
+                className={`cursor-pointer whitespace-nowrap rounded-lg border p-1 text-sm sm:text-base ${
                   amenitiesFilter &&
                   amenitiesFilter?.find((a) => a === amenity.id)
                     ? "border-t-blue text-t-blue "
@@ -59,7 +59,7 @@ export default function Amenities({
           {utilites?.map((utility) => (
             <div key={utility.id} className="col-span-1">
               <label
-                className={`cursor-pointer rounded-lg border p-1 ${
+                className={`cursor-pointer whitespace-nowrap rounded-lg border p-1 text-sm sm:text-base ${
                   utilitiesFilter &&
                   utilitiesFilter?.find((a) => a === utility.id)
                     ? "border-t-blue text-t-blue "
