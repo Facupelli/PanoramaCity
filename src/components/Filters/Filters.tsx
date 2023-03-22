@@ -82,10 +82,10 @@ export default function Filters({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white">
-      <div className="max-h-[calc(100vh_-_200px)] overflow-y-auto p-10">
+      <div className="max-h-[calc(100vh_-_140px)] overflow-y-auto p-4 sm:max-h-[calc(100vh_-_200px)] sm:p-10">
         <div className="border-netrual-800 grid gap-2 pb-6">
           <label className="pb-2 font-semibold">Tipo de inmueble</label>
-          <div className="flex gap-10">
+          <div className="flex flex-wrap gap-x-10 gap-y-4">
             {types?.map((type) => (
               <div key={type.id}>
                 <input
@@ -143,7 +143,7 @@ export default function Filters({
           <label className="pb-2 font-semibold" htmlFor="price">
             Precio
           </label>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <div className="grid grow">
               <label htmlFor="price.min">Mínimo $</label>
               <input
@@ -202,7 +202,7 @@ export default function Filters({
           <label className="pb-2 font-semibold" htmlFor="surface">
             Superficie
           </label>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <div className="grid grow">
               <label>Mínimo m²</label>
               <input
