@@ -30,7 +30,7 @@ const Home: NextPage = () => {
 
       <main className="min-h-screen bg-neutral-100 font-barlow">
         <section className="relative">
-          <div className="relative aspect-[16/10] w-full after:absolute after:top-0 after:left-0 after:h-[800px] after:w-full after:bg-landing-image after:content-['']">
+          <div className="relative aspect-[1/2] w-full after:absolute after:top-0 after:left-0 after:h-[800px] after:w-full after:bg-landing-image after:content-[''] sm:aspect-[16/10]">
             <Image
               fill
               src="/cozy-house-1.png"
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
 
           <div className="after " />
 
-          <div className="absolute top-1/3 left-24 grid max-w-[45%] gap-6">
+          <div className="absolute top-24 grid gap-6 p-4 sm:top-1/3 sm:left-24 sm:max-w-[45%] sm:p-0">
             <div className="grid gap-4">
               <h1 className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-5xl font-bold text-transparent">
                 Encuentra. Toureala. Hazla tuya.
