@@ -3,14 +3,18 @@ import Head from "next/head";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 
-type LandingForm = {
-  action: string;
-};
-
 import NavBar from "~/components/NavBar";
 import Search from "~/icons/Search";
+
+type LandingForm = {
+  action: string;
+  location: string;
+};
+
 const Home: NextPage = () => {
-  const { register, watch } = useForm<LandingForm>();
+  const { register, watch } = useForm<LandingForm>({
+    defaultValues: { action: "rent" },
+  });
 
   const action = watch("action");
 
@@ -51,23 +55,6 @@ const Home: NextPage = () => {
             <div className="grid gap-4">
               <div className="flex gap-10">
                 <label
-                  htmlFor="buy"
-                  className={`cursor-pointer border-b-4 py-1 text-center text-white ${
-                    action === "buy"
-                      ? " border-white font-semibold"
-                      : "border-transparent"
-                  }`}
-                >
-                  Comprar
-                </label>
-                <input
-                  id="buy"
-                  type="radio"
-                  value="buy"
-                  {...register("action")}
-                  className="hidden"
-                />
-                <label
                   htmlFor="rent"
                   className={`cursor-pointer border-b-4 py-1 text-center text-white ${
                     action === "rent"
@@ -81,6 +68,24 @@ const Home: NextPage = () => {
                   id="rent"
                   type="radio"
                   value="rent"
+                  {...register("action")}
+                  className="hidden"
+                />
+
+                <label
+                  htmlFor="buy"
+                  className={`cursor-pointer border-b-4 py-1 text-center text-white ${
+                    action === "buy"
+                      ? " border-white font-semibold"
+                      : "border-transparent"
+                  }`}
+                >
+                  Comprar
+                </label>
+                <input
+                  id="buy"
+                  type="radio"
+                  value="buy"
                   {...register("action")}
                   className="hidden"
                 />
@@ -105,6 +110,7 @@ const Home: NextPage = () => {
               </div>
               <div className="flex items-center">
                 <input
+                  {...register("location")}
                   type="search"
                   className="h-16 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md"
                   placeholder="Ciudad, dirección, ZIP"
