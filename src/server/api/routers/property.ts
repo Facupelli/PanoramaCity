@@ -219,7 +219,7 @@ export const propertyRouter = createTRPCRouter({
           await prisma.propertyMedia.create({
             data: {
               property: { connect: { id: newProperty.id } },
-              images: input.media.images,
+              images: JSON.stringify(input.media.images),
               video: "das",
             },
           });
@@ -244,7 +244,7 @@ export const propertyRouter = createTRPCRouter({
         await prisma.propertyMedia.update({
           where: { id: input.id },
           data: {
-            images: input.images,
+            images: JSON.stringify(input.images),
             video: input.video,
             tour: input.tour,
           },

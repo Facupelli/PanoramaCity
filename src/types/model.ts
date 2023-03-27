@@ -44,7 +44,7 @@ export type Property = {
 };
 
 export type PropertyMedia = {
-  images: string[];
+  images: string;
   video: string;
   tour: string | null;
 };

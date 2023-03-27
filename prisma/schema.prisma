@@ -140,7 +140,7 @@ model PropertyInfo {
 
 model PropertyMedia {
     id              String        @id @default(cuid())
-    images          Json
+    images          String
     video           String
     tour            String?
     propertyId      String        @unique

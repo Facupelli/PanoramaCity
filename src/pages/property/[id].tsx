@@ -13,7 +13,7 @@ import PropertyHeader from "~/components/PropertyDetail/PropertyHeader";
 import Gallery from "~/components/PropertyDetail/Gallery";
 import Whatsapp from "~/icons/Whatsapp";
 
-import { User, type Property } from "~/types/model";
+import { type User, type Property } from "~/types/model";
 
 type Props = {
   property?: Property;
