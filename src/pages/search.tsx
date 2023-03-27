@@ -34,7 +34,7 @@ const Search: NextPage<Props> = ({
 
   const hasMounted = useRef(false);
 
-  const [activeProperty, setActiveProperty] = useState<string>("");
+  const [activeProperty, setActiveProperty] = useState<Property | null>(null);
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
 
   const filters = useFilterStore((state) => state.filters);
@@ -102,6 +102,13 @@ const Search: NextPage<Props> = ({
               {mobileViewList ? "Mapa" : "Lista"}
             </button>
           </div>
+
+          {activeProperty && (
+            <div className="fixed bottom-4 left-1/2 z-30 -translate-x-1/2 rounded py-2 px-4 font-medium shadow sm:hidden">
+              <PropertyCard property={activeProperty} small />
+            </div>
+          )}
+
           <section
             className={`h-[calc(100vh_-_126px)] sm:fixed sm:z-10 sm:h-[calc(100vh_-_70px)] sm:w-2/5 ${
               mobileViewList ? "hidden sm:block" : "block"

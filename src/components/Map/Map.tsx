@@ -16,7 +16,7 @@ import MapMarkers from "./MapMarkers";
 
 type Props = {
   properties: Property[];
-  setActiveProperty: Dispatch<SetStateAction<string>>;
+  setActiveProperty: Dispatch<SetStateAction<Property | null>>;
 };
 
 const NEXT_PUBLIC_GOOGLE_MAP_KEY = process.env

@@ -8,7 +8,7 @@ import { type Property } from "~/types/model";
 
 type Props = {
   properties: Property[];
-  setActiveProperty: Dispatch<SetStateAction<string>>;
+  setActiveProperty: Dispatch<SetStateAction<Property | null>>;
 };
 
 export default function MapMarkers({ properties, setActiveProperty }: Props) {
@@ -50,7 +50,7 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
       prevMarkersRef.current.push(marker);
 
       marker.addListener("click", () => {
-        setActiveProperty(property.id);
+        setActiveProperty(property);
       });
 
       return marker;
