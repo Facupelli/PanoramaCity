@@ -81,7 +81,7 @@ const Home: NextPage = () => {
           </div>
         </section>
         <section className="mx-4 py-20 sm:mx-24">
-          <div className="flex flex-wrap justify-between gap-10 ">
+          <div className="grid grid-cols-1 justify-between gap-10 sm:grid-cols-3 ">
             <button
               onClick={() => {
                 setFilters({
@@ -103,7 +103,7 @@ const Home: NextPage = () => {
                 });
                 void router.push("/search");
               }}
-              className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
+              className="col-span-1 grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
             >
               <div className="relative h-56 w-56">
                 <Image
@@ -137,7 +137,7 @@ const Home: NextPage = () => {
                 });
                 void router.push("/search");
               }}
-              className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
+              className="col-span-1 grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
             >
               <div className="relative h-56 w-56">
                 <Image src="/buy_house.svg" alt="buy house illustration" fill />
@@ -148,7 +148,7 @@ const Home: NextPage = () => {
             </button>
             <button
               onClick={handlePostClick}
-              className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
+              className="col-span-1 grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
             >
               <div className="relative h-56 w-56">
                 <Image src="/for_sale.svg" alt="buy house illustration" fill />
