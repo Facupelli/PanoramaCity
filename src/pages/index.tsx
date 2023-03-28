@@ -39,7 +39,7 @@ const Home: NextPage = () => {
 
       <main className="min-h-screen bg-neutral-100 font-barlow">
         <section className="relative">
-          <div className="clip-landing-mobile sm:clip-landing h-[calc(100vh_+_100px)] w-full bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']">
+          <div className="clip-landing-mobile sm:clip-landing h-[calc(100vh_+_200px)] w-full bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-[''] sm:h-[calc(100vh_+_100px)]">
             <div className="absolute right-4 bottom-[10%] aspect-video w-[80%] max-w-[900px] sm:bottom-[15%] sm:left-[30%] sm:w-2/3">
               <Image
                 fill
