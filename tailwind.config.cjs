@@ -30,7 +30,7 @@ const config = {
       },
       backgroundImage: {
         "landing-image":
-          "linear-gradient(rgba(0,0,0,.55) 70px,transparent 310px)",
+          "linear-gradient(rgba(0,0,0,.3) 70px,transparent 310px)",
       },
       keyframes: {
         blink: {

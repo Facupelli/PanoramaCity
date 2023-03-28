@@ -7,20 +7,17 @@ import { useForm } from "react-hook-form";
 
 import NavBar from "~/components/NavBar";
 import Search from "~/icons/Search";
+import { useFilterStore } from "~/zustand/store";
 
 type LandingForm = {
-  action: string;
   location: string;
 };
 
 const Home: NextPage = () => {
+  const setFilters = useFilterStore((state) => state.setFilters);
   const { data: sessionData } = useSession();
-  const { register, watch } = useForm<LandingForm>({
-    defaultValues: { action: "rent" },
-  });
+  const { register } = useForm<LandingForm>();
   const router = useRouter();
-
-  const action = watch("action");
 
   const handlePostClick = () => {
     if (sessionData) {
@@ -42,97 +39,124 @@ const Home: NextPage = () => {
 
       <main className="min-h-screen bg-neutral-100 font-barlow">
         <section className="relative">
-          <div className="relative aspect-[1/2] w-full after:absolute after:top-0 after:left-0 after:h-[800px] after:w-full after:bg-landing-image after:content-[''] sm:aspect-[16/10]">
-            <Image
-              fill
-              src="/cozy-house-1.png"
-              alt="index-bg"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-
-          <div className="after " />
-
-          <div className="absolute top-24 grid gap-6 p-4 sm:top-1/3 sm:left-24 sm:max-w-[45%] sm:p-0">
-            <div className="grid gap-4">
-              <h1 className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-5xl font-bold text-transparent">
-                Encuentra. Toureala. Hazla tuya.
-              </h1>
-              <p className="rounded-lg  p-2  text-lg text-white">
-                ¡Con nuestra experiencia inmersiva vas a sentir que estás
-                caminando por tu futura propiedad! Descubrí las mejores
-                propiedades sin salir de casa.
-              </p>
+          <div className="clip-landing h-[calc(100vh_+_100px)] w-full bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']">
+            <div className="absolute bottom-[15%] left-[30%] aspect-video w-2/3 max-w-[900px]">
+              <Image
+                fill
+                src="/town.svg"
+                alt="index-bg"
+                style={{ objectFit: "contain" }}
+              />
             </div>
-            <div className="grid gap-4">
-              <div className="flex gap-10">
-                <label
-                  htmlFor="rent"
-                  className={`cursor-pointer border-b-4 py-1 text-center text-white ${
-                    action === "rent"
-                      ? "border-white font-semibold"
-                      : "border-transparent"
-                  }`}
-                >
-                  Alquilar
-                </label>
-                <input
-                  id="rent"
-                  type="radio"
-                  value="rent"
-                  {...register("action")}
-                  className="hidden"
-                />
-
-                <label
-                  htmlFor="buy"
-                  className={`cursor-pointer border-b-4 py-1 text-center text-white ${
-                    action === "buy"
-                      ? " border-white font-semibold"
-                      : "border-transparent"
-                  }`}
-                >
-                  Comprar
-                </label>
-                <input
-                  id="buy"
-                  type="radio"
-                  value="buy"
-                  {...register("action")}
-                  className="hidden"
-                />
-
-                <button
-                  onClick={handlePostClick}
-                  className={`cursor-pointer rounded p-2 py-1 text-center text-white hover:bg-white hover:font-semibold hover:text-m-blue`}
-                >
-                  Publicar
-                </button>
-                <input
-                  id="post"
-                  value="post"
-                  type="radio"
-                  {...register("action")}
-                  className="hidden"
-                />
+            <div className="absolute top-24 grid gap-6 rounded bg-[rgba(44,62,80,0.8)] p-4 sm:top-1/4 sm:left-24 sm:max-w-[40%] sm:p-8">
+              <div className="grid gap-4">
+                <h1 className="bg-gradient-to-r from-pink-500 to-[#6C63FF] bg-clip-text text-5xl font-bold text-transparent">
+                  Encuentra. Toureala. Hazla tuya.
+                </h1>
+                <p className="rounded-lg p-2 text-lg text-white">
+                  ¡Con nuestra experiencia inmersiva vas a sentir que estás
+                  caminando por tu futuro hogar! Descubrí las mejores
+                  propiedades sin salir de casa.
+                </p>
               </div>
-              <div className="flex items-center">
-                <input
-                  {...register("location")}
-                  type="search"
-                  className="h-16 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md"
-                  placeholder="Ciudad, dirección, ZIP"
-                />
-                <div>
-                  <button
-                    className="h-16 rounded-tr-lg rounded-br-lg bg-m-blue px-4 shadow-md"
-                    aria-label="search button"
-                  >
-                    <Search />
-                  </button>
+              <div className="grid gap-4">
+                <div className="flex items-center">
+                  <input
+                    {...register("location")}
+                    type="search"
+                    className="h-16 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md"
+                    placeholder="Ciudad, dirección, ZIP"
+                  />
+                  <div>
+                    <button
+                      className="h-16 rounded-tr-lg rounded-br-lg bg-m-blue px-4 shadow-md"
+                      aria-label="search button"
+                    >
+                      <Search />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+        <section className="mx-24 py-20">
+          <div className="flex justify-between gap-10">
+            <button
+              onClick={() => {
+                setFilters({
+                  type: ["", ""],
+                  operation: "clfrb2pa7002ee78wb43qej92",
+                  price: {
+                    min: "",
+                    max: "",
+                  },
+                  ambiences: "",
+                  bathrooms: "",
+                  bedrooms: "",
+                  surface: {
+                    min: "",
+                    max: "",
+                  },
+                  amenities: [""],
+                  location: "all",
+                });
+                router.push("/search");
+              }}
+              className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
+            >
+              <div className="relative h-56 w-56">
+                <Image
+                  src="/choosing_house.svg"
+                  alt="buy house illustration"
+                  fill
+                />
+              </div>
+              <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all duration-100 ease-in-out">
+                Alquilar
+              </p>
+            </button>
+            <button
+              onClick={() => {
+                setFilters({
+                  type: ["", ""],
+                  operation: "clfrb2pa7002ge78wqs0pa287",
+                  price: {
+                    min: "",
+                    max: "",
+                  },
+                  ambiences: "",
+                  bathrooms: "",
+                  bedrooms: "",
+                  surface: {
+                    min: "",
+                    max: "",
+                  },
+                  amenities: [""],
+                  location: "all",
+                });
+                router.push("/search");
+              }}
+              className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
+            >
+              <div className="relative h-56 w-56">
+                <Image src="/buy_house.svg" alt="buy house illustration" fill />
+              </div>
+              <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all duration-100 ease-in-out">
+                Comprar
+              </p>
+            </button>
+            <button
+              onClick={handlePostClick}
+              className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
+            >
+              <div className="relative h-56 w-56">
+                <Image src="/for_sale.svg" alt="buy house illustration" fill />
+              </div>
+              <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all delay-75 duration-100 ease-in-out">
+                Publicar
+              </p>
+            </button>
           </div>
         </section>
       </main>
