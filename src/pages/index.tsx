@@ -1,6 +1,8 @@
 import { type NextPage } from "next";
+import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 import NavBar from "~/components/NavBar";
@@ -12,11 +14,21 @@ type LandingForm = {
 };
 
 const Home: NextPage = () => {
+  const { data: sessionData } = useSession();
   const { register, watch } = useForm<LandingForm>({
     defaultValues: { action: "rent" },
   });
+  const router = useRouter();
 
   const action = watch("action");
+
+  const handlePostClick = () => {
+    if (sessionData) {
+      return router.push(`/user/${sessionData.user.id}/post`);
+    }
+
+    void signIn("google");
+  };
 
   return (
     <>
@@ -90,16 +102,12 @@ const Home: NextPage = () => {
                   className="hidden"
                 />
 
-                <label
-                  htmlFor="post"
-                  className={`cursor-pointer border-b-4 py-1 text-center text-white ${
-                    action === "post"
-                      ? "border-white font-semibold"
-                      : "border-transparent"
-                  }`}
+                <button
+                  onClick={handlePostClick}
+                  className={`cursor-pointer rounded p-2 py-1 text-center text-white hover:bg-white hover:font-semibold hover:text-m-blue`}
                 >
                   Publicar
-                </label>
+                </button>
                 <input
                   id="post"
                   value="post"

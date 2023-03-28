@@ -1,18 +1,14 @@
 import { GoogleMapsProvider } from "@ubilabs/google-maps-react-hooks";
-// import {
-//   MarkerClusterer,
-//   SuperClusterAlgorithm,
-// } from "@googlemaps/markerclusterer";
 import {
   type Dispatch,
   type SetStateAction,
   useState,
   useCallback,
 } from "react";
-import { type Property } from "~/types/model";
 import MapCanvas from "./MapCanvas";
-
 import MapMarkers from "./MapMarkers";
+
+import { type Property } from "~/types/model";
 
 type Props = {
   properties: Property[];

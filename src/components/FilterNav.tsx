@@ -11,12 +11,7 @@ import Filter from "~/icons/Filter";
 import Filters from "./Filters/Filters";
 import Modal from "./UI/Modal";
 
-import {
-  type Operation,
-  type PropertyType,
-  type Property,
-  type Amenity,
-} from "~/types/model";
+import type { Operation, PropertyType, Property, Amenity } from "~/types/model";
 
 type Props = {
   setPropertiesList: Dispatch<SetStateAction<Property[]>>;
