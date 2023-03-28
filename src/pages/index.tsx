@@ -39,8 +39,8 @@ const Home: NextPage = () => {
 
       <main className="min-h-screen bg-neutral-100 font-barlow">
         <section className="relative">
-          <div className="clip-landing h-[calc(100vh_+_100px)] w-full bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']">
-            <div className="absolute bottom-[15%] left-[30%] aspect-video w-2/3 max-w-[900px]">
+          <div className="clip-landing-mobile sm:clip-landing h-[calc(100vh_+_100px)] w-full bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']">
+            <div className="absolute right-4 bottom-[10%] aspect-video w-[80%] max-w-[900px] sm:bottom-[15%] sm:left-[30%] sm:w-2/3">
               <Image
                 fill
                 src="/town.svg"
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
                 style={{ objectFit: "contain" }}
               />
             </div>
-            <div className="absolute top-24 grid gap-6 rounded bg-[rgba(44,62,80,0.8)] p-4 sm:top-1/4 sm:left-24 sm:max-w-[40%] sm:p-8">
+            <div className="absolute top-24 mx-4 grid gap-6 rounded bg-[rgba(44,62,80,0.8)] p-4 sm:top-1/4 sm:left-24 sm:mx-0 sm:max-w-[40%] sm:p-8">
               <div className="grid gap-4">
                 <h1 className="bg-gradient-to-r from-pink-500 to-[#6C63FF] bg-clip-text text-5xl font-bold text-transparent">
                   Encuentra. Toureala. Hazla tuya.
@@ -64,12 +64,12 @@ const Home: NextPage = () => {
                   <input
                     {...register("location")}
                     type="search"
-                    className="h-16 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md"
+                    className="h-12 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md sm:h-16"
                     placeholder="Ciudad, dirección, ZIP"
                   />
                   <div>
                     <button
-                      className="h-16 rounded-tr-lg rounded-br-lg bg-m-blue px-4 shadow-md"
+                      className="h-12 rounded-tr-lg rounded-br-lg bg-m-blue px-4 shadow-md sm:h-16"
                       aria-label="search button"
                     >
                       <Search />
@@ -80,8 +80,8 @@ const Home: NextPage = () => {
             </div>
           </div>
         </section>
-        <section className="mx-24 py-20">
-          <div className="flex justify-between gap-10">
+        <section className="mx-4 py-20 sm:mx-24">
+          <div className="flex flex-wrap justify-between gap-10 ">
             <button
               onClick={() => {
                 setFilters({
