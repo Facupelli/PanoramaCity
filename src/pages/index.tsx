@@ -37,7 +37,7 @@ const Home: NextPage = () => {
 
       <NavBar color="transparent" />
 
-      <main className="min-h-screen bg-neutral-100 font-barlow">
+      <main className="grid min-h-screen gap-10 bg-neutral-100 font-barlow">
         <section className="relative">
           <div className=" clip-landing-mobile sm:clip-landing grid h-[calc(100vh_+_300px)] w-full grid-cols-7 place-items-end bg-m-blue pb-14 after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-[''] sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
             <div className="relative col-span-7 aspect-video w-full max-w-[900px] sm:col-span-4 sm:col-start-4">
@@ -52,12 +52,13 @@ const Home: NextPage = () => {
             <div className="absolute top-24 mx-4 grid gap-6 rounded p-4 sm:top-[20%] sm:left-4 sm:mx-0 sm:max-w-[45%] sm:p-8">
               <div className="grid gap-6 ">
                 <h1 className="bg-gradient-to-r from-[#ff6884] to-[#ffa7bd] bg-clip-text py-1 text-5xl font-bold text-transparent">
-                  Buscar un inmueble nunca fue tan inmersivo.
+                  Buscar un inmueble nunca fue tan divertido. Experiencia
+                  inmersiva.
                 </h1>
                 <p className="rounded-lg text-lg text-white">
-                  Con nuestros toures vas a sentir que estas caminando por tu
-                  futuro hogar. Descubrí las mejores propiedades sin salir de
-                  casa.
+                  Con nuestros recorridos virtuales vas a sentir que estas
+                  caminando por tu futuro hogar. Descubrí las mejores
+                  propiedades sin salir de casa.
                 </p>
               </div>
               <div className="grid gap-4">
@@ -158,6 +159,98 @@ const Home: NextPage = () => {
                 Quiero publicar!
               </p>
             </button>
+          </div>
+        </section>
+
+        <section className="mx-24 py-20">
+          <h1 className="text-3xl font-bold">PROXIMAMENTE</h1>
+
+          <div className="grid gap-20 pt-10">
+            <article className="grid grid-cols-2 items-center gap-20 ">
+              <div className="relative col-span-1 aspect-[5/2] w-full">
+                <Image
+                  src="/our_neighborhood.svg"
+                  alt="neighborhood virtual tours illustration"
+                  fill
+                />
+              </div>
+
+              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
+                <h2 className="text-lg font-semibold">
+                  Recorrido virtual por tu barrio
+                </h2>
+                <p>
+                  Camina por las calles y plazas de tu futuro barrio. Mira donde
+                  esta posicionada tu casa en el barrio. Recorre sus
+                  alrededores.
+                </p>
+              </div>
+            </article>
+
+            <article className="grid grid-cols-2 items-center gap-20 ">
+              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
+                <h2 className="text-lg font-semibold">
+                  Paga tu estadía mediante la blockchain
+                </h2>
+                <p>
+                  Paga el alquiler de tu casa de fin de semana con la
+                  blockchain, a través de un contrato inteligente.
+                  <span className="text-sm text-neutral-500">
+                    {" "}
+                    *Solo disponible para alquileres temporarios*
+                  </span>
+                </p>
+              </div>
+
+              <div className="relative col-span-1 aspect-[5/2] w-full">
+                <Image
+                  src="/digital_currency.svg"
+                  alt="blockchain illustration"
+                  fill
+                />
+              </div>
+            </article>
+
+            <article className="grid grid-cols-2 items-center gap-20 ">
+              <div className="relative col-span-1 aspect-[5/2] w-full">
+                <Image
+                  src="/split.svg"
+                  alt="comparisoon properties illustration"
+                  fill
+                />
+              </div>
+
+              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
+                <h2 className="text-lg font-semibold">Compara propiedades</h2>
+                <p>
+                  Compara las characterísticas principales de dos o más
+                  propiedades para que puedas tomar decisiones informadas.
+                </p>
+              </div>
+            </article>
+
+            <article className="grid grid-cols-2 items-center gap-20 ">
+              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
+                <h2 className="text-lg font-semibold">Reseña y calificación</h2>
+                <p>
+                  Deja tu reseña y una calificación luego de tu estadía en una
+                  propiedad. Podrás ver reseñas de propiedades y asi tomar una
+                  decisión más informada.
+                  <span className="text-sm text-neutral-500">
+                    {" "}
+                    *Solo disponible para alquileres temporarios*
+                  </span>
+                </p>
+              </div>
+
+              <div className="relative col-span-1 aspect-[5/2] w-full">
+                <Image
+                  src="/reviews.svg"
+                  alt="reviews and rating illustration"
+                  fill
+                />
+              </div>
+            </article>
           </div>
         </section>
       </main>
