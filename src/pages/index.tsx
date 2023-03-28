@@ -39,8 +39,8 @@ const Home: NextPage = () => {
 
       <main className="min-h-screen bg-neutral-100 font-barlow">
         <section className="relative">
-          <div className="clip-landing-mobile sm:clip-landing h-[calc(100vh_+_200px)] w-full bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-[''] sm:h-[calc(100vh_+_100px)]">
-            <div className="absolute right-4 bottom-[10%] aspect-video w-[80%] max-w-[900px] sm:bottom-[15%] sm:left-[30%] sm:w-2/3">
+          <div className=" clip-landing-mobile sm:clip-landing grid h-[calc(100vh_+_300px)] w-full grid-cols-7 place-items-end bg-m-blue pb-14 after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-[''] sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
+            <div className="relative col-span-7 aspect-video w-full max-w-[900px] sm:col-span-4 sm:col-start-4">
               <Image
                 fill
                 src="/town.svg"
@@ -48,15 +48,16 @@ const Home: NextPage = () => {
                 style={{ objectFit: "contain" }}
               />
             </div>
-            <div className="absolute top-24 mx-4 grid gap-6 rounded bg-[rgba(44,62,80,0.8)] p-4 sm:top-1/4 sm:left-24 sm:mx-0 sm:max-w-[40%] sm:p-8">
-              <div className="grid gap-4">
-                <h1 className="bg-gradient-to-r from-pink-500 to-[#6C63FF] bg-clip-text text-5xl font-bold text-transparent">
-                  Encuentra. Toureala. Hazla tuya.
+
+            <div className="absolute top-24 mx-4 grid gap-6 rounded p-4 sm:top-[20%] sm:left-4 sm:mx-0 sm:max-w-[45%] sm:p-8">
+              <div className="grid gap-6 ">
+                <h1 className="bg-gradient-to-r from-[#ff6884] to-[#ffa7bd] bg-clip-text py-1 text-5xl font-bold text-transparent">
+                  Buscar un inmueble nunca fue tan inmersivo.
                 </h1>
-                <p className="rounded-lg p-2 text-lg text-white">
-                  ¡Con nuestra experiencia inmersiva vas a sentir que estás
-                  caminando por tu futuro hogar! Descubrí las mejores
-                  propiedades sin salir de casa.
+                <p className="rounded-lg text-lg text-white">
+                  Con nuestros toures vas a sentir que estas caminando por tu
+                  futuro hogar. Descubrí las mejores propiedades sin salir de
+                  casa.
                 </p>
               </div>
               <div className="grid gap-4">
@@ -69,7 +70,7 @@ const Home: NextPage = () => {
                   />
                   <div>
                     <button
-                      className="h-12 rounded-tr-lg rounded-br-lg bg-m-blue px-4 shadow-md sm:h-16"
+                      className="h-12 rounded-tr-lg rounded-br-lg bg-[#6c63ff] px-4 shadow-md sm:h-16"
                       aria-label="search button"
                     >
                       <Search />
@@ -113,7 +114,7 @@ const Home: NextPage = () => {
                 />
               </div>
               <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all duration-100 ease-in-out">
-                Alquilar
+                Quiero alquilar!
               </p>
             </button>
             <button
@@ -143,7 +144,7 @@ const Home: NextPage = () => {
                 <Image src="/buy_house.svg" alt="buy house illustration" fill />
               </div>
               <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all duration-100 ease-in-out">
-                Comprar
+                Quiero comprar!
               </p>
             </button>
             <button
@@ -154,7 +155,7 @@ const Home: NextPage = () => {
                 <Image src="/for_sale.svg" alt="buy house illustration" fill />
               </div>
               <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all delay-75 duration-100 ease-in-out">
-                Publicar
+                Quiero publicar!
               </p>
             </button>
           </div>
