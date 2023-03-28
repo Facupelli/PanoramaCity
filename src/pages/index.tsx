@@ -101,7 +101,7 @@ const Home: NextPage = () => {
                   amenities: [""],
                   location: "all",
                 });
-                router.push("/search");
+                void router.push("/search");
               }}
               className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
             >
@@ -135,7 +135,7 @@ const Home: NextPage = () => {
                   amenities: [""],
                   location: "all",
                 });
-                router.push("/search");
+                void router.push("/search");
               }}
               className="grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
             >
