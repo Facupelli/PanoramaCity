@@ -1,12 +1,13 @@
+import { type Dispatch, type SetStateAction } from "react";
+
 import FavButton from "../UI/FavButton";
+import GoBackButton from "../UI/GoBackButton";
 
 import Video from "~/icons/Video";
 import ImageIcon from "~/icons/Image";
 import Tour from "~/icons/Tour";
 
 import { type MediaActive } from "~/pages/property/[id]";
-import { type Dispatch, type SetStateAction } from "react";
-import GoBackButton from "../UI/GoBackButton";
 
 type Props = {
   mediaActive: MediaActive;

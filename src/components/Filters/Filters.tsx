@@ -1,34 +1,12 @@
 import { useForm } from "react-hook-form";
 import { type Dispatch, type SetStateAction } from "react";
 import { useFilterStore } from "~/zustand/store";
+import { san_juan_departamentos } from "~/assets/san_juan_departamentos";
 
 import RadioFilters from "../UI/RadioFilters";
 
-import {
-  type Property,
-  type Operation,
-  type PropertyType,
-  type Amenity,
-} from "~/types/model";
-import { san_juan_departamentos } from "~/assets/san_juan_departamentos";
-
-export type FiltersData = {
-  type: string[];
-  operation: string;
-  price: {
-    min: string;
-    max: string;
-  };
-  ambiences: string;
-  bathrooms: string;
-  bedrooms: string;
-  surface: {
-    min: string;
-    max: string;
-  };
-  amenities: string[];
-  location: string;
-};
+import type { Property, Operation, PropertyType, Amenity } from "~/types/model";
+import type { FiltersData } from "~/types/filters";
 
 type Props = {
   operations: Operation[];

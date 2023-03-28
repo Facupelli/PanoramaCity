@@ -1,5 +1,5 @@
 import { type UseFormRegister } from "react-hook-form";
-import { type FiltersData } from "../Filters/Filters";
+import { type FiltersData } from "~/types/filters";
 
 type Props = {
   register: UseFormRegister<FiltersData>;

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { type FiltersData } from "~/components/Filters/Filters";
+import { type FiltersData } from "~/types/filters";
 
 type FilterState = {
   filters: FiltersData;
