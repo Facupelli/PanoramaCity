@@ -1,4 +1,4 @@
-import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { prisma } from "~/server/db";
 import { type ParsedUrlQuery } from "querystring";
@@ -17,12 +17,12 @@ import Fieldset from "~/components/UI/FieldSet";
 import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
 import GoBackButton from "~/components/UI/GoBackButton";
 
-import {
-  type PropertyType,
-  type User,
-  type Operation,
-  type Amenity,
-  type Utility,
+import type {
+  PropertyType,
+  User,
+  Operation,
+  Amenity,
+  Utility,
 } from "~/types/model";
 import { validationSchema, type FormData } from "~/types/createProperty";
 import Amenities from "~/components/PropertyForm/Amenities";

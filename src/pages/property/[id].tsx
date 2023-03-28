@@ -1,4 +1,4 @@
-import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { prisma } from "~/server/db";
 import { type ParsedUrlQuery } from "querystring";
@@ -13,7 +13,7 @@ import PropertyHeader from "~/components/PropertyDetail/PropertyHeader";
 import Gallery from "~/components/PropertyDetail/Gallery";
 import Whatsapp from "~/icons/Whatsapp";
 
-import { type User, type Property } from "~/types/model";
+import type { User, Property } from "~/types/model";
 
 type Props = {
   property?: Property;

@@ -1,4 +1,4 @@
-import { type GetStaticPaths, type GetStaticProps, type NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { type ParsedUrlQuery } from "querystring";
 import { prisma } from "~/server/db";
