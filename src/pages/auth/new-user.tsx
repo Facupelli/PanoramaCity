@@ -2,7 +2,9 @@ import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 import NavBar from "~/components/NavBar";
 import { api } from "~/utils/api";
@@ -17,12 +19,27 @@ type NewUserForm = {
 const NewUser: NextPage = () => {
   const { data: sessionData } = useSession();
   const { register, handleSubmit } = useForm<NewUserForm>();
+  const router = useRouter();
 
   const putUserInfo = api.user.putUserInfo.useMutation();
 
   const onSubmit = (data: NewUserForm) => {
     console.log(data);
-    putUserInfo.mutate({ ...data, id: sessionData?.user.id });
+    putUserInfo.mutate(
+      { ...data, id: sessionData?.user.id },
+      {
+        onSuccess() {
+          router.push("/search");
+          toast.success("Perfil creado con éxito!");
+        },
+        onError(err) {
+          console.log(err);
+          toast.error(
+            "Algo salió mal. Por favor intenta completar tu perfil más tarde."
+          );
+        },
+      }
+    );
   };
 
   return (

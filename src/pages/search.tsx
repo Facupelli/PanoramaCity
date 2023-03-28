@@ -16,6 +16,7 @@ import {
   type Property,
   type Amenity,
 } from "~/types/model";
+import { toast } from "react-hot-toast";
 
 type Props = {
   properties: Property[];
@@ -68,6 +69,15 @@ const Search: NextPage<Props> = ({
                 return;
               }
               //MENSAJE PROPIEDADES NO ENCONTRAdAS
+              toast.error("No encontramos propiedades con esos filtros!", {
+                duration: 5000,
+              });
+            },
+            onError(err) {
+              console.log(err);
+              toast.error(
+                "Algo salió mal! Por favor intenta de nuevo más tarde."
+              );
             },
           }
         );
@@ -123,7 +133,6 @@ const Search: NextPage<Props> = ({
             className={`grid h-14 gap-4 p-4 sm:ml-auto sm:block sm:w-3/5`}
           >
             <FilterNav
-              // setShowFiltersModal={setShowFiltersModal}
               setPropertiesList={setPropertiesList}
               operations={operations}
               propertyTypes={propertyTypes}

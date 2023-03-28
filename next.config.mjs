@@ -26,7 +26,7 @@ const config = {
       },
       {
         protocol: "https",
-        hostname: "e7.pngegg.com",
+        hostname: "www.remax.com.ar",
       },
     ],
   },
