@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import Footer from "~/components/Footer";
 
 import NavBar from "~/components/NavBar";
 import Search from "~/icons/Search";
@@ -175,31 +176,35 @@ const Home: NextPage = () => {
                 />
               </div>
 
-              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
-                <h2 className="text-lg font-semibold">
-                  Recorrido virtual por tu barrio
-                </h2>
-                <p>
-                  Camina por las calles y plazas de tu futuro barrio. Mira donde
-                  esta posicionada tu casa en el barrio. Recorre sus
-                  alrededores.
-                </p>
+              <div className="col-span-1 flex h-full items-center rounded bg-white p-6 shadow">
+                <div className="grid gap-2">
+                  <h2 className="text-lg font-semibold">
+                    Recorrido virtual por tu barrio.
+                  </h2>
+                  <p>
+                    Camina por las calles y plazas de tu futuro barrio. Mira
+                    donde esta posicionada tu casa en el barrio. Recorre sus
+                    alrededores.
+                  </p>
+                </div>
               </div>
             </article>
 
             <article className="grid grid-cols-2 items-center gap-20 ">
-              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
-                <h2 className="text-lg font-semibold">
-                  Paga tu estadía mediante la blockchain
-                </h2>
-                <p>
-                  Paga el alquiler de tu casa de fin de semana con la
-                  blockchain, a través de un contrato inteligente.
-                  <span className="text-sm text-neutral-500">
-                    {" "}
-                    *Solo disponible para alquileres temporarios*
-                  </span>
-                </p>
+              <div className="col-span-1 flex h-full items-center rounded bg-white p-6 shadow">
+                <div className="grid gap-2">
+                  <h2 className="text-lg font-semibold">
+                    Paga tu estadía mediante la blockchain.
+                  </h2>
+                  <p>
+                    Paga el alquiler de tu casa de fin de semana con la
+                    blockchain, a través de un contrato inteligente.
+                    <span className="text-sm text-neutral-500">
+                      {" "}
+                      *Solo disponible para alquileres temporarios*
+                    </span>
+                  </p>
+                </div>
               </div>
 
               <div className="relative col-span-1 aspect-[5/2] w-full">
@@ -220,27 +225,35 @@ const Home: NextPage = () => {
                 />
               </div>
 
-              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
-                <h2 className="text-lg font-semibold">Compara propiedades</h2>
-                <p>
-                  Compara las characterísticas principales de dos o más
-                  propiedades para que puedas tomar decisiones informadas.
-                </p>
+              <div className="col-span-1 flex h-full items-center rounded bg-white p-6 shadow">
+                <div className="grid gap-2">
+                  <h2 className="text-lg font-semibold">
+                    Compara propiedades.
+                  </h2>
+                  <p>
+                    Compara las characterísticas principales de dos o más
+                    propiedades para que puedas tomar decisiones informadas.
+                  </p>
+                </div>
               </div>
             </article>
 
             <article className="grid grid-cols-2 items-center gap-20 ">
-              <div className="col-span-1 h-full rounded bg-white p-6 shadow">
-                <h2 className="text-lg font-semibold">Reseña y calificación</h2>
-                <p>
-                  Deja tu reseña y una calificación luego de tu estadía en una
-                  propiedad. Podrás ver reseñas de propiedades y asi tomar una
-                  decisión más informada.
-                  <span className="text-sm text-neutral-500">
-                    {" "}
-                    *Solo disponible para alquileres temporarios*
-                  </span>
-                </p>
+              <div className="col-span-1 flex h-full items-center rounded bg-white p-6 shadow">
+                <div className="grid gap-2">
+                  <h2 className="text-lg font-semibold">
+                    Reseña y calificación.
+                  </h2>
+                  <p>
+                    Deja tu reseña y una calificación luego de tu estadía en una
+                    propiedad. Podrás ver reseñas de propiedades y asi tomar una
+                    decisión más informada.
+                    <span className="text-sm text-neutral-500">
+                      {" "}
+                      *Solo disponible para alquileres temporarios*
+                    </span>
+                  </p>
+                </div>
               </div>
 
               <div className="relative col-span-1 aspect-[5/2] w-full">
@@ -254,6 +267,7 @@ const Home: NextPage = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 };
