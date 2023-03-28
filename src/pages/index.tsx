@@ -163,11 +163,11 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section className="mx-24 py-20">
+        <section className="mx-4 py-20 sm:mx-24">
           <h1 className="text-3xl font-bold">PROXIMAMENTE</h1>
 
           <div className="grid gap-20 pt-10">
-            <article className="grid grid-cols-2 items-center gap-20 ">
+            <article className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2 sm:gap-20 ">
               <div className="relative col-span-1 aspect-[5/2] w-full">
                 <Image
                   src="/our_neighborhood.svg"
@@ -190,7 +190,7 @@ const Home: NextPage = () => {
               </div>
             </article>
 
-            <article className="grid grid-cols-2 items-center gap-20 ">
+            <article className="flex flex-col-reverse items-center gap-10 sm:grid sm:grid-cols-2 sm:gap-20 ">
               <div className="col-span-1 flex h-full items-center rounded bg-white p-6 shadow">
                 <div className="grid gap-2">
                   <h2 className="text-lg font-semibold">
@@ -216,7 +216,7 @@ const Home: NextPage = () => {
               </div>
             </article>
 
-            <article className="grid grid-cols-2 items-center gap-20 ">
+            <article className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2 sm:gap-20 ">
               <div className="relative col-span-1 aspect-[5/2] w-full">
                 <Image
                   src="/split.svg"
@@ -238,7 +238,7 @@ const Home: NextPage = () => {
               </div>
             </article>
 
-            <article className="grid grid-cols-2 items-center gap-20 ">
+            <article className="flex flex-col-reverse items-center gap-10 sm:grid sm:grid-cols-2 sm:gap-20 ">
               <div className="col-span-1 flex h-full items-center rounded bg-white p-6 shadow">
                 <div className="grid gap-2">
                   <h2 className="text-lg font-semibold">
