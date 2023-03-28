@@ -21,18 +21,17 @@ const NewUser: NextPage = () => {
   const { register, handleSubmit } = useForm<NewUserForm>();
   const router = useRouter();
 
-  const putUserInfo = api.user.putUserInfo.useMutation();
+  const { mutate, isLoading } = api.user.putUserInfo.useMutation();
 
   const onSubmit = (data: NewUserForm) => {
-    console.log(data);
-    putUserInfo.mutate(
+    mutate(
       { ...data, id: sessionData?.user.id },
       {
-        onSuccess() {
-          router.push("/search");
+        onSuccess: () => {
           toast.success("Perfil creado con éxito!");
+          void router.push("/search");
         },
-        onError(err) {
+        onError: (err) => {
           console.log(err);
           toast.error(
             "Algo salió mal. Por favor intenta completar tu perfil más tarde."

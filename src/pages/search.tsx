@@ -63,7 +63,7 @@ const Search: NextPage<Props> = ({
         getFilteredProperties.mutate(
           { ...filters, sort },
           {
-            onSuccess(data) {
+            onSuccess: (data) => {
               if (data.properties && data.properties.length > 0) {
                 setPropertiesList(data.properties);
                 return;
@@ -73,7 +73,7 @@ const Search: NextPage<Props> = ({
                 duration: 5000,
               });
             },
-            onError(err) {
+            onError: (err) => {
               console.log(err);
               toast.error(
                 "Algo salió mal! Por favor intenta de nuevo más tarde."

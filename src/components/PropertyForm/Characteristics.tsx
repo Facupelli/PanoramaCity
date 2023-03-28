@@ -1,6 +1,5 @@
 import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
 import { type FormData } from "~/types/createProperty";
-import { type Amenity } from "~/types/model";
 
 type Props = {
   register: UseFormRegister<FormData>;
