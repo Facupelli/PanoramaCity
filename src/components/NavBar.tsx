@@ -7,7 +7,7 @@ export default function NavBar({ color }: { color?: string }) {
 
   return (
     <nav
-      className={`fixed z-20 w-full ${
+      className={`fixed z-20 w-full transition-all duration-150 ease-in-out ${
         color === "transparent" ? "bg-transparent" : "bg-m-blue"
       }  `}
     >

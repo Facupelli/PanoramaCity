@@ -3,6 +3,7 @@ import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Footer from "~/components/Footer";
 
@@ -28,6 +29,31 @@ const Home: NextPage = () => {
     void signIn("google");
   };
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [navBg, setNavBg] = useState("transparent");
+  const [sectionHeight, setSectionHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      setSectionHeight(sectionRef.current.getBoundingClientRect().height);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window) {
+      window.addEventListener("scroll", () => {
+        if (sectionHeight) {
+          if (window.scrollY > sectionHeight && navBg === "transparent") {
+            setNavBg("dark");
+          }
+          if (window.scrollY < sectionHeight && navBg === "dark") {
+            setNavBg("transparent");
+          }
+        }
+      });
+    }
+  }, [navBg, sectionHeight]);
+
   return (
     <>
       <Head>
@@ -36,13 +62,16 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NavBar color="transparent" />
+      <NavBar color={navBg} />
 
       <main className="grid min-h-screen gap-10 bg-neutral-100 font-barlow">
-        <section className="clip-landing-mobile sm:clip-landing relative bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']">
+        <section
+          ref={sectionRef}
+          className="clip-landing-mobile sm:clip-landing relative bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']"
+        >
           <div className="relative mx-4 max-w-7xl xl:mx-auto ">
             <div className="grid h-[calc(100vh_+_350px)] w-full grid-cols-7 place-items-end pb-14 sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
-              <div className="relative col-span-4 col-start-3 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] sm:col-span-4 sm:col-start-4">
+              <div className="relative col-span-7 col-start-1 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] sm:col-span-4 sm:col-start-4">
                 <Image
                   fill
                   src="/town.svg"
