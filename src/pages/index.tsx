@@ -39,52 +39,54 @@ const Home: NextPage = () => {
       <NavBar color="transparent" />
 
       <main className="grid min-h-screen gap-10 bg-neutral-100 font-barlow">
-        <section className="relative">
-          <div className=" clip-landing-mobile sm:clip-landing grid h-[calc(100vh_+_300px)] w-full grid-cols-7 place-items-end bg-m-blue pb-14 after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-[''] sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
-            <div className="relative col-span-7 aspect-video w-full max-w-[900px] sm:col-span-4 sm:col-start-4">
-              <Image
-                fill
-                src="/town.svg"
-                alt="index-bg"
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-
-            <div className="absolute top-24 mx-4 grid gap-6 rounded p-4 sm:top-[20%] sm:left-4 sm:mx-0 sm:max-w-[45%] sm:p-8">
-              <div className="grid gap-6 ">
-                <h1 className="bg-gradient-to-r from-[#ff6884] to-[#ffa7bd] bg-clip-text py-1 text-5xl font-bold text-transparent">
-                  Buscar un inmueble nunca fue tan divertido. Experiencia
-                  inmersiva.
-                </h1>
-                <p className="rounded-lg text-lg text-white">
-                  Con nuestros recorridos virtuales vas a sentir que estas
-                  caminando por tu futuro hogar. Descubrí las mejores
-                  propiedades sin salir de casa.
-                </p>
+        <section className="clip-landing-mobile sm:clip-landing relative bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']">
+          <div className="relative mx-4 max-w-7xl xl:mx-auto ">
+            <div className="grid h-[calc(100vh_+_350px)] w-full grid-cols-7 place-items-end pb-14 sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
+              <div className="relative col-span-4 col-start-3 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] sm:col-span-4 sm:col-start-4">
+                <Image
+                  fill
+                  src="/town.svg"
+                  alt="index-bg"
+                  style={{ objectFit: "contain" }}
+                />
               </div>
-              <div className="grid gap-4">
-                <div className="flex items-center">
-                  <input
-                    {...register("location")}
-                    type="search"
-                    className="h-12 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md sm:h-16"
-                    placeholder="Ciudad, dirección, ZIP"
-                  />
-                  <div>
-                    <button
-                      className="h-12 rounded-tr-lg rounded-br-lg bg-[#6c63ff] px-4 shadow-md sm:h-16"
-                      aria-label="search button"
-                    >
-                      <Search />
-                    </button>
+
+              <div className="absolute top-24 grid gap-6 rounded p-4 sm:top-[20%] sm:left-4 sm:mx-0 sm:max-w-[45%] ">
+                <div className="grid gap-6 ">
+                  <h1 className="bg-gradient-to-r from-[#ffae42] to-[#ffd092] bg-clip-text py-1 text-5xl font-bold text-transparent">
+                    Buscar un inmueble nunca fue tan divertido. Experiencia
+                    inmersiva.
+                  </h1>
+                  <p className="rounded-lg text-lg text-white">
+                    Con nuestros recorridos virtuales vas a sentir que estas
+                    caminando por tu futuro hogar. Descubrí las mejores
+                    propiedades sin salir de casa.
+                  </p>
+                </div>
+                <div className="grid gap-4">
+                  <div className="flex items-center">
+                    <input
+                      {...register("location")}
+                      type="search"
+                      className="h-12 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md sm:h-16"
+                      placeholder="Ciudad, dirección, ZIP"
+                    />
+                    <div>
+                      <button
+                        className="h-12 rounded-tr-lg rounded-br-lg bg-[#6c63ff] px-4 shadow-md sm:h-16"
+                        aria-label="search button"
+                      >
+                        <Search />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <section className="mx-4 py-20 sm:mx-24">
-          <div className="grid grid-cols-1 justify-between gap-10 sm:grid-cols-3 ">
+        <section className="mx-4 max-w-7xl py-20 xl:mx-auto xl:w-full">
+          <div className="grid  grid-cols-1 justify-between gap-10 sm:grid-cols-3">
             <button
               onClick={() => {
                 setFilters({
@@ -163,7 +165,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section className="mx-4 py-20 sm:mx-24">
+        <section className="mx-4 max-w-7xl py-20 xl:mx-auto">
           <h1 className="text-3xl font-bold">PROXIMAMENTE</h1>
 
           <div className="grid gap-20 pt-10">
