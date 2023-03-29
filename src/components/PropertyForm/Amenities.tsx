@@ -17,7 +17,6 @@ export default function Amenities({
 }: Props) {
   const amenitiesFilter = watch("amenities");
   const utilitiesFilter = watch("utilities");
-  console.log(amenitiesFilter);
 
   return (
     <>

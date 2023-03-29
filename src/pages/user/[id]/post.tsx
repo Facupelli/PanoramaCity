@@ -16,6 +16,7 @@ import PageBtn from "~/components/UI/PageBtn";
 import Fieldset from "~/components/UI/FieldSet";
 import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
 import GoBackButton from "~/components/UI/GoBackButton";
+import Amenities from "~/components/PropertyForm/Amenities";
 
 import type {
   PropertyType,
@@ -25,7 +26,8 @@ import type {
   Utility,
 } from "~/types/model";
 import { validationSchema, type FormData } from "~/types/createProperty";
-import Amenities from "~/components/PropertyForm/Amenities";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 
 type Props = {
   user?: User;
@@ -44,13 +46,14 @@ const UserPostProperty: NextPage<Props> = ({
   utilities,
 }: Props) => {
   const { data: sessionData } = useSession();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     watch,
     // formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
-  const createProperty = api.property.createProperty.useMutation();
+  const { mutate } = api.property.createProperty.useMutation();
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   //IMAGES
@@ -67,36 +70,46 @@ const UserPostProperty: NextPage<Props> = ({
     // );
 
     // console.log("response", response.data);
-    const propertyData = {
-      typeId: data.typeId,
-      userId: sessionData?.user.id ?? "",
-      price: Number(data.price),
-      title: data.title,
-      description: data.description,
-      operationId: data.operationId,
-      locationLat: -31.549338520859266,
-      locationLng: -68.54317943487884,
-      propertyInfo: {
-        ambiences: Number(data.propertyInfo.ambiences),
-        bedrooms: Number(data.propertyInfo.bedrooms),
-        bathrooms: Number(data.propertyInfo.bathrooms),
-        floor: Number(data.propertyInfo.floor ?? 0),
-        surface: Number(data.propertyInfo.surface),
-        buildYear: Number(data.propertyInfo.buildYear),
-        address: data.propertyInfo.address,
-        city: data.propertyInfo.city,
-        zone: data.propertyInfo.zone,
-        orientation: data.propertyInfo.orientation,
-      },
-      media: {
-        images: urls,
-      },
-      amenities: data.amenities.map((amenityId) => ({ id: amenityId })),
-      utilities: data.utilities.map((utilityId) => ({ id: utilityId })),
-    };
+    if (sessionData?.user.id) {
+      const propertyData = {
+        typeId: data.typeId,
+        userId: sessionData?.user.id ?? "",
+        price: Number(data.price),
+        title: data.title,
+        description: data.description,
+        operationId: data.operationId,
+        locationLat: -31.549338520859266,
+        locationLng: -68.54317943487884,
+        propertyInfo: {
+          ambiences: Number(data.propertyInfo.ambiences),
+          bedrooms: Number(data.propertyInfo.bedrooms),
+          bathrooms: Number(data.propertyInfo.bathrooms),
+          floor: Number(data.propertyInfo.floor ?? 0),
+          surface: Number(data.propertyInfo.surface),
+          buildYear: Number(data.propertyInfo.buildYear),
+          address: data.propertyInfo.address,
+          city: data.propertyInfo.city,
+          zone: data.propertyInfo.zone,
+          orientation: data.propertyInfo.orientation,
+        },
+        media: {
+          images: urls,
+        },
+        amenities: data.amenities.map((amenityId) => ({ id: amenityId })),
+        utilities: data.utilities.map((utilityId) => ({ id: utilityId })),
+      };
 
-    createProperty.mutate(propertyData);
-    setStep((prev) => (prev += 1));
+      mutate(propertyData, {
+        onSuccess: () => {
+          toast.success("Propiedad creada con éxito!");
+          void router.push(`/user/${sessionData.user.id}`);
+        },
+        onError: (err) => {
+          console.log(err);
+          toast.error("Lo siento, no se pudo crear la propiedad");
+        },
+      });
+    }
   };
 
   const handleNextPage = () => {

@@ -139,7 +139,7 @@ const Search: NextPage<Props> = ({
               amenities={amenities}
             />
             <div
-              className={`grid grid-cols-auto-fit justify-items-center gap-4 ${
+              className={`grid grid-cols-auto-fit justify-items-center gap-4 pb-10 ${
                 mobileViewList ? "block" : "hidden sm:block"
               }`}
             >
