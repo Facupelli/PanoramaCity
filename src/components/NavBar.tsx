@@ -12,7 +12,7 @@ export default function NavBar({ color }: { color?: string }) {
       }  `}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="flex h-nav items-center justify-between px-4 ">
+        <div className="flex h-nav items-center justify-between px-6 xl:px-0">
           <Link href="/" className="font-archivo text-m-white sm:text-2xl">
             Panorama City
           </Link>

@@ -69,7 +69,7 @@ const Home: NextPage = () => {
           ref={sectionRef}
           className="clip-landing-mobile sm:clip-landing relative bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']"
         >
-          <div className="relative mx-4 max-w-7xl xl:mx-auto ">
+          <div className="relative mx-6 max-w-7xl xl:mx-auto ">
             <div className="grid h-[calc(100vh_+_350px)] w-full grid-cols-7 place-items-end pb-14 sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
               <div className="relative col-span-7 col-start-1 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] sm:col-span-4 sm:col-start-4">
                 <Image
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
                 />
               </div>
 
-              <div className="absolute top-24 grid gap-6 rounded p-4 sm:top-[20%] sm:left-4 sm:mx-0 sm:max-w-[45%] ">
+              <div className="absolute top-24 grid gap-6 rounded sm:top-[20%] sm:left-0 sm:mx-0 sm:max-w-[45%] ">
                 <div className="grid gap-6 ">
                   <h1 className="bg-gradient-to-r from-[#ffae42] to-[#ffd092] bg-clip-text py-1 text-5xl font-bold text-transparent">
                     Buscar un inmueble nunca fue tan divertido. Experiencia
@@ -114,7 +114,8 @@ const Home: NextPage = () => {
             </div>
           </div>
         </section>
-        <section className="mx-4 max-w-7xl py-20 xl:mx-auto xl:w-full">
+
+        <section className="mx-6 max-w-7xl py-20 xl:mx-auto xl:w-full">
           <div className="grid  grid-cols-1 justify-between gap-10 sm:grid-cols-3">
             <button
               onClick={() => {
@@ -194,7 +195,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section className="mx-4 max-w-7xl py-20 xl:mx-auto">
+        <section className="mx-6 max-w-7xl py-20 xl:mx-auto">
           <h1 className="text-3xl font-bold">PROXIMAMENTE</h1>
 
           <div className="grid gap-20 pt-10">
