@@ -1,11 +1,13 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import { prisma } from "~/server/db";
-import { type ParsedUrlQuery } from "querystring";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormTrigger } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import { type ParsedUrlQuery } from "querystring";
+import { prisma } from "~/server/db";
 import { api } from "~/utils/api";
 
 import NavBar from "~/components/NavBar";
@@ -13,10 +15,16 @@ import Address from "~/components/PropertyForm/Address";
 import Characteristics from "~/components/PropertyForm/Characteristics";
 import MainInfo from "~/components/PropertyForm/MainInfo";
 import PageBtn from "~/components/UI/PageBtn";
-import Fieldset from "~/components/UI/FieldSet";
 import ImagesUpload from "~/components/PropertyForm/ImagesUpload";
 import GoBackButton from "~/components/UI/GoBackButton";
 import Amenities from "~/components/PropertyForm/Amenities";
+import FormLayout from "~/components/UI/Layouts/FormLayout";
+
+import {
+  validateStep1,
+  validateStep2,
+  validateStep3,
+} from "~/utils/postProperty";
 
 import type {
   PropertyType,
@@ -26,8 +34,6 @@ import type {
   Utility,
 } from "~/types/model";
 import { validationSchema, type FormData } from "~/types/createProperty";
-import { useRouter } from "next/router";
-import { toast } from "react-hot-toast";
 
 type Props = {
   user?: User;
@@ -37,7 +43,7 @@ type Props = {
   utilities: Utility[];
 };
 
-export const steps = 5;
+// export const steps = 5;
 
 const UserPostProperty: NextPage<Props> = ({
   propertyTypes,
@@ -51,7 +57,8 @@ const UserPostProperty: NextPage<Props> = ({
     register,
     handleSubmit,
     watch,
-    // formState: { errors },
+    trigger,
+    formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
   const { mutate } = api.property.createProperty.useMutation();
 
@@ -60,6 +67,7 @@ const UserPostProperty: NextPage<Props> = ({
   const [urls, setUrls] = useState<string[]>([]);
   //STEPS
   const [step, setStep] = useState(1);
+  const steps = 5;
 
   const onSubmit = (data: FormData) => {
     // const parsedAddres = encodeURI(
@@ -112,13 +120,28 @@ const UserPostProperty: NextPage<Props> = ({
     }
   };
 
-  const handleNextPage = () => {
+  const validations = [validateStep1, validateStep2, validateStep3];
+
+  const handleNextPage = async () => {
+    console.log(step);
     if (step === 5) {
       if (buttonRef.current) {
         return buttonRef.current.click();
       }
     }
-    setStep((prev) => (prev += 1));
+
+    if (step === 4) {
+      return setStep((prev) => (prev += 1));
+    }
+
+    const validation = validations[step - 1];
+    if (validation) {
+      const isValid = await validation(trigger);
+
+      if (isValid) {
+        setStep((prev) => (prev += 1));
+      }
+    }
   };
 
   return (
@@ -134,53 +157,48 @@ const UserPostProperty: NextPage<Props> = ({
       <main className="min-h-screen bg-neutral-100 pt-[70px]">
         {/* <UserLayout> */}
         <div className="mx-auto max-w-6xl py-10 px-4 sm:px-10">
-          <GoBackButton />
-          <div className="grid flex-col items-baseline justify-between gap-4 font-barlow sm:grid-cols-6 sm:flex-row sm:gap-0 ">
-            <h1 className=" text-2xl font-bold sm:col-span-2">
-              Publicar un inmueble
-            </h1>
+          <div className="flex items-center gap-10 font-barlow">
+            <GoBackButton />
+            <h1 className="text-2xl font-bold">Publicar un inmueble</h1>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="pt-4">
-            {step === 1 && (
-              <Fieldset title="Información principal" step={step}>
+            <FormLayout step={step}>
+              {step === 1 && (
                 <MainInfo
                   register={register}
                   watch={watch}
                   propertyTypes={propertyTypes}
                   operations={operations}
+                  errors={errors}
                 />
-              </Fieldset>
-            )}
-            {step === 2 && (
-              <Fieldset title="Dirección del inmueble" step={step}>
-                <Address register={register} watch={watch} step={step} />
-              </Fieldset>
-            )}
-            {step === 3 && (
-              <Fieldset title="Características del inmueble" step={step}>
+              )}
+              {step === 2 && (
+                <Address
+                  register={register}
+                  watch={watch}
+                  step={step}
+                  errors={errors}
+                />
+              )}
+              {step === 3 && (
                 <Characteristics
                   register={register}
                   watch={watch}
                   step={step}
+                  errors={errors}
                 />
-              </Fieldset>
-            )}
-            {step === 4 && (
-              <Fieldset title="Comodidades del inmueble" step={step}>
+              )}
+              {step === 4 && (
                 <Amenities
                   register={register}
                   watch={watch}
                   amenities={amenities}
                   utilites={utilities}
                 />
-              </Fieldset>
-            )}
-            {step === 5 && (
-              <Fieldset title="Fotos del inmueble" step={step}>
-                <ImagesUpload setUrls={setUrls} urls={urls} />
-              </Fieldset>
-            )}
+              )}
+              {step === 5 && <ImagesUpload setUrls={setUrls} urls={urls} />}
+            </FormLayout>
 
             <div className="grid grid-cols-6">
               <div className="col-span-4 col-start-2 flex items-center justify-center gap-2 sm:col-start-3 ">

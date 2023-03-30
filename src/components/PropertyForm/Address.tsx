@@ -1,4 +1,8 @@
-import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
+import type {
+  UseFormWatch,
+  UseFormRegister,
+  FieldErrors,
+} from "react-hook-form";
 import { provinces } from "~/assets/provinces";
 import { san_juan_departamentos } from "~/assets/san_juan_departamentos";
 import { type FormData } from "~/types/createProperty";
@@ -9,9 +13,10 @@ type Props = {
   register: UseFormRegister<FormData>;
   watch: UseFormWatch<FormData>;
   step: number;
+  errors: FieldErrors<FormData>;
 };
 
-export default function Address({ register, watch }: Props) {
+export default function Address({ register, watch, errors }: Props) {
   const propertyType = watch("typeId");
 
   return (
@@ -79,6 +84,11 @@ export default function Address({ register, watch }: Props) {
           placeholder="Los Cedros 4234 oeste"
           {...register("propertyInfo.address")}
         />
+        {errors.propertyInfo?.address && (
+          <p className="pt-1 text-sm text-red-700">
+            {errors.propertyInfo.address.message}
+          </p>
+        )}
       </div>
 
       {propertyType === "clf1mbf010000e7vkfto3gjcp" && (
@@ -109,6 +119,11 @@ export default function Address({ register, watch }: Props) {
           placeholder="Oeste"
           {...register("propertyInfo.orientation")}
         />
+        {errors.propertyInfo?.orientation && (
+          <p className="pt-1 text-sm text-red-700">
+            {errors.propertyInfo.orientation.message}
+          </p>
+        )}
       </div>
     </>
   );

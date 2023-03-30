@@ -8,6 +8,10 @@ export type File = {
 export type FormData = {
   typeId: string;
   userId: string;
+  title: string;
+  description: string;
+  operationId: string;
+  price: number;
   propertyInfo: {
     propertyId: string;
     ambiences: number;
@@ -21,10 +25,6 @@ export type FormData = {
     buildYear: number;
     orientation: string;
   };
-  title: string;
-  description: string;
-  operationId: string;
-  price: number;
   locationLat: string;
   locationLng: string;
   amenities: string[];
@@ -45,7 +45,7 @@ export const validationSchema = z.object({
     buildYear: z.number().lte(new Date().getFullYear()),
     orientation: z.string().min(1),
   }),
-  title: z.string().max(50),
+  title: z.string().nonempty().min(1).max(50),
   description: z.string(),
   operationId: z.string(),
   price: z.number().gte(1),

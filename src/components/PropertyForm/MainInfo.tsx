@@ -1,12 +1,17 @@
-import { type UseFormWatch, type UseFormRegister } from "react-hook-form";
+import type {
+  UseFormWatch,
+  UseFormRegister,
+  FieldErrors,
+} from "react-hook-form";
 import { type FormData } from "~/types/createProperty";
-import { type PropertyType, type Operation } from "~/types/model";
+import type { PropertyType, Operation } from "~/types/model";
 
 type Props = {
   register: UseFormRegister<FormData>;
   watch: UseFormWatch<FormData>;
   propertyTypes: PropertyType[];
   operations: Operation[];
+  errors: FieldErrors<FormData>;
 };
 
 export default function MainInfo({
@@ -14,6 +19,7 @@ export default function MainInfo({
   // watch,
   propertyTypes,
   operations,
+  errors,
 }: Props) {
   return (
     <>
@@ -57,6 +63,9 @@ export default function MainInfo({
           placeholder="Departamento en San Juan centro 540m"
           {...register("title")}
         />
+        {errors.title && (
+          <p className="pt-1 text-sm text-red-700">{errors.title.message}</p>
+        )}
       </div>
 
       <div className="grid">
@@ -68,6 +77,9 @@ export default function MainInfo({
           placeholder="Breve Descripción del inmueble"
           {...register("description")}
         />
+        {errors.title && (
+          <p className="pt-1 text-sm text-red-700">{errors.title.message}</p>
+        )}
       </div>
 
       <div className="grid">
@@ -80,6 +92,9 @@ export default function MainInfo({
           placeholder="15.000"
           {...register("price", { valueAsNumber: true })}
         />
+        {errors.price && (
+          <p className="pt-1 text-sm text-red-700">{errors.price.message}</p>
+        )}
       </div>
     </>
   );
