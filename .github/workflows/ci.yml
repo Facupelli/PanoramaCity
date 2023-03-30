@@ -8,25 +8,24 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [15]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Update pnpm
-        run: pnpm update -g pnpm
-
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
       - name: Install Dependencies
         run: pnpm install
-
       - name: Typecheck
         run: pnpm run typecheck
-
       - name: Lint
         run: pnpm run lint
-
       - name: Print Environment Variable
         run: echo $DATABASE_URL
