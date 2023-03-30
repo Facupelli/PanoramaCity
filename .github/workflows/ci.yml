@@ -4,15 +4,15 @@ on: [push, pull_request]
 
 env:
   DATABASE_URL: "https://fake.com"
-  NEXTAUTH_SECRET:"https://fake.com"
-  NEXTAUTH_URL:"https://fake.com"
-  GOOGLE_CLIENT_ID:"https://fake.com"
-  GOOGLE_CLIENT_SECRET:"https://fake.com"
-  NEXT_PUBLIC_GOOGLE_MAP_KEY:"https://fake.com"
-  S3_UPLOAD_KEY:"https://fake.com"
-  S3_UPLOAD_SECRET:"https://fake.com"
-  S3_UPLOAD_BUCKET:"https://fake.com"
-  S3_UPLOAD_REGION:"https://fake.com"
+  NEXTAUTH_SECRET: "https://fake.com"
+  NEXTAUTH_URL: "https://fake.com"
+  GOOGLE_CLIENT_ID: "https://fake.com"
+  GOOGLE_CLIENT_SECRET: "https://fake.com"
+  NEXT_PUBLIC_GOOGLE_MAP_KEY: "https://fake.com"
+  S3_UPLOAD_KEY: "https://fake.com"
+  S3_UPLOAD_SECRET: "https://fake.com"
+  S3_UPLOAD_BUCKET: "https://fake.com"
+  S3_UPLOAD_REGION: "https://fake.com"
 
 jobs:
   build:
