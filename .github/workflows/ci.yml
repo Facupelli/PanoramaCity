@@ -14,13 +14,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Dependencies
-         run: pnpm install
+        run: pnpm install
 
       - name: Typecheck
-         run: pnpm run typecheck
+        run: pnpm run typecheck
 
       - name: Lint
-         run: pnpm run lint
+        run: pnpm run lint
 
-      - name: Print ENvironment Variable
-         run: echo $DATABASE_URL
+      - name: Print Environment Variable
+        run: echo $DATABASE_URL
