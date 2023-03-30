@@ -1,10 +1,6 @@
 name: CI
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 
 env:
   DATABASE_URL: "https://fake.com"
@@ -14,15 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16.x"
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run TypeScript typechecking
-        run: pnpm run typecheck
-      - name: Run ESLint
-        run: pnpm run lint
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+         run: pnpm install
+
+      - name: Typecheck
+         run: pnpm run typecheck
+
+      - name: Lint
+         run: pnpm run lint
+
+      - name: Print ENvironment Variable
+         run: echo $DATABASE_URL
