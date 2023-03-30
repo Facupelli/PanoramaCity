@@ -83,8 +83,7 @@ const Home: NextPage = () => {
               <div className="absolute top-24 grid gap-6 rounded sm:top-[20%] sm:left-0 sm:mx-0 sm:max-w-[45%] ">
                 <div className="grid gap-6 ">
                   <h1 className="bg-gradient-to-r from-[#ffae42] to-[#ffd092] bg-clip-text py-1 text-5xl font-bold text-transparent">
-                    Buscar un inmueble nunca fue tan divertido. Experiencia
-                    inmersiva.
+                    Encuentra el hogar de tus sueños. A un click de distancia.
                   </h1>
                   <p className="rounded-lg text-lg text-white">
                     Con nuestros recorridos virtuales vas a sentir que estas
