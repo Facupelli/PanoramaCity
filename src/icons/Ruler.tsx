@@ -1,4 +1,10 @@
-export default function Ruler({ stroke }: { stroke: number }) {
+export default function Ruler({
+  size,
+  stroke,
+}: {
+  size: number;
+  stroke: number;
+}) {
   return (
     <svg
       width="30px"

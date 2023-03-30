@@ -13,6 +13,8 @@ import { formatSurface } from "../utils/surface";
 import { formatPrice } from "../utils/price";
 
 import { type Property } from "~/types/model";
+import Bed from "~/icons/Bed";
+import Ruler from "~/icons/Ruler";
 
 type Props = {
   property: Property;
@@ -104,7 +106,7 @@ export default function PropertyCard({
         </div>
       </Carousel>
       <Link href={`/property/${property.id}`}>
-        <div className={`grid  gap-y-1 px-4 ${small ? "py-0" : "py-2"} `}>
+        <div className={`grid px-4 ${small ? "py-0" : "py-2"} `}>
           <p className=" text-sm text-neutral-600">{property.type?.name}</p>
           <div className="grid ">
             <h1 className={`${small ? "text-md" : "text-lg"}  font-semibold`}>
@@ -116,17 +118,23 @@ export default function PropertyCard({
               property.propertyInfo?.city ?? ""
             }`}</p>
           </div>
-          <div className={`flex gap-x-6  ${small ? "py-1" : "py-2"}`}>
+          <div className={`flex gap-x-6  ${small ? "pt-1" : "pt-2"}`}>
             <div className="flex items-center gap-1">
-              <Ambiences size={small ? 18 : 24} stroke={1} />
-              <p className={`${small ? "text-sm" : "text-base"}`}>
-                {property.propertyInfo?.ambiences ?? 0} amb
+              <Bed size={small ? 18 : 22} stroke={1} />
+              <p className="text-sm">
+                {property.propertyInfo?.bedrooms ?? 0} hab
               </p>
             </div>
             <div className="flex items-center gap-1">
-              <Bath size={small ? 18 : 24} stroke={1} />
-              <p className={`${small ? "text-sm" : "text-base"}`}>
-                {formatSurface(property.propertyInfo?.bathrooms ?? 0)} bañ
+              <Bath size={small ? 18 : 22} stroke={1} />
+              <p className="text-sm">
+                {property.propertyInfo?.bathrooms ?? 0} bañ
+              </p>
+            </div>
+            <div className="flex items-center gap-1">
+              <Ruler size={small ? 18 : 22} stroke={1} />
+              <p className="text-sm">
+                {formatSurface(property.propertyInfo?.surface ?? 0)}m²
               </p>
             </div>
           </div>

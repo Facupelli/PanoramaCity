@@ -31,7 +31,7 @@ export default function IconDetails({ property }: Props) {
         </div>
         <div className="grid">
           <div>
-            <Bed />
+            <Bed size={30} stroke={1.5} />
           </div>
           <p className="text-sm text-neutral-500">
             {property.propertyInfo?.bedrooms}{" "}
@@ -73,7 +73,7 @@ export default function IconDetails({ property }: Props) {
         </div>
         <div className="grid">
           <div>
-            <Ruler stroke={1.5} />
+            <Ruler size={30} stroke={1.5} />
           </div>
           <p className="text-sm text-neutral-500">
             {formatSurface(property.propertyInfo?.surface ?? 0)}m²

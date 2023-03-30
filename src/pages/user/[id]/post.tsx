@@ -123,7 +123,6 @@ const UserPostProperty: NextPage<Props> = ({
   const validations = [validateStep1, validateStep2, validateStep3];
 
   const handleNextPage = async () => {
-    console.log(step);
     if (step === 5) {
       if (buttonRef.current) {
         return buttonRef.current.click();
