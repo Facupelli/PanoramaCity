@@ -17,7 +17,7 @@ import Bed from "~/icons/Bed";
 import Ruler from "~/icons/Ruler";
 
 type Props = {
-  property: Property;
+  property: Property | null;
   activeProperty?: Property | null;
   small?: boolean;
 };
@@ -28,6 +28,8 @@ export default function PropertyCard({
   small,
 }: Props) {
   const cardRef = useRef<HTMLDivElement>(null);
+
+  if (!property) return <div>Property not found</div>;
 
   if (property.id === activeProperty?.id && cardRef.current) {
     cardRef.current.scrollIntoView({ behavior: "smooth" });

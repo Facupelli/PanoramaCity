@@ -23,6 +23,8 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
     }
   }
 
+  map && map.addListener("click", () => setActiveProperty(null));
+
   useEffect(() => {
     if (!map) {
       return;
@@ -40,7 +42,7 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
       const markerOptions = {
         map,
         position,
-        title: property.description,
+        title: property.title,
         clickeable: false,
       };
 
@@ -49,8 +51,9 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
       const marker = new window.google.maps.Marker(markerOptions);
       prevMarkersRef.current.push(marker);
 
-      marker.addListener("click", () => {
+      marker.addListener("click", (e: any) => {
         setActiveProperty(property);
+        e.stop();
       });
 
       return marker;

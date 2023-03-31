@@ -113,11 +113,13 @@ const Search: NextPage<Props> = ({
             </button>
           </div>
 
-          {activeProperty && (
-            <div className="fixed bottom-4 left-1/2 z-30 -translate-x-1/2 rounded py-2 px-4 font-medium shadow sm:hidden">
-              <PropertyCard property={activeProperty} small />
-            </div>
-          )}
+          <div
+            className={`fixed left-1/2 z-30 -translate-x-1/2 rounded py-2 px-4 font-medium shadow transition-all duration-500 ease-in-out sm:hidden ${
+              activeProperty ? "bottom-4" : " bottom-[-500px]"
+            }`}
+          >
+            <PropertyCard property={activeProperty} small />
+          </div>
 
           <section
             className={`h-[calc(100vh_-_126px)] sm:fixed sm:z-10 sm:h-[calc(100vh_-_70px)] sm:w-2/5 ${
