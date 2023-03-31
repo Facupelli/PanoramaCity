@@ -19,3 +19,4 @@ Web para inmobiliarias e inmuebles. En desarrollo.
 <img src="/imgs/post.png" alt="post" />
 <img src="/imgs/search_mobile.png" alt="search_mobile" />
 <img src="/imgs/map_mobile.png" alt="map_mobile" />
+<img src="/imgs/map_mobile_property.png" alt="map_mobile_property" />
