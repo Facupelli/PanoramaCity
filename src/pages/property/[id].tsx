@@ -195,7 +195,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as IParams;
 
   try {
-    const property: Property | null = await prisma.property.findUnique({
+    const property = await prisma.property.findUnique({
       where: { id },
       include: {
         amenities: true,
