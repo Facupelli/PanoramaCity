@@ -34,7 +34,7 @@ export default function ImagesUpload({
     if (e.target.files && propertyAddress) {
       const files: File[] = Array.from(e.target.files);
 
-      let loadingToastId = toast.loading("Subiendo imágenes");
+      const loadingToastId = toast.loading("Subiendo imágenes");
       for (let index = 0; index < files.length; index++) {
         const file = files[index];
         if (file) {

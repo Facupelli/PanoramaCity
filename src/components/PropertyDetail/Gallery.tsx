@@ -11,7 +11,7 @@ export type Props = {
 };
 
 export default function Gallery({ propertyMedia, mediaActive }: Props) {
-  const propImages = JSON.parse(propertyMedia.images).images as string[];
+  const propImages = JSON.parse(propertyMedia.images) as { images: string[] };
 
   if (mediaActive.tour) {
     return (
@@ -51,7 +51,7 @@ export default function Gallery({ propertyMedia, mediaActive }: Props) {
             },
           }}
         >
-          {propImages?.map((image) => (
+          {propImages?.images.map((image) => (
             <div key={image} className="relative aspect-[16/6] w-full bg-white">
               <Image
                 style={{ objectFit: "contain" }}
