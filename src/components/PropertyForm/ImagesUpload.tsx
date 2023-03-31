@@ -5,14 +5,21 @@ import {
   type SetStateAction,
   useRef,
   type ChangeEvent,
+  useState,
 } from "react";
+import { toast } from "react-hot-toast";
 
 type Props = {
   setUrls: Dispatch<SetStateAction<string[]>>;
   urls: string[];
+  propertyAddress: string | undefined;
 };
 
-export default function ImagesUpload({ setUrls, urls }: Props) {
+export default function ImagesUpload({
+  setUrls,
+  urls,
+  propertyAddress,
+}: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClickRef = () => {
@@ -21,12 +28,13 @@ export default function ImagesUpload({ setUrls, urls }: Props) {
     }
   };
 
-  const { uploadToS3 } = useS3Upload();
+  const { uploadToS3, files } = useS3Upload();
 
   const handleFilesChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    if (e.target.files && propertyAddress) {
       const files: File[] = Array.from(e.target.files);
 
+      let loadingToastId = toast.loading("Subiendo imágenes");
       for (let index = 0; index < files.length; index++) {
         const file = files[index];
         if (file) {
@@ -34,7 +42,7 @@ export default function ImagesUpload({ setUrls, urls }: Props) {
             endpoint: {
               request: {
                 body: {
-                  propertyId: "sdf",
+                  propertyAddress: propertyAddress.split(" ").join(""),
                 },
               },
             },
@@ -43,11 +51,12 @@ export default function ImagesUpload({ setUrls, urls }: Props) {
           setUrls((prev) => [...prev, url]);
         }
       }
+      toast.dismiss(loadingToastId);
     }
   };
 
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-2 ">
       <input
         ref={inputRef}
         type="file"
@@ -64,13 +73,15 @@ export default function ImagesUpload({ setUrls, urls }: Props) {
         Elegir archivos
       </button>
 
-      <div className="grid grid-cols-auto-s3 gap-2 pt-4 ">
-        {urls.map((url) => (
-          <div
-            className="relative aspect-video w-[250px] bg-neutral-50 "
-            key={url}
-          >
-            <Image src={url} fill alt={url} style={{ objectFit: "contain" }} />
+      <div className="grid grid-cols-auto-s3 gap-2 border-t border-neutral-200 pt-4">
+        {urls.map((url, i) => (
+          <div className="relative aspect-video w-[200px] rounded" key={url}>
+            <Image
+              src={url}
+              fill
+              alt={url}
+              style={{ objectFit: "cover", borderRadius: 5 }}
+            />
           </div>
         ))}
       </div>

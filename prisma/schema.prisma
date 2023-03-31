@@ -126,7 +126,7 @@ model PropertyInfo {
     id              String        @id @default(cuid())
     propertyId      String        @unique
     property        Property      @relation(fields: [propertyId], references: [id])
-    address         String
+    address         String        @unique
     city            String
     zone            String
     floor           String?

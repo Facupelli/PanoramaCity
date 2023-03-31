@@ -18,6 +18,13 @@ export default function Amenities({
   const amenitiesFilter = watch("amenities");
   const utilitiesFilter = watch("utilities");
 
+  const setValueAsArray = (value: "string" | boolean) => {
+    if (value === false) {
+      return [];
+    }
+    return value;
+  };
+
   return (
     <>
       <div className="grid gap-2 ">
@@ -39,7 +46,7 @@ export default function Amenities({
                 {amenity.name}
               </label>
               <input
-                {...register("amenities")}
+                {...register("amenities", { setValueAs: setValueAsArray })}
                 className="hidden"
                 value={amenity.id}
                 type="checkbox"
@@ -69,7 +76,7 @@ export default function Amenities({
                 {utility.name}
               </label>
               <input
-                {...register("utilities")}
+                {...register("utilities", { setValueAs: setValueAsArray })}
                 className="hidden"
                 value={utility.id}
                 type="checkbox"

@@ -60,14 +60,42 @@ const UserPostProperty: NextPage<Props> = ({
     trigger,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
-  const { mutate } = api.property.createProperty.useMutation();
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const propertyAddress = watch("propertyInfo.address");
+
+  const { mutate } = api.property.createProperty.useMutation();
+
   //IMAGES
   const [urls, setUrls] = useState<string[]>([]);
+
   //STEPS
   const [step, setStep] = useState(1);
-  const steps = 5;
+  const totalSteps = 5;
+
+  const validations = [validateStep1, validateStep2, validateStep3];
+
+  const handleNextPage = async () => {
+    if (step === totalSteps && buttonRef.current) {
+      buttonRef.current.click();
+      console.log("click");
+      return;
+    }
+    console.log("click");
+
+    if (step === 4) {
+      setStep((prev) => prev + 1);
+      return;
+    }
+
+    const validation = validations[step - 1];
+    if (validation) {
+      const isValid = await validation(trigger);
+      if (isValid) {
+        setStep((prev) => prev + 1);
+      }
+    }
+  };
 
   const onSubmit = (data: FormData) => {
     // const parsedAddres = encodeURI(
@@ -78,6 +106,7 @@ const UserPostProperty: NextPage<Props> = ({
     // );
 
     // console.log("response", response.data);
+    const loadingPostId = toast.loading("Cargando");
     if (sessionData?.user.id) {
       const propertyData = {
         typeId: data.typeId,
@@ -117,29 +146,7 @@ const UserPostProperty: NextPage<Props> = ({
           toast.error("Lo siento, no se pudo crear la propiedad");
         },
       });
-    }
-  };
-
-  const validations = [validateStep1, validateStep2, validateStep3];
-
-  const handleNextPage = async () => {
-    if (step === 5) {
-      if (buttonRef.current) {
-        return buttonRef.current.click();
-      }
-    }
-
-    if (step === 4) {
-      return setStep((prev) => (prev += 1));
-    }
-
-    const validation = validations[step - 1];
-    if (validation) {
-      const isValid = await validation(trigger);
-
-      if (isValid) {
-        setStep((prev) => (prev += 1));
-      }
+      toast.dismiss(loadingPostId);
     }
   };
 
@@ -196,7 +203,13 @@ const UserPostProperty: NextPage<Props> = ({
                   utilites={utilities}
                 />
               )}
-              {step === 5 && <ImagesUpload setUrls={setUrls} urls={urls} />}
+              {step === 5 && (
+                <ImagesUpload
+                  setUrls={setUrls}
+                  urls={urls}
+                  propertyAddress={propertyAddress}
+                />
+              )}
             </FormLayout>
 
             <div className="grid grid-cols-6">
@@ -213,7 +226,7 @@ const UserPostProperty: NextPage<Props> = ({
             <button
               ref={buttonRef}
               type="submit"
-              className="hidden rounded bg-s-blue py-2 px-4 text-sm font-semibold text-white"
+              className="rounded bg-s-blue py-2 px-4 text-sm font-semibold text-white"
             >
               Siguiente
             </button>
