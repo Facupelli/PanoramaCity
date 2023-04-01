@@ -1,13 +1,9 @@
-import {
-  GoogleMapsProvider,
-  useGoogleMap,
-} from "@ubilabs/google-maps-react-hooks";
+import { GoogleMapsProvider } from "@ubilabs/google-maps-react-hooks";
 import {
   type Dispatch,
   type SetStateAction,
   useState,
   useCallback,
-  useEffect,
 } from "react";
 import MapCanvas from "./MapCanvas";
 import MapMarkers from "./MapMarkers";

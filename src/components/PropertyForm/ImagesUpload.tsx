@@ -5,7 +5,6 @@ import {
   type SetStateAction,
   useRef,
   type ChangeEvent,
-  useState,
 } from "react";
 import { toast } from "react-hot-toast";
 
@@ -28,7 +27,7 @@ export default function ImagesUpload({
     }
   };
 
-  const { uploadToS3, files } = useS3Upload();
+  const { uploadToS3 } = useS3Upload();
 
   const handleFilesChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && propertyAddress) {
@@ -74,7 +73,7 @@ export default function ImagesUpload({
       </button>
 
       <div className="grid grid-cols-auto-s3 gap-4 border-t border-neutral-200 pt-4">
-        {urls.map((url, i) => (
+        {urls.map((url) => (
           <div className="relative aspect-video w-[200px] rounded" key={url}>
             <Image
               src={url}

@@ -51,7 +51,7 @@ export default function MapMarkers({ properties, setActiveProperty }: Props) {
       const marker = new window.google.maps.Marker(markerOptions);
       prevMarkersRef.current.push(marker);
 
-      marker.addListener("click", (e: any) => {
+      marker.addListener("click", (e: google.maps.MapMouseEvent) => {
         setActiveProperty(property);
         e.stop();
       });

@@ -6,7 +6,6 @@ import { useRef } from "react";
 import FavButton from "../UI/FavButton";
 import ChevronLeft from "~/icons/ChevronLeft";
 import ChevronRight from "~/icons/ChevronRight";
-import Ambiences from "~/icons/Ambiences";
 import Bath from "~/icons/Bath";
 
 import { formatSurface } from "../utils/surface";
