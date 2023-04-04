@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import LogOut from "~/icons/LogOut";
 
@@ -13,7 +14,13 @@ export default function NavBar({ color }: { color?: string }) {
     >
       <div className="mx-auto max-w-7xl">
         <div className="flex h-nav items-center justify-between px-6 xl:px-0">
-          <Link href="/" className="font-archivo text-m-white sm:text-2xl">
+          <Link
+            href="/"
+            className="font-archivo flex items-center gap-4 font-philo text-m-white sm:text-2xl"
+          >
+            <div className="relative h-[70px] w-[70px]">
+              <Image src="/logo-solo.svg" alt="asd" fill />
+            </div>
             Panorama City
           </Link>
           {sessionData ? (

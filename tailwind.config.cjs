@@ -4,10 +4,8 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        josefin: ["Josefin Slab", "serif"],
         barlow: ["Barlow", "sans-serif"],
-        inconsolata: ["Inconsolata", "monospace"],
-        archivo: ["Archivo Narrow", "sans-serif"],
+        philo: ["Philosopher", "sans-serif"],
       },
       colors: {
         "m-blue": "#1D2A36",

@@ -74,7 +74,7 @@ const Home: NextPage = () => {
               <div className="relative col-span-7 col-start-1 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] sm:col-span-4 sm:col-start-4">
                 <Image
                   fill
-                  src="/town.svg"
+                  src="/landing/town.svg"
                   alt="index-bg"
                   style={{ objectFit: "contain" }}
                 />
@@ -141,7 +141,7 @@ const Home: NextPage = () => {
             >
               <div className="relative h-56 w-56">
                 <Image
-                  src="/choosing_house.svg"
+                  src="/landing/choosing_house.svg"
                   alt="buy house illustration"
                   fill
                 />
@@ -174,7 +174,11 @@ const Home: NextPage = () => {
               className="col-span-1 grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
             >
               <div className="relative h-56 w-56">
-                <Image src="/buy_house.svg" alt="buy house illustration" fill />
+                <Image
+                  src="/landing/buy_house.svg"
+                  alt="buy house illustration"
+                  fill
+                />
               </div>
               <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all duration-100 ease-in-out">
                 Quiero comprar!
@@ -185,7 +189,11 @@ const Home: NextPage = () => {
               className="col-span-1 grid w-full justify-center gap-y-6 rounded bg-white p-6 shadow-md transition-all duration-100 ease-in-out hover:scale-110 hover:shadow-xl [&>p]:hover:bg-m-blue [&>p]:hover:text-white"
             >
               <div className="relative h-56 w-56">
-                <Image src="/for_sale.svg" alt="buy house illustration" fill />
+                <Image
+                  src="/landing/for_sale.svg"
+                  alt="buy house illustration"
+                  fill
+                />
               </div>
               <p className="rounded border border-m-blue bg-white p-2 font-semibold text-m-blue transition-all delay-75 duration-100 ease-in-out">
                 Quiero publicar!
@@ -201,7 +209,7 @@ const Home: NextPage = () => {
             <article className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2 sm:gap-20 ">
               <div className="relative col-span-1 aspect-[5/2] w-full">
                 <Image
-                  src="/our_neighborhood.svg"
+                  src="/landing/our_neighborhood.svg"
                   alt="neighborhood virtual tours illustration"
                   fill
                 />
@@ -240,7 +248,7 @@ const Home: NextPage = () => {
 
               <div className="relative col-span-1 aspect-[5/2] w-full">
                 <Image
-                  src="/digital_currency.svg"
+                  src="/landing/digital_currency.svg"
                   alt="blockchain illustration"
                   fill
                 />
@@ -250,7 +258,7 @@ const Home: NextPage = () => {
             <article className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2 sm:gap-20 ">
               <div className="relative col-span-1 aspect-[5/2] w-full">
                 <Image
-                  src="/split.svg"
+                  src="/landing/split.svg"
                   alt="comparisoon properties illustration"
                   fill
                 />
@@ -289,7 +297,7 @@ const Home: NextPage = () => {
 
               <div className="relative col-span-1 aspect-[5/2] w-full">
                 <Image
-                  src="/reviews.svg"
+                  src="/landing/reviews.svg"
                   alt="reviews and rating illustration"
                   fill
                 />
