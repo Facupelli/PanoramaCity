@@ -7,7 +7,7 @@ import { provinces } from "~/assets/provinces";
 import { san_juan_departamentos } from "~/assets/san_juan_departamentos";
 import { type FormData } from "~/types/createProperty";
 // import Autocomplete from "./Autocomplete";
-// import Autocomplete from "react-google-autocomplete";
+import Autocomplete from "react-google-autocomplete";
 
 type Props = {
   register: UseFormRegister<FormData>;

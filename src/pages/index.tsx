@@ -71,27 +71,17 @@ const Home: NextPage = () => {
         >
           <div className="relative mx-6 max-w-7xl xl:mx-auto ">
             <div className="grid h-[calc(100vh_+_350px)] w-full grid-cols-7 place-items-end pb-14 sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
-              <div className="relative col-span-7 col-start-1 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] sm:col-span-4 sm:col-start-4">
-                <Image
-                  fill
-                  src="/landing/town.svg"
-                  alt="index-bg"
-                  style={{ objectFit: "contain" }}
-                />
-              </div>
-
-              <div className="absolute top-24 grid gap-6 rounded sm:top-[20%] sm:left-0 sm:mx-0 sm:max-w-[45%] ">
-                <div className="grid gap-6 ">
+              <div className="relative col-span-3 rounded ">
+                {/* <div className="absolute z-30 h-full w-full rounded bg-[#d4fae2] opacity-20" /> */}
+                <div className="grid gap-1 p-6">
                   <h1 className="bg-gradient-to-r from-[#ffae42] to-[#ffd092] bg-clip-text py-1 text-5xl font-bold text-transparent">
-                    Encuentra el hogar de tus sueños. A un click de distancia.
+                    Explorá tu futuro hogar. A un click de distancia.
                   </h1>
-                  <p className="rounded-lg text-lg text-white">
-                    Con nuestros recorridos virtuales vas a sentir que estas
-                    caminando por tu futuro hogar. Descubrí las mejores
-                    propiedades sin salir de casa.
+                  <p className="rounded-lg text-xl text-white">
+                    Descubrí las mejores propiedades sin salir de tu casa.
                   </p>
                 </div>
-                <div className="grid gap-4">
+                <div className="grid gap-4 p-6">
                   <div className="flex items-center">
                     <input
                       {...register("location")}
@@ -109,6 +99,15 @@ const Home: NextPage = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="relative col-span-7 col-start-1 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] contrast-125 sm:col-span-4 sm:col-start-4">
+                <Image
+                  fill
+                  src="/landing/town.svg"
+                  alt="index-bg"
+                  style={{ objectFit: "contain" }}
+                />
               </div>
             </div>
           </div>
