@@ -30,10 +30,21 @@ const config = {
         "landing-image":
           "linear-gradient(rgba(0,0,0,.3) 70px,transparent 310px)",
       },
+      boxShadow: {
+        landing: "0px 0px 20px 150px #2c4358",
+      },
       keyframes: {
         blink: {
           "50%": { opacity: "25%" },
         },
+        move: {
+          "50%": {
+            transform: "translateY(-10px) rotate(360deg)",
+          },
+        },
+      },
+      animation: {
+        move: "move 3s ease-in-out infinite",
       },
     },
   },

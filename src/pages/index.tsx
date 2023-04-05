@@ -71,10 +71,9 @@ const Home: NextPage = () => {
         >
           <div className="relative mx-6 max-w-7xl xl:mx-auto ">
             <div className="grid h-[calc(100vh_+_350px)] w-full grid-cols-7 place-items-end pb-14 sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
-              <div className="relative col-span-3 rounded ">
-                {/* <div className="absolute z-30 h-full w-full rounded bg-[#d4fae2] opacity-20" /> */}
+              <div className="relative z-30 col-span-7 rounded sm:col-span-3 ">
                 <div className="grid gap-1 p-6">
-                  <h1 className="bg-gradient-to-r from-[#ffae42] to-[#ffd092] bg-clip-text py-1 text-5xl font-bold text-transparent">
+                  <h1 className="bg-gradient-to-r from-[#ff4466] to-[rgb(255,164,181)] bg-clip-text py-1 text-5xl font-bold text-transparent">
                     Explorá tu futuro hogar. A un click de distancia.
                   </h1>
                   <p className="rounded-lg text-xl text-white">
@@ -91,7 +90,7 @@ const Home: NextPage = () => {
                     />
                     <div>
                       <button
-                        className="h-12 rounded-tr-lg rounded-br-lg bg-[#6c63ff] px-4 shadow-md sm:h-16"
+                        className="h-12 rounded-tr-lg rounded-br-lg bg-[#ff6884] px-4 shadow-md sm:h-16"
                         aria-label="search button"
                       >
                         <Search />
@@ -101,7 +100,8 @@ const Home: NextPage = () => {
                 </div>
               </div>
 
-              <div className="relative col-span-7 col-start-1 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] rounded-full bg-[#96c2a6] contrast-125 sm:col-span-4 sm:col-start-4">
+              <div className="relative col-span-7 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] sm:col-span-4">
+                <div className="absoulte h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] animate-move rounded-full bg-[#2c4358] duration-300 ease-in-out md:shadow-landing" />
                 <Image
                   fill
                   src="/landing/town.svg"
