@@ -11,7 +11,7 @@ export type Props = {
 };
 
 export default function Gallery({ propertyMedia, mediaActive }: Props) {
-  const propImages = JSON.parse(propertyMedia.images) as { images: string[] };
+  const propImages = JSON.parse(propertyMedia.images) as string[];
 
   if (mediaActive.tour) {
     return (
@@ -23,6 +23,7 @@ export default function Gallery({ propertyMedia, mediaActive }: Props) {
           src="https://tour.metareal.com/apps/player?asset=9be7133d-0eda-4672-bf3c-51bf6b8f88fb&position=-6.40x1.58y5.38z&rotation=6.53x-19.14y0.00z"
           allow="xr-spatial-tracking"
           allowFullScreen
+          loading="lazy"
         ></iframe>
       </div>
     );
@@ -51,7 +52,7 @@ export default function Gallery({ propertyMedia, mediaActive }: Props) {
             },
           }}
         >
-          {propImages?.images.map((image) => (
+          {propImages?.map((image) => (
             <div key={image} className="relative aspect-[16/6] w-full bg-white">
               <Image
                 style={{ objectFit: "contain" }}
