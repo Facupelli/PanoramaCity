@@ -1,6 +1,10 @@
 import { z } from "zod";
-
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import axios from "axios";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 import { prisma } from "~/server/db";
 import { type OrderPipe, type WherePipe } from "~/types/api/getProperty";
 
@@ -140,7 +144,23 @@ export const propertyRouter = createTRPCRouter({
       }
     }),
 
-  createProperty: publicProcedure
+  getLocationCoordinates: protectedProcedure
+    .input(
+      z.object({ address: z.string(), city: z.string(), location: z.string() })
+    )
+    .mutation(async ({ input }) => {
+      const parsedAddres = encodeURI(
+        `${input.address}, ${input.location}, ${input.city}, Argentina`
+      );
+      const response = await axios(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
+      );
+
+      console.log("response", response.data);
+      return response.data;
+    }),
+
+  createProperty: protectedProcedure
     .input(
       z.object({
         typeId: z.string(),
@@ -149,8 +169,6 @@ export const propertyRouter = createTRPCRouter({
         description: z.string(),
         operationId: z.string(),
         price: z.number(),
-        locationLat: z.number(),
-        locationLng: z.number(),
         amenities: z.object({ id: z.string() }).array().optional(),
         utilities: z.object({ id: z.string() }).array().optional(),
         //PropertyInfo
@@ -159,6 +177,7 @@ export const propertyRouter = createTRPCRouter({
           bathrooms: z.number(),
           bedrooms: z.number(),
           address: z.string(),
+          zipCode: z.number(),
           city: z.string(),
           zone: z.string(),
           floor: z.number().optional(),
@@ -172,7 +191,25 @@ export const propertyRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input }) => {
-      let newProperty, newPropertyInfo;
+      let newProperty, newPropertyInfo, lat, lng;
+
+      const parsedAddres = encodeURI(
+        `${input.propertyInfo.address} ${
+          input.propertyInfo.orientation ?? ""
+        } , ${input.propertyInfo.zone}, ${input.propertyInfo.city}, Argentina`
+      );
+
+      console.log(parsedAddres);
+      const response = await axios(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
+      );
+
+      if (!response.data.results || response.data.results.length <= 0) {
+        return;
+      }
+
+      lat = response.data.results[0].geometry.location.lat;
+      lng = response.data.results[0].geometry.location.lng;
 
       try {
         newProperty = await prisma.property.create({
@@ -183,8 +220,8 @@ export const propertyRouter = createTRPCRouter({
             description: input.description,
             operation: { connect: { id: input.operationId } },
             price: Number(input.price),
-            locationLat: input.locationLat,
-            locationLng: input.locationLng,
+            locationLat: lat,
+            locationLng: lng,
             amenities: { connect: input.amenities },
             utilities: { connect: input.utilities },
           },

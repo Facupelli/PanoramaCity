@@ -6,8 +6,6 @@ import type {
 import { provinces } from "~/assets/provinces";
 import { san_juan_departamentos } from "~/assets/san_juan_departamentos";
 import { type FormData } from "~/types/createProperty";
-// import Autocomplete from "./Autocomplete";
-import Autocomplete from "react-google-autocomplete";
 
 type Props = {
   register: UseFormRegister<FormData>;
@@ -59,53 +57,24 @@ export default function Address({ register, watch, errors }: Props) {
         </select>
       </div>
 
-      {/* <Autocomplete
-        apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}
-        onPlaceSelected={(place) => {
-          console.log(place);
-        }}
-        options={{
-          types: ["address"],
-          setComponentRestrictions: "ar",
-        }}
-      /> */}
-
-      {/* <Autocomplete /> */}
-
       <div className="grid">
-        <label htmlFor="address" className="pb-2 text-neutral-900">
-          Dirección
+        <label htmlFor="street-name" className="pb-2 text-neutral-900">
+          Calle
         </label>
         <input
-          id="address"
+          id="street-name"
           className="rounded-md border border-neutral-200 p-2"
           type="text"
           required
-          placeholder="Los Cedros 4234 oeste"
-          {...register("propertyInfo.address")}
+          placeholder="Los Cedros"
+          {...register("propertyInfo.street_name")}
         />
-        {errors.propertyInfo?.address && (
+        {errors.propertyInfo?.street_name && (
           <p className="pt-1 text-sm text-red-700">
-            {errors.propertyInfo.address.message}
+            {errors.propertyInfo.street_name.message}
           </p>
         )}
       </div>
-
-      {propertyType === "clf1mbf010000e7vkfto3gjcp" && (
-        <div className="grid">
-          <label htmlFor="floor" className="pb-2 text-neutral-900">
-            Piso
-          </label>
-          <input
-            id="floor"
-            className="rounded-md border border-neutral-200 p-2"
-            type="text"
-            required
-            placeholder="3"
-            {...register("propertyInfo.floor", { valueAsNumber: true })}
-          />
-        </div>
-      )}
 
       <div className="grid">
         <label htmlFor="orientation" className="pb-2 text-neutral-900">
@@ -122,6 +91,60 @@ export default function Address({ register, watch, errors }: Props) {
         {errors.propertyInfo?.orientation && (
           <p className="pt-1 text-sm text-red-700">
             {errors.propertyInfo.orientation.message}
+          </p>
+        )}
+      </div>
+
+      <div className="grid">
+        <label htmlFor="stree-number" className="pb-2 text-neutral-900">
+          Número
+        </label>
+        <input
+          id="stree-number"
+          className="rounded-md border border-neutral-200 p-2"
+          type="text"
+          required
+          placeholder="4234"
+          {...register("propertyInfo.street_number", { valueAsNumber: true })}
+        />
+        {errors.propertyInfo?.street_number && (
+          <p className="pt-1 text-sm text-red-700">
+            {errors.propertyInfo.street_number.message}
+          </p>
+        )}
+      </div>
+
+      {propertyType === "clfrb1uv3001ue78wc2bqsg85" && (
+        <div className="grid">
+          <label htmlFor="floor" className="pb-2 text-neutral-900">
+            Piso
+          </label>
+          <input
+            id="floor"
+            className="rounded-md border border-neutral-200 p-2"
+            type="text"
+            required
+            placeholder="3"
+            {...register("propertyInfo.floor", { valueAsNumber: true })}
+          />
+        </div>
+      )}
+
+      <div className="grid">
+        <label htmlFor="zip-code" className="pb-2 text-neutral-900">
+          Códgio Postal
+        </label>
+        <input
+          id="zip-code"
+          className="rounded-md border border-neutral-200 p-2"
+          type="text"
+          required
+          placeholder="5400"
+          {...register("propertyInfo.zip_code", { valueAsNumber: true })}
+        />
+        {errors.propertyInfo?.zip_code && (
+          <p className="pt-1 text-sm text-red-700">
+            {errors.propertyInfo.zip_code.message}
           </p>
         )}
       </div>

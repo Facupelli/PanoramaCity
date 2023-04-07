@@ -62,7 +62,8 @@ const UserPostProperty: NextPage<Props> = ({
   } = useForm<FormData>({ resolver: zodResolver(validationSchema) });
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const propertyAddress = watch("propertyInfo.address");
+  const propertyNumber = watch("propertyInfo.street_number");
+  const propertyStreet = watch("propertyInfo.street_name");
 
   const { mutate } = api.property.createProperty.useMutation();
 
@@ -75,13 +76,13 @@ const UserPostProperty: NextPage<Props> = ({
 
   const validations = [validateStep1, validateStep2, validateStep3];
 
+  const getCoordinates = api.property.getLocationCoordinates.useMutation();
+
   const handleNextPage = async () => {
     if (step === totalSteps && buttonRef.current) {
       buttonRef.current.click();
-      console.log("click");
       return;
     }
-    console.log("click");
 
     if (step === 4) {
       setStep((prev) => prev + 1);
@@ -97,15 +98,7 @@ const UserPostProperty: NextPage<Props> = ({
     }
   };
 
-  const onSubmit = (data: FormData) => {
-    // const parsedAddres = encodeURI(
-    //   `${data.propertyInfo.address} ${data.propertyInfo.city} Argentina`
-    // );
-    // const response = await axios(
-    //   `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
-    // );
-
-    // console.log("response", response.data);
+  const onSubmit = async (data: FormData) => {
     const loadingPostId = toast.loading("Cargando");
     if (sessionData?.user.id) {
       const propertyData = {
@@ -115,8 +108,6 @@ const UserPostProperty: NextPage<Props> = ({
         title: data.title,
         description: data.description,
         operationId: data.operationId,
-        locationLat: -31.549338520859266,
-        locationLng: -68.54317943487884,
         propertyInfo: {
           ambiences: Number(data.propertyInfo.ambiences),
           bedrooms: Number(data.propertyInfo.bedrooms),
@@ -124,7 +115,8 @@ const UserPostProperty: NextPage<Props> = ({
           floor: Number(data.propertyInfo.floor ?? 0),
           surface: Number(data.propertyInfo.surface),
           buildYear: Number(data.propertyInfo.buildYear),
-          address: data.propertyInfo.address,
+          address: `${data.propertyInfo.street_name} ${data.propertyInfo.street_number}`,
+          zipCode: data.propertyInfo.zip_code,
           city: data.propertyInfo.city,
           zone: data.propertyInfo.zone,
           orientation: data.propertyInfo.orientation,
@@ -207,7 +199,7 @@ const UserPostProperty: NextPage<Props> = ({
                 <ImagesUpload
                   setUrls={setUrls}
                   urls={urls}
-                  propertyAddress={propertyAddress}
+                  propertyAddress={`${propertyStreet} ${propertyNumber}`}
                 />
               )}
             </FormLayout>

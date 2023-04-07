@@ -86,7 +86,7 @@ const Home: NextPage = () => {
                       {...register("location")}
                       type="search"
                       className="h-12 w-full rounded-bl-lg rounded-tl-lg border-none bg-white px-4 shadow-md sm:h-16"
-                      placeholder="Ciudad, dirección, ZIP"
+                      placeholder="Ciudad, departamento"
                     />
                     <div>
                       <button

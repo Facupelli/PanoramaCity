@@ -17,7 +17,9 @@ export type FormData = {
     ambiences: number;
     bathrooms: number;
     bedrooms: number;
-    address: string;
+    zip_code: number;
+    street_number: number;
+    street_name: string;
     city: string;
     zone: string;
     floor?: number;
@@ -37,13 +39,15 @@ export const validationSchema = z.object({
     ambiences: z.number().gte(1),
     bathrooms: z.number().gte(0),
     bedrooms: z.number().gte(0),
-    address: z.string().nonempty(),
+    street_name: z.string().nonempty(),
+    street_number: z.number(),
+    zip_code: z.number(),
     city: z.string().min(1),
     zone: z.string().min(1),
     floor: z.number().optional(),
     surface: z.number().gte(1),
     buildYear: z.number().lte(new Date().getFullYear()),
-    orientation: z.string().min(1),
+    orientation: z.string(),
   }),
   title: z.string().nonempty().max(50),
   description: z.string(),

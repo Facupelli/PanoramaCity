@@ -16,7 +16,9 @@ export const validateStep2 = async (trigger: UseFormTrigger<FormData>) => {
   const result = await trigger([
     "propertyInfo.city",
     "propertyInfo.zone",
-    "propertyInfo.address",
+    "propertyInfo.street_number",
+    "propertyInfo.street_name",
+    "propertyInfo.zip_code",
     "propertyInfo.floor",
     "propertyInfo.orientation",
   ]);
