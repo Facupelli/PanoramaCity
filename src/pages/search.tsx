@@ -106,7 +106,6 @@ const Search: NextPage<Props> = ({
             <button
               onClick={() => {
                 setMobileViewList(!mobileViewList);
-                console.log("clik");
               }}
             >
               {mobileViewList ? "Mapa" : "Lista"}
