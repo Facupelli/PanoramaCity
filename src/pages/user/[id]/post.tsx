@@ -76,8 +76,6 @@ const UserPostProperty: NextPage<Props> = ({
 
   const validations = [validateStep1, validateStep2, validateStep3];
 
-  const getCoordinates = api.property.getLocationCoordinates.useMutation();
-
   const handleNextPage = async () => {
     if (step === totalSteps && buttonRef.current) {
       buttonRef.current.click();
@@ -98,7 +96,7 @@ const UserPostProperty: NextPage<Props> = ({
     }
   };
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = (data: FormData) => {
     const loadingPostId = toast.loading("Cargando");
     if (sessionData?.user.id) {
       const propertyData = {

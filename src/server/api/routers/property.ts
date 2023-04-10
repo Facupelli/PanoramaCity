@@ -8,6 +8,19 @@ import {
 import { prisma } from "~/server/db";
 import { type OrderPipe, type WherePipe } from "~/types/api/getProperty";
 
+type GeocodeResponse = {
+  tatus: string;
+  results: {
+    formatted_address: string;
+    geometry: {
+      location: {
+        lat: number;
+        lng: number;
+      };
+    };
+  }[];
+};
+
 export const propertyRouter = createTRPCRouter({
   getFilteredProperties: publicProcedure
     .input(
@@ -144,22 +157,6 @@ export const propertyRouter = createTRPCRouter({
       }
     }),
 
-  getLocationCoordinates: protectedProcedure
-    .input(
-      z.object({ address: z.string(), city: z.string(), location: z.string() })
-    )
-    .mutation(async ({ input }) => {
-      const parsedAddres = encodeURI(
-        `${input.address}, ${input.location}, ${input.city}, Argentina`
-      );
-      const response = await axios(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
-      );
-
-      console.log("response", response.data);
-      return response.data;
-    }),
-
   createProperty: protectedProcedure
     .input(
       z.object({
@@ -191,7 +188,7 @@ export const propertyRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input }) => {
-      let newProperty, newPropertyInfo, lat, lng;
+      let newProperty, newPropertyInfo;
 
       const parsedAddres = encodeURI(
         `${input.propertyInfo.address} ${
@@ -200,16 +197,18 @@ export const propertyRouter = createTRPCRouter({
       );
 
       console.log(parsedAddres);
-      const response = await axios(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}`
+      const response = await axios<GeocodeResponse>(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${parsedAddres}&key=${
+          process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY as string
+        }`
       );
 
-      if (!response.data.results || response.data.results.length <= 0) {
+      if (!response.data.results || !response.data.results[0]) {
         return;
       }
 
-      lat = response.data.results[0].geometry.location.lat;
-      lng = response.data.results[0].geometry.location.lng;
+      const lat = response.data.results[0].geometry.location.lat;
+      const lng = response.data.results[0].geometry.location.lng;
 
       try {
         newProperty = await prisma.property.create({
