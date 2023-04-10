@@ -100,8 +100,8 @@ const Home: NextPage = () => {
                 </div>
               </div>
 
-              <div className="relative col-span-7 h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] sm:col-span-4">
-                <div className="absoulte h-[55vw] max-h-[800px] min-h-[300px] w-[55vw] min-w-[300px] max-w-[800px] animate-move rounded-full bg-[#2c4358] duration-300 ease-in-out md:shadow-landing" />
+              <div className="relative col-span-7 aspect-square w-full max-w-[800px] sm:col-span-4 sm:h-[55vw] sm:max-h-[800px] sm:min-h-[300px] sm:w-[55vw] sm:min-w-[300px]">
+                <div className="absoulte aspect-square w-full max-w-[800px] animate-move  rounded-full bg-[#2c4358] duration-300 ease-in-out sm:h-[55vw] sm:max-h-[800px] sm:min-h-[300px] sm:w-[55vw] sm:min-w-[300px] md:shadow-landing" />
                 <Image
                   fill
                   src="/landing/town.svg"

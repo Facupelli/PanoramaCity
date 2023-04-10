@@ -39,7 +39,7 @@ const config = {
         },
         move: {
           "50%": {
-            transform: "translateY(-10px) rotate(360deg)",
+            transform: "translateY(-10px)",
           },
         },
       },

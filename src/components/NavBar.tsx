@@ -17,7 +17,7 @@ export default function NavBar({ color }: { color?: string }) {
           href="/"
           className="font-archivo flex items-center gap-4 font-philo text-m-white sm:text-2xl"
         >
-          <div className="relative h-[70px] w-[70px]">
+          <div className="hidden h-[70px] w-[70px] sm:relative">
             <Image src="/logo-solo.svg" alt="asd" fill />
           </div>
           Panorama City
