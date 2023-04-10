@@ -64,15 +64,15 @@ const Home: NextPage = () => {
 
       <NavBar color={navBg} />
 
-      <main className="grid min-h-screen gap-10 bg-neutral-100 font-barlow">
+      <main className="grid min-h-screen gap-10 bg-neutral-100  font-barlow">
         <section
           ref={sectionRef}
-          className="clip-landing-mobile sm:clip-landing relative bg-m-blue after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-['']"
+          className="clip-landing-mobile sm:clip-landing relative h-[calc(100vh_+_350px)] bg-m-blue pt-[70px] after:absolute after:top-0 after:left-0 after:h-[300px] after:w-full after:bg-landing-image after:content-[''] sm:h-[calc(100vh_+_100px)]"
         >
-          <div className="relative mx-6 max-w-7xl xl:mx-auto ">
-            <div className="grid h-[calc(100vh_+_350px)] w-full grid-cols-7 place-items-end pb-14 sm:h-[calc(100vh_+_100px)] sm:place-items-center sm:pb-0">
+          <div className="relative mx-6 max-w-7xl pt-10 sm:pt-0 xl:mx-auto ">
+            <div className="grid h-full w-full grid-cols-7 place-items-end gap-12 sm:place-items-center sm:gap-0">
               <div className="relative z-30 col-span-7 rounded sm:col-span-3 ">
-                <div className="grid gap-1 p-6">
+                <div className="grid gap-4 sm:gap-1 sm:p-6">
                   <h1 className="bg-gradient-to-r from-[#ff4466] to-[rgb(255,164,181)] bg-clip-text py-1 text-5xl font-bold text-transparent">
                     Explorá tu futuro hogar. A un click de distancia.
                   </h1>
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
                     Descubrí las mejores propiedades sin salir de tu casa.
                   </p>
                 </div>
-                <div className="grid gap-4 p-6">
+                <div className="grid gap-4 pt-4 sm:p-6">
                   <div className="flex items-center">
                     <input
                       {...register("location")}
