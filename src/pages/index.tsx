@@ -3,7 +3,6 @@ import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Footer from "~/components/Footer";
 
@@ -72,7 +71,7 @@ const Home: NextPage = () => {
                       <button
                         className="h-12 rounded-tr-lg rounded-br-lg bg-[#ff6884] px-4 shadow-md sm:h-16"
                         aria-label="search button"
-                        onClick={() => void router.push("/")}
+                        onClick={() => void router.push("/search")}
                       >
                         <Search />
                       </button>
