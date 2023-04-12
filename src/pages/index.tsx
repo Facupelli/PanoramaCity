@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import Footer from "~/components/Footer";
 
 import NavBar from "~/components/NavBar";
+import { useNavColor } from "~/hooks/useNavColor";
+import { useSectionHeight } from "~/hooks/useSectionHeight";
 import Search from "~/icons/Search";
 import { useFilterStore } from "~/zustand/store";
 
@@ -21,6 +23,9 @@ const Home: NextPage = () => {
   const { register } = useForm<LandingForm>();
   const router = useRouter();
 
+  const { sectionRef, sectionHeight } = useSectionHeight();
+  const { navBg } = useNavColor({ sectionHeight });
+
   const handlePostClick = () => {
     if (sessionData) {
       return router.push(`/user/${sessionData.user.id}/post`);
@@ -28,31 +33,6 @@ const Home: NextPage = () => {
 
     void signIn("google");
   };
-
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [navBg, setNavBg] = useState("transparent");
-  const [sectionHeight, setSectionHeight] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (sectionRef.current) {
-      setSectionHeight(sectionRef.current.getBoundingClientRect().height);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (window) {
-      window.addEventListener("scroll", () => {
-        if (sectionHeight) {
-          if (window.scrollY > sectionHeight && navBg === "transparent") {
-            setNavBg("dark");
-          }
-          if (window.scrollY < sectionHeight && navBg === "dark") {
-            setNavBg("transparent");
-          }
-        }
-      });
-    }
-  }, [navBg, sectionHeight]);
 
   return (
     <>
@@ -92,6 +72,7 @@ const Home: NextPage = () => {
                       <button
                         className="h-12 rounded-tr-lg rounded-br-lg bg-[#ff6884] px-4 shadow-md sm:h-16"
                         aria-label="search button"
+                        onClick={() => void router.push("/")}
                       >
                         <Search />
                       </button>
