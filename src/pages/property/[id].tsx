@@ -57,9 +57,9 @@ const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
               mediaActive={mediaActive}
             />
           )}
-          <section className="relative grid gap-y-10 px-24 py-10 font-barlow">
+          <section className="relative grid gap-y-10 px-4 py-10 font-barlow sm:px-24">
             <div className="grid grid-cols-7 gap-4">
-              <div className="col-span-5 grid gap-y-10">
+              <div className="col-span-7 grid gap-y-8 sm:col-span-5 sm:gap-y-10">
                 <GalleryButtons
                   mediaActive={mediaActive}
                   setMediaActive={setMediaActive}
@@ -79,7 +79,7 @@ const PropertyDetail: NextPage<Props> = ({ property }: Props) => {
                 </section>
               </div>
 
-              <div className="col-span-2">
+              <div className="col-span-7 sm:col-span-2">
                 <div className="grid gap-y-4">
                   {property.user?.companyName && (
                     <RealEstateCard user={property.user} />

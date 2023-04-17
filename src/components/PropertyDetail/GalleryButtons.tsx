@@ -16,16 +16,14 @@ type Props = {
 
 export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
   return (
-    <section className="flex items-center ">
-      <div className="flex max-w-sm grow items-center gap-4 font-semibold">
-        <div className="flex grow items-center justify-center">
-          <GoBackButton />
-        </div>
+    <section className="grid gap-2">
+      <GoBackButton />
+      <div className="flex grow flex-wrap items-center justify-between gap-4 font-semibold">
         <button
           onClick={() => {
             setMediaActive({ images: false, video: false, tour: true });
           }}
-          className={`flex grow items-center justify-around rounded border border-neutral-200 px-6 py-2 ${
+          className={`flex items-center justify-around gap-2 rounded border border-neutral-200 px-2 py-2 sm:px-6 ${
             mediaActive.tour ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
@@ -36,7 +34,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: true, video: false, tour: false });
           }}
-          className={`flex grow items-center justify-around rounded border border-neutral-200 px-6 py-2 ${
+          className={`flex items-center justify-around gap-2 rounded border border-neutral-200 px-2 py-2 sm:px-6 ${
             mediaActive.images ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
@@ -47,16 +45,16 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: false, video: true, tour: false });
           }}
-          className={`flex grow items-center justify-around rounded border border-neutral-200 px-6 py-2 ${
+          className={`flex items-center justify-around gap-2 rounded border border-neutral-200 px-2 py-2 sm:px-6 ${
             mediaActive.video ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
           <Video color={mediaActive.video ? "#ffffff" : "#000000"} />
           Video
         </button>
-      </div>
-      <div className="ml-auto">
-        <FavButton size={20} />
+        <div className="ml-auto">
+          <FavButton size={20} />
+        </div>
       </div>
     </section>
   );
