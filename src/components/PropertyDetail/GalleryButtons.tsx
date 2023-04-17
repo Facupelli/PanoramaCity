@@ -15,6 +15,8 @@ type Props = {
 };
 
 export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
+  const buttonClass =
+    "flex items-center justify-around gap-2 rounded border border-neutral-200 px-2 py-2 sm:px-6";
   return (
     <section className="grid gap-2">
       <GoBackButton />
@@ -23,7 +25,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: false, video: false, tour: true });
           }}
-          className={`flex items-center justify-around gap-2 rounded border border-neutral-200 px-2 py-2 sm:px-6 ${
+          className={`${buttonClass} ${
             mediaActive.tour ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
@@ -34,7 +36,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: true, video: false, tour: false });
           }}
-          className={`flex items-center justify-around gap-2 rounded border border-neutral-200 px-2 py-2 sm:px-6 ${
+          className={`${buttonClass} ${
             mediaActive.images ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
@@ -45,7 +47,7 @@ export default function GalleryButtons({ mediaActive, setMediaActive }: Props) {
           onClick={() => {
             setMediaActive({ images: false, video: true, tour: false });
           }}
-          className={`flex items-center justify-around gap-2 rounded border border-neutral-200 px-2 py-2 sm:px-6 ${
+          className={`${buttonClass} ${
             mediaActive.video ? "bg-s-blue text-white" : "bg-white"
           }`}
         >
