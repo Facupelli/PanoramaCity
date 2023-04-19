@@ -65,7 +65,7 @@ const UserPostProperty: NextPage<Props> = ({
   const propertyNumber = watch("propertyInfo.street_number");
   const propertyStreet = watch("propertyInfo.street_name");
 
-  const { mutate } = api.property.createProperty.useMutation();
+  const { mutate, isLoading } = api.property.createProperty.useMutation();
 
   //IMAGES
   const [urls, setUrls] = useState<string[]>([]);
@@ -97,6 +97,8 @@ const UserPostProperty: NextPage<Props> = ({
   };
 
   const onSubmit = (data: FormData) => {
+    if (isLoading) return;
+
     const loadingPostId = toast.loading("Cargando");
     if (sessionData?.user.id) {
       const propertyData = {
