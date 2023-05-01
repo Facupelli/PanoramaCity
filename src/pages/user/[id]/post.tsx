@@ -78,7 +78,7 @@ const UserPostProperty: NextPage<Props> = ({
 
   const handleNextPage = async () => {
     if (step === totalSteps && buttonRef.current) {
-      buttonRef.current.click();
+      // buttonRef.current.click();
       return;
     }
 
@@ -212,16 +212,20 @@ const UserPostProperty: NextPage<Props> = ({
                     handleClick={() => setStep((prev) => (prev -= 1))}
                   />
                 )}
-                {<PageBtn type="next" handleClick={handleNextPage} />}
+                {step === totalSteps && (
+                  <button
+                    ref={buttonRef}
+                    type="submit"
+                    className="rounded bg-s-blue py-2 px-4 text-sm font-semibold text-white"
+                  >
+                    Finalizar
+                  </button>
+                )}
+                {step !== totalSteps && (
+                  <PageBtn type="next" handleClick={handleNextPage} />
+                )}
               </div>
             </div>
-            <button
-              ref={buttonRef}
-              type="submit"
-              className="rounded bg-s-blue py-2 px-4 text-sm font-semibold text-white"
-            >
-              Siguiente
-            </button>
           </form>
         </div>
         {/* </UserLayout> */}
